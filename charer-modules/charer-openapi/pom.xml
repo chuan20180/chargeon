@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>charer-modules</artifactId>
+        <groupId>com.obast.charer</groupId>
+        <version>1.0.6</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>charer-openapi</artifactId>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
+        <!-- SpringCloud Alibaba Nacos -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!-- SpringCloud Alibaba Nacos Config -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <!-- SpringCloud Loadbalancer -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.obast.charer</groupId>
+            <artifactId>charer-api-system</artifactId>
+        </dependency>
+
+<!--        &lt;!&ndash;内置vertx消息总线&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.obast.charer</groupId>-->
+<!--            <artifactId>charer-message-event-bus</artifactId>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>com.obast.charer</groupId>
+            <artifactId>charer-data-model</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.obast.charer</groupId>
+            <artifactId>charer-common-core</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.obast.charer</groupId>
+            <artifactId>charer-common-oss</artifactId>
+        </dependency>
+
+
+
+        <dependency>
+            <groupId>com.obast.charer</groupId>
+            <artifactId>charer-data-service-rdb</artifactId>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.obast.charer</groupId>-->
+<!--            <artifactId>charer-data-service-cache</artifactId>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>com.obast.charer</groupId>
+            <artifactId>charer-common-web</artifactId>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.obast.charer</groupId>-->
+<!--            <artifactId>charer-common-doc</artifactId>-->
+<!--        </dependency>-->
+
+
+        <dependency>
+            <groupId>com.obast.charer</groupId>
+            <artifactId>charer-payment-wechat</artifactId>
+        </dependency>
+
+
+        <!--====================第三方库===================-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-to-slf4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
+
+        <!--监控sql日志-->
+        <dependency>
+            <groupId>org.bgee.log4jdbc-log4j2</groupId>
+            <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--指定打包时，jar的位置-->
+                    <outputDirectory>/Users/chuan/Desktop/java/charer/charer-cloud/data/jar</outputDirectory>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source> <!-- depending on your project -->
+                    <target>${java.version}</target> <!-- depending on your project -->
+                    <encoding>utf8</encoding>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>io.github.linpeilie</groupId>
+                            <artifactId>mapstruct-plus-processor</artifactId>
+                            <version>${mapstruct-plus.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok-mapstruct-binding</artifactId>
+                            <version>0.2.0</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

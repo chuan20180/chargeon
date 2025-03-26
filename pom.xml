@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.12</version>
+    </parent>
+
+    <groupId>com.obast.charer</groupId>
+    <artifactId>charer-cloud</artifactId>
+    <version>1.0.6</version>
+    <name>${project.artifactId}</name>
+
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>charer-data</module>
+        <module>charer-modules</module>
+        <module>charer-service</module>
+        <module>charer-common</module>
+        <module>charer-plugins</module>
+        <module>charer-api</module>
+
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>11</java.version>
+        <charer.version>1.0.6</charer.version>
+        <spring-boot.version>2.7.12</spring-boot.version>
+        <spring-cloud.version>2021.0.4</spring-cloud.version>
+        <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
+        <vertx.version>4.2.2</vertx.version>
+        <satoken.version>1.34.0</satoken.version>
+        <beanutils.version>1.9.3</beanutils.version>
+        <lang3.version>3.7</lang3.version>
+        <hutool.version>5.8.18</hutool.version>
+        <mapstruct-plus.version>1.3.1</mapstruct-plus.version>
+        <spring-brick.version>3.1.4</spring-brick.version>
+        <yitter.version>1.0.6</yitter.version>
+        <velocity.version>2.3</velocity.version>
+        <javax.persistence.version>2.2</javax.persistence.version>
+        <lock4j.version>2.2.4</lock4j.version>
+        <aws-v2.version>2.24.9</aws-v2.version>
+        <redisson.version>3.17.4</redisson.version>
+        <hibernate.version>5.6.15.Final</hibernate.version>
+        <hibernate-validator.version>6.2.5.Final</hibernate-validator.version>
+        <lombok.version>1.18.26</lombok.version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <!-- 环境标识，需要与配置文件的名称相对应 -->
+                <profiles.active>dev</profiles.active>
+                <!-- Nacos地址  -->
+                <nacos.host>localhost</nacos.host>
+                <!-- Nacos端口  -->
+                <nacos.port>8848</nacos.port>
+                <!-- Nacos命名空间  -->
+                <nacos.namespace>public</nacos.namespace>
+                <!-- Nacos账号  -->
+                <nacos.username>nacos</nacos.username>
+                <!-- Nacos密码  -->
+                <nacos.password>nacos</nacos.password>
+                <!-- 打包docker地址  -->
+                <docker.host>http://127.0.0.1:2375</docker.host>
+                <!-- 远程仓库地址  -->
+                <docker.registry>yourself registry</docker.registry>
+                <!-- 远程仓库空间  -->
+                <docker.namespace>yourself namespace</docker.namespace>
+                <!-- 远程仓库账号  -->
+                <docker.username>yourself username</docker.username>
+                <!-- 远程仓库密码  -->
+                <docker.password>yourself password</docker.password>
+                <!-- docker镜像的版本号  -->
+                <docker.image.version>3.3.5</docker.image.version>
+            </properties>
+            <activation>
+                <!-- 默认环境 -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
+
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- SpringCloud 微服务 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- SpringCloud Alibaba 微服务 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+
+            <!-- SpringBoot的依赖配置-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>4.0.1</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>io.github.linpeilie</groupId>
+                <artifactId>mapstruct-plus-spring-boot-starter</artifactId>
+                <version>1.3.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${beanutils.version}</version>
+            </dependency>
+
+
+            <!-- hutool 的依赖配置-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-bom</artifactId>
+                <version>${hutool.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
+                <version>6.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>2.3.2</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>2.1.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>20.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>co.elastic.clients</groupId>
+                <artifactId>elasticsearch-java</artifactId>
+                <version>7.17.9</version>
+            </dependency>
+
+            <dependency>
+                <groupId>it.ozimov</groupId>
+                <artifactId>embedded-redis</artifactId>
+                <version>0.7.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>2.17.1</version>
+            </dependency>
+
+            <!--监控sql日志-->
+            <dependency>
+                <groupId>org.bgee.log4jdbc-log4j2</groupId>
+                <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+                <version>1.16</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ejlchina</groupId>
+                <artifactId>okhttps</artifactId>
+                <version>3.1.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-kafka-client</artifactId>
+                <version>${vertx.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-core</artifactId>
+                <version>${vertx.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-mqtt</artifactId>
+                <version>${vertx.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-web-proxy</artifactId>
+                <version>${vertx.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-web-client</artifactId>
+                <version>${vertx.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gitee.starblues</groupId>
+                <artifactId>charer-spring-brick</artifactId>
+                <version>${spring-brick.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gitee.starblues</groupId>
+                <artifactId>spring-brick</artifactId>
+                <version>${spring-brick.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gitee.starblues</groupId>
+                <artifactId>spring-brick-bootstrap</artifactId>
+                <version>${spring-brick.version}</version>
+            </dependency>
+
+
+
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>2.0.9</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>1.5.22</version>
+            </dependency>
+
+            <!-- iot-core -->
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-common-core</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-common-cloud</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-common-thing</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-common-plugin</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-common-oss</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-common-websocket</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-common-web</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-common-doc</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-common-i18n</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-common-excel</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-common-tenant</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-common-satoken</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-common-redis</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-common-log</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <!--message-bus-->
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-message-core</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-message-event-bus</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-message-rocketmq</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <!--iot-data-->
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-data-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-data-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-data-service-cache</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-data-service-rdb</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-temporal-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-temporal-service-es</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-temporal-service-td</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-system</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-message</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-plugins</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-message-bus</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>iot-thing</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-openapi</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-plugin</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-oss-embed</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-api-plugin</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-api-system</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+
+
+            <dependency>
+                <groupId>com.github.yitter</groupId>
+                <artifactId>yitter-idgenerator</artifactId>
+                <version>${yitter.version}</version>
+            </dependency>
+            <!-- velocity代码生成使用模板 -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.vladmihalcea</groupId>
+                <artifactId>hibernate-types-52</artifactId>
+                <version>2.10.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>javax.persistence-api</artifactId>
+                <version>${javax.persistence.version}</version>
+            </dependency>
+
+            <!--第三方-->
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!--短信-->
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-sms-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-sms-nikita</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-sms-aliyun</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!--支付-->
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-payment</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-payment-core</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-payment-wechat</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-payment-mbank</artifactId>
+                <version>${charer.version}</version>
+            </dependency>
+
+            <!--推送-->
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-push</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-push-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-push-getui</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.obast.charer</groupId>
+                <artifactId>charer-push-wechat</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+
+        </dependencies>
+
+    </dependencyManagement>
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <!--执行clean时，清除掉指定目录的jar-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+
+                <configuration>
+                    <!--<skip>true</skip>-->
+                    <!--<failOnError>false</failOnError>-->
+                    <!--当配置true时,只清理filesets里的文件,构建目录中的文件不被清理.默认是flase.-->
+                    <excludeDefaultDirectories>false</excludeDefaultDirectories>
+                    <filesets>
+                        <fileset>
+                            <!--要清理的目录位置，这里这里这里这里-->
+                            <directory>/Users/chuan/Desktop/java/charer/charer-cloud/data/jar</directory>
+                            <!--是否跟随符号链接,默认false-->
+                            <followSymlinks>false</followSymlinks>
+                            <!--默认有些文件是不会被清理的,如果设置成false,则全部按照自定义的来处理-->
+                            <useDefaultExcludes>true</useDefaultExcludes>
+                            <!--对这些文件进行清理，这里这里这里这里-->
+                            <includes>
+                                <include>*.jar</include>
+                            </includes>
+                            <!--对这些文件不清理-->
+                            <!--<excludes>
+                                <exclude>xxx*</exclude>
+                            </excludes>-->
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.obast.charer</groupId>
+        <artifactId>charer-payment</artifactId>
+        <version>1.0.6</version>
+    </parent>
+
+    <artifactId>charer-payment-wechat</artifactId>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.obast.charer</groupId>
+            <artifactId>charer-common-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.obast.charer</groupId>
+            <artifactId>charer-payment-core</artifactId>
+        </dependency>
+
+
+
+        <dependency>
+            <groupId>com.github.wechatpay-apiv3</groupId>
+            <artifactId>wechatpay-java</artifactId>
+            <version>0.2.10</version>
+        </dependency>
+
+        <!-- 微信官方封装的Apache HttpClient扩展SDK-->
+        <dependency>
+            <groupId>com.github.wechatpay-apiv3</groupId>
+            <artifactId>wechatpay-apache-httpclient</artifactId>
+            <version>0.4.9</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.50</version>
+        </dependency>
+
+
+    </dependencies>
+</project>

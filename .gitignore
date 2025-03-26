@@ -1,0 +1,26 @@
+# Compiled class file
+*.class
+
+*.zip
+
+.idea
+*.iml
+data/elasticsearch/**
+*.db
+
+.DS_Store
+
+/data/dist/**
+/data/iot-oss/**
+/data/plugins/**
+
+
+**/target/**
+/log/**
+/data/jar/*.jar
+
+/data/jar/dist/**
+/data/jar/chargeon.cn.conf
+/data/jar/index.html
+/charer-modules/charer-system/log/**
+/ykc-tcp-plugin-1.0.4-repackage.jar

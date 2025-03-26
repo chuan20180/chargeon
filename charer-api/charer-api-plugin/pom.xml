@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.obast.charer</groupId>
+        <artifactId>charer-api</artifactId>
+        <version>1.0.6</version>
+    </parent>
+
+    <artifactId>charer-api-plugin</artifactId>
+
+    <dependencies>
+
+
+        <dependency>
+            <groupId>com.obast.charer</groupId>
+            <artifactId>charer-common-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.obast.charer</groupId>
+            <artifactId>charer-common-cloud</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.obast.charer</groupId>
+            <artifactId>charer-common-plugin</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.obast.charer</groupId>
+            <artifactId>charer-data-model</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>

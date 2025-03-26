@@ -1,0 +1,3 @@
+plugin:
+  runMode: prod
+  mainPackage: com.obast.charer

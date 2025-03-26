@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.obast.charer</groupId>
+        <artifactId>charer-payment</artifactId>
+        <version>1.0.6</version>
+    </parent>
+
+    <artifactId>charer-payment-mbank</artifactId>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.obast.charer</groupId>
+            <artifactId>charer-common-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.obast.charer</groupId>
+            <artifactId>charer-payment-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.obast.charer</groupId>
+            <artifactId>charer-data-model</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.obast.charer</groupId>
+            <artifactId>charer-data-service-rdb</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.50</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>2.9.7</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
