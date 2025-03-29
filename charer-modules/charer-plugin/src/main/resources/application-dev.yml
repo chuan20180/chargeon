@@ -1,10 +1,8 @@
 server:
-  port: 9088
+  port: 8088
 spring:
   application:
     name: charer-plugin
-  jackson:
-    time-zone: GMT+8
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848
@@ -34,7 +32,7 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/charer_rocket?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/charer-open?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: root
     hikari:
@@ -48,13 +46,13 @@ spring:
 
   #<<================es时序数据配置开始===============
   elasticsearch:
-#    embedded:
-#      # 是否启用内部es
-#      enabled: true
-#      port: 9200
-      #rest:
-      #使用内置es的配置
-      #uris: http://elasticsearch:9200
+    #    embedded:
+    #      # 是否启用内部es
+    #      enabled: true
+    #      port: 9200
+    #rest:
+    #使用内置es的配置
+    #uris: http://elasticsearch:9200
     uris: http://127.0.0.1:9200
     username:
     password:
@@ -103,49 +101,58 @@ logging:
   pattern:
     console: '%d{HH:mm:ss.SSS} %-5level - %msg%n'
 
-sa-token:
-  # token名称 (同时也是cookie名称)
-  token-name: rocket-plugin
-  # token有效期，单位s 默认30天, -1代表永不过期
-  timeout: 86400
-  # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
-  activity-timeout: 600
-  # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
-  is-concurrent: false
-  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
-  is-share: false
-  # token风格
-  token-style: uuid
-  # 是否输出操作日志
-  is-log: true
-
-# 用户配置
-user:
-  password:
-    # 密码最大错误次数
-    maxRetryCount: 50
-    # 密码锁定时间（默认10分钟）
-    lockTime: 10
-
-websocket:
-  enabled: true
-  path: /websocket
-  allowedOrigins: '*'
 
 plugin:
   runMode: prod
   mainPackage: com.obast.charer
   pluginPath:
-    - /Users/chuan/Desktop/java/chargeon/chargeon-backend/data/plugins/
+    - /Users/chuan/Desktop/java/charer/charer-cloud/data/plugins/
 
-
-
-#微信小程序配置
-weixin:
-  appId: wx7fd1602b884b4f31
-  appSecret: 7269bdb79b5691afd6e9b8dbeb401d55
-
-
-application:
+charer:
   baseUrl: 'http://192.168.3.61'
+  # 多租户
+  tenant:
+    enable: true
+  # 代理商
+  agent:
+    enable: true
+  # 合作商
+  dealer:
+    enable: true
+  #是否开启分润
+  profit:
+    enabled: true
 
+  #系统模块
+  system:
+    i18n:
+      #默认语言
+      language: zh_CN
+      multiple: false
+      locales:
+        - locale: zh_CN
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
+        - locale: en_US
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
+        - locale: ru_RU
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
+
+  #openapi模块
+  openapi:
+    i18n:
+      #默认语言
+      language: zh_CN
+      multiple: false
+      locales:
+        - locale: zh_CN
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
+        - locale: en_US
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
+        - locale: ru_RU
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
