@@ -99,7 +99,7 @@
                 <artifactId>spring-brick-maven-packager</artifactId>
                 <version>${spring-brick.version}</version>
                 <configuration>
-                    <outputDirectory>/Users/chuan/Desktop/java/charer/charer-cloud/data/plugins</outputDirectory>
+                    <outputDirectory>/Users/chuan/Desktop/java/chargeon/chargeon-backend/data/plugins</outputDirectory>
                     <mode>${plugin.build.mode}</mode>
                     <pluginInfo>
                         <id>vzi-mqtt-client-plugin</id>

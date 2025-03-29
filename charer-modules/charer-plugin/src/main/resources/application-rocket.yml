@@ -136,7 +136,7 @@ plugin:
   runMode: prod
   mainPackage: com.obast.charer
   pluginPath:
-    - /Users/chuan/Desktop/java/charer/charer-cloud/data/plugins/
+    - /Users/chuan/Desktop/java/chargeon/chargeon-backend/data/plugins/
 
 
 

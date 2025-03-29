@@ -125,7 +125,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <!--指定打包时，jar的位置-->
-                    <outputDirectory>/Users/chuan/Desktop/java/charer/charer-cloud/data/jar</outputDirectory>
+                    <outputDirectory>/Users/chuan/Desktop/java/chargeon/chargeon-backend/data/plugins</outputDirectory>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>

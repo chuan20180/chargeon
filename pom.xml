@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.obast.charer</groupId>
-    <artifactId>charer-cloud</artifactId>
+    <artifactId>charer-backend</artifactId>
     <version>1.0.6</version>
     <name>${project.artifactId}</name>
 
@@ -626,7 +626,7 @@
                     <filesets>
                         <fileset>
                             <!--要清理的目录位置，这里这里这里这里-->
-                            <directory>/Users/chuan/Desktop/java/charer/charer-cloud/data/jar</directory>
+                            <directory>/Users/chuan/Desktop/java/chargeon/chargeon-backend/data/jar</directory>
                             <!--是否跟随符号链接,默认false-->
                             <followSymlinks>false</followSymlinks>
                             <!--默认有些文件是不会被清理的,如果设置成false,则全部按照自定义的来处理-->

@@ -5,7 +5,7 @@
 
     <parent>
         <groupId>com.obast.charer</groupId>
-        <artifactId>charer-cloud</artifactId>
+        <artifactId>charer-backend</artifactId>
         <version>1.0.6</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
