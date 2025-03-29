@@ -1,10 +1,8 @@
 server:
-  port: 9088
+  port: 8087
 spring:
   application:
-    name: charer-plugin
-  jackson:
-    time-zone: GMT+8
+    name: charer-openapi
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848
@@ -21,7 +19,6 @@ spring:
     database: MySQL
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: false
-
     hibernate:
       ddl-auto: update
     properties:
@@ -34,7 +31,7 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/charer_rocket?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/charer-open?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: root
     hikari:
@@ -48,13 +45,9 @@ spring:
 
   #<<================es时序数据配置开始===============
   elasticsearch:
-#    embedded:
-#      # 是否启用内部es
-#      enabled: true
-#      port: 9200
-      #rest:
-      #使用内置es的配置
-      #uris: http://elasticsearch:9200
+    #embedded:
+    #  enabled: false
+    #  port: 9200
     uris: http://127.0.0.1:9200
     username:
     password:
@@ -68,14 +61,15 @@ spring:
   #    password: taosdata
   #    driverClassName: com.taosdata.jdbc.rs.RestfulDriver
   #===========tdengine时序数据库配置开始============>>
+
   redis:
     #使用内置redis的配置
-    embedded:
-      enabled: false
+    #embedded:
+    #  enabled: false
     #host: redis
     host: 127.0.0.1
     port: 6379
-    database: 1
+    database: 2
 
   mvc:
     pathmatch:
@@ -91,6 +85,7 @@ logging:
     org.hibernate.orm.jdbc.bind: TRACE
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.hibernate.type: TRACE
+
     org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
     org.hibernate.engine.QueryParameters: DEBUG
     org.hibernate.engine.query.HQLQueryPlan: DEBUG
@@ -103,49 +98,70 @@ logging:
   pattern:
     console: '%d{HH:mm:ss.SSS} %-5level - %msg%n'
 
+
 sa-token:
   # token名称 (同时也是cookie名称)
-  token-name: rocket-plugin
+  token-name: x-token
   # token有效期，单位s 默认30天, -1代表永不过期
-  timeout: 86400
+  timeout: -1
   # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
-  activity-timeout: 600
+  activity-timeout: -1
   # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
-  is-concurrent: false
+  is-concurrent: true
   # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
   is-share: false
   # token风格
   token-style: uuid
   # 是否输出操作日志
-  is-log: true
-
-# 用户配置
-user:
-  password:
-    # 密码最大错误次数
-    maxRetryCount: 50
-    # 密码锁定时间（默认10分钟）
-    lockTime: 10
-
-websocket:
-  enabled: true
-  path: /websocket
-  allowedOrigins: '*'
-
-plugin:
-  runMode: prod
-  mainPackage: com.obast.charer
-  pluginPath:
-    - /Users/chuan/Desktop/java/chargeon/chargeon-backend/data/plugins/
+  is-log: false
 
 
+charer:
+  # 多租户
+  tenant:
+    enable: true
+  # 代理商
+  agent:
+    enable: true
+  # 合作商
+  dealer:
+    enable: true
+  #是否开启分润
+  profit:
+    enabled: true
 
-#微信小程序配置
-weixin:
-  appId: wx7fd1602b884b4f31
-  appSecret: 7269bdb79b5691afd6e9b8dbeb401d55
+  #系统模块
+  system:
+    baseUrl: 'http://192.168.3.61'
+    i18n:
+      #默认语言
+      language: zh_CN
+      multiple: false
+      locales:
+        - locale: zh_CN
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
+        - locale: en_US
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
+        - locale: ru_RU
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
 
-
-application:
-  baseUrl: 'http://192.168.3.61'
-
+  #openapi模块
+  openapi:
+    baseUrl: 'http://192.168.3.61'
+    i18n:
+      #默认语言
+      language: zh_CN
+      multiple: false
+      locales:
+        - locale: zh_CN
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
+        - locale: en_US
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
+        - locale: ru_RU
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
