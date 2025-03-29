@@ -1,10 +1,8 @@
 server:
-  port: 9088
+  port: 8086
 spring:
   application:
-    name: charer-plugin
-  jackson:
-    time-zone: GMT+8
+    name: charer-system
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848
@@ -21,20 +19,19 @@ spring:
     database: MySQL
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: false
-
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
-    #        format_sql: true
+        format_sql: false
     #        use_sql_comments: false
     #        session_factory:
-    #          statement_inspector: com.obast.charer.interceptor.data.JpaStatementInterceptor
+    #          statement_inspector: com.obast.charer.data.interceptor.JpaStatementInterceptor
     open-in-view: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/charer_rocket?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/charer-open?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: root
     hikari:
@@ -48,13 +45,10 @@ spring:
 
   #<<================es时序数据配置开始===============
   elasticsearch:
-#    embedded:
-#      # 是否启用内部es
-#      enabled: true
-#      port: 9200
-      #rest:
-      #使用内置es的配置
-      #uris: http://elasticsearch:9200
+    #embedded:
+    #  # 是否启用内部es
+    #  enabled: false
+    #  port: 9200
     uris: http://127.0.0.1:9200
     username:
     password:
@@ -70,8 +64,8 @@ spring:
   #===========tdengine时序数据库配置开始============>>
   redis:
     #使用内置redis的配置
-    embedded:
-      enabled: false
+    #embedded:
+    #  enabled: false
     #host: redis
     host: 127.0.0.1
     port: 6379
@@ -105,11 +99,11 @@ logging:
 
 sa-token:
   # token名称 (同时也是cookie名称)
-  token-name: rocket-plugin
+  token-name: jiufu-system
   # token有效期，单位s 默认30天, -1代表永不过期
-  timeout: 86400
+  timeout: 2592000
   # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
-  activity-timeout: 600
+  activity-timeout: 1800
   # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
   is-concurrent: false
   # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
@@ -118,6 +112,18 @@ sa-token:
   token-style: uuid
   # 是否输出操作日志
   is-log: true
+
+captcha:
+  enable: false
+  # 页面 <参数设置> 可开启关闭 验证码校验
+  # 验证码类型 math 数组计算 char 字符验证
+  type: CHAR
+  # line 线段干扰 circle 圆圈干扰 shear 扭曲干扰
+  category: CIRCLE
+  # 数字验证码位数
+  numberLength: 1
+  # 字符验证码长度
+  charLength: 4
 
 # 用户配置
 user:
@@ -132,20 +138,51 @@ websocket:
   path: /websocket
   allowedOrigins: '*'
 
-plugin:
-  runMode: prod
-  mainPackage: com.obast.charer
-  pluginPath:
-    - /Users/chuan/Desktop/java/chargeon/chargeon-backend/data/plugins/
-
-
-
-#微信小程序配置
-weixin:
-  appId: wx7fd1602b884b4f31
-  appSecret: 7269bdb79b5691afd6e9b8dbeb401d55
-
-
-application:
+charer:
   baseUrl: 'http://192.168.3.61'
+  # 多租户
+  tenant:
+    enable: true
+  # 代理商
+  agent:
+    enable: true
+  # 合作商
+  dealer:
+    enable: true
+  #是否开启分润
+  profit:
+    enabled: true
 
+  #系统模块
+  system:
+    i18n:
+      #默认语言
+      language: zh_CN
+      multiple: false
+      locales:
+        - locale: zh_CN
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
+        - locale: en_US
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
+        - locale: ru_RU
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
+
+  #openapi模块
+  openapi:
+    i18n:
+      #默认语言
+      language: zh_CN
+      multiple: false
+      locales:
+        - locale: zh_CN
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
+        - locale: en_US
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
+        - locale: ru_RU
+          timezone: GMT+8
+          date-format: 'yyyy-MM-dd HH:mm:ss'
