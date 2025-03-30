@@ -16,7 +16,7 @@ ChargeOn充电桩运营管理平台是基于 SaaS 架构打造的云端充电桩
 - 密码: ******
 
 ## 文档
-文档地址: [doc.chargeon.cn](https://doc.chargeon.cn)(建设中)
+[文档地址](https://cned5b7owj.feishu.cn/docx/MKxwdGpYSon94PxWBIocb7UAnxd?from=from_copylink)
 
 
 ## 特性
