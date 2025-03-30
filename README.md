@@ -7,7 +7,7 @@ ChargeOn充电桩运营管理平台是基于 SaaS 架构打造的云端充电桩
 
 
 ## 架构
-基于SpringBoot | Spring Cloud & Alibaba |  JPA | Vue3 + TS + Element Plus + Vite  的微服务多租户SaaS框架。
+基于SpringBoot | Spring Cloud & Alibaba |  JPA 的微服务多租户SaaS框架。
 
 ## 演示
 - 演示地址: [www.chargeon.cn:8085](https://www.chargeon.cn:8085)
