@@ -6,9 +6,8 @@
 ChargeOn充电桩运营管理平台是基于 SaaS 架构打造的云端充电桩运营管理平台，集成了物联网、大数据、云计算等先进技术，致力于为充电桩运营商、企业、政府等客户提供高效、智能、可靠的电动汽车充电桩运营管理 SaaS 平台解决方案，助力构建互联互通的充电网络，推动新能源汽车产业蓬勃发展。
 
 
-## 技术路线
-Vue3 + TS + Element Plus + Vite
-
+## 架构
+基于SpringBoot | Spring Cloud & Alibaba |  JPA | Vue3 + TS + Element Plus + Vite  的微服务多租户SaaS框架。
 
 ## 演示
 - 演示地址: [www.chargeon.cn:8085](https://www.chargeon.cn:8085)
