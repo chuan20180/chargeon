@@ -55,4 +55,4 @@ ChargeOn充电桩运营管理平台是基于 SaaS 架构打造的云端充电桩
 
 ## 致谢
 
-- [禹霖科技开源/iita-iot-web-admin](https://portrait.gitee.com/open-iita/iita-iot-web-admin) 此项目前端基于禹霖科技开源项目
+- [禹霖科技开源/iotkitparent](https://portrait.gitee.com/open-iita/iotkitparent) 此项目基础框架基于禹霖科技开源项目
