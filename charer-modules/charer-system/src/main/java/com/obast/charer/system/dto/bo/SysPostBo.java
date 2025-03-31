@@ -56,14 +56,14 @@ public class SysPostBo extends BaseDto {
      * 岗位编码
      */
     @NotBlank(message = "岗位编码不能为空", groups = { AddGroup.class, EditGroup.class })
-    @Size(min = 0, max = 64, message = "岗位编码长度不能超过{max}个字符")
+    @Size(max = 64, message = "岗位编码长度不能超过{max}个字符")
     private String postCode;
 
     /**
      * 岗位名称
      */
     @NotBlank(message = "岗位名称不能为空", groups = { AddGroup.class, EditGroup.class })
-    @Size(min = 0, max = 50, message = "岗位名称长度不能超过{max}个字符")
+    @Size(max = 50, message = "岗位名称长度不能超过{max}个字符")
     private String postName;
 
     /**

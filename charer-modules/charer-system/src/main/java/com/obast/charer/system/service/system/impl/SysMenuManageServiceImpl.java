@@ -157,7 +157,7 @@ public class SysMenuManageServiceImpl implements ISysMenuManageService {
      */
     @Override
     public List<SysMenu> selectMenuTreeByUserId(String userId) {
-        List<SysMenu> menus = null;
+        List<SysMenu> menus;
         if (LoginHelper.isSuperAdmin(userId)) {
             menus = sysMenuData.selectMenuTreeAll();
         } else {

@@ -45,13 +45,7 @@ import java.util.Map;
 public class OpenAppController extends BaseController {
 
   @Autowired
-  private IOpenSysConfigService openSysConfigService;
-
-  @Autowired
   private ISysAppData sysAppData;
-
-  @Autowired
-  private IMapConfigData mapConfigData;
 
   @Autowired
   private INotifyConfigData notifyConfigData;

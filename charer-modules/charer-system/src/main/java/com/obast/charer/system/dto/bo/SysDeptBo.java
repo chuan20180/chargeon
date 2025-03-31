@@ -63,7 +63,7 @@ public class SysDeptBo extends BaseDto {
      * 部门名称
      */
     @NotBlank(message = "部门名称不能为空", groups = { AddGroup.class, EditGroup.class })
-    @Size(min = 0, max = 30, message = "部门名称长度不能超过{max}个字符")
+    @Size(max = 30, message = "部门名称长度不能超过{max}个字符")
     private String deptName;
 
     /**
@@ -80,14 +80,14 @@ public class SysDeptBo extends BaseDto {
     /**
      * 联系电话
      */
-    @Size(min = 0, max = 11, message = "联系电话长度不能超过{max}个字符")
+    @Size(max = 11, message = "联系电话长度不能超过{max}个字符")
     private String phone;
 
     /**
      * 邮箱
      */
     // @Email(message = "邮箱格式不正确")
-    @Size(min = 0, max = 50, message = "邮箱长度不能超过{max}个字符")
+    @Size(max = 50, message = "邮箱长度不能超过{max}个字符")
     private String email;
 
     /**
