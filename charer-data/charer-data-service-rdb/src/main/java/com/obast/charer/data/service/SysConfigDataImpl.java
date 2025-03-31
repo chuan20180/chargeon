@@ -87,7 +87,7 @@ public class SysConfigDataImpl extends AbstractCommonData<SysConfigQueryBo>
 
     @Override
     public SysConfig save(SysConfig data) {
-        baseRepository.save(MapstructUtils.convert(data, TbSysConfig.class));
+        baseRepository.save(data.to(TbSysConfig.class));
         return data;
     }
 

@@ -27,16 +27,6 @@ public class OpenSysConfigServiceImpl implements IOpenSysConfigService {
     private ISysConfigData sysConfigData;
 
     @Override
-    public Map<String, Object> querySysConfig() {
-        List<SysConfig> sysConfigs = sysConfigData.findAll();
-        Map<String, Object> configs = new HashMap<>();
-        for(SysConfig sysConfig: sysConfigs) {
-            configs.put(sysConfig.getConfigKey(), sysConfig.getConfigValue());
-        }
-        return configs;
-    }
-
-    @Override
     public Object selectByConfigKey(String key) {
         SysConfig sysConfig = sysConfigData.findByConfigKey(key);
 

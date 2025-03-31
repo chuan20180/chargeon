@@ -1,6 +1,5 @@
 package com.obast.charer.model.system;
 
-import com.obast.charer.common.constant.UserConstants;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
@@ -11,9 +10,8 @@ import java.io.Serializable;
 
 /**
  * 角色信息视图对象 sys_role
- *
- * @author Michelle.Chung
  */
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class SysRole extends BaseModel implements Id<String>,Serializable {

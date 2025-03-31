@@ -57,9 +57,6 @@ public class ChargerOperateServiceImpl implements IChargerOperateService {
     private IPriceData priceData;
 
     @Autowired
-    private IParkData parkData;
-
-    @Autowired
     private IRemoteChargerService remoteChargerService;
 
     @Override

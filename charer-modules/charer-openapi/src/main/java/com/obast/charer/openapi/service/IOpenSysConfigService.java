@@ -1,6 +1,5 @@
 package com.obast.charer.openapi.service;
 
-import java.util.Map;
 
 /**
  * @ Author：chuan
@@ -8,6 +7,7 @@ import java.util.Map;
  * @ Version：1.0
  * @ Description：OPENAPI充电桩订单服务接口
  */
+
 public interface IOpenSysConfigService {
 
     /**
