@@ -37,7 +37,7 @@ ChargeOn充电桩运营管理平台是基于 SaaS 架构打造的云端充电桩
 <img src="https://www.chargeon.cn/screen/wechat-qrcode.png" alt="微信二维码" width="221" height="300" />
 
 
-## 截图
+## 电脑端截图
 
 <table>
     <tr>
@@ -50,7 +50,7 @@ ChargeOn充电桩运营管理平台是基于 SaaS 架构打造的云端充电桩
     </tr>
 </table>
 
-
+## 手机端截图
 <table>
     <tr>
         <td style="padding: 30px"><img src="https://www.chargeon.cn/screen/1.jpg" width="185" height="400"  alt="" /></td>
@@ -59,10 +59,10 @@ ChargeOn充电桩运营管理平台是基于 SaaS 架构打造的云端充电桩
         <td style="padding: 30px"><img src="https://www.chargeon.cn/screen/4.jpg" width="185" height="400"  alt="" /></td>
     </tr>
    <tr>
-        <td style="padding: 30px"><img src="https://www.chargeon.cn/screen/5.jpg" width="139" height="300"  alt="" /></td>
-        <td style="padding: 30px"><img src="https://www.chargeon.cn/screen/6.jpg" width="139" height="300"  alt="" /></td>
-        <td style="padding: 30px"><img src="https://www.chargeon.cn/screen/7.jpg" width="139" height="300"  alt="" /></td>
-        <td style="padding: 30px"><img src="https://www.chargeon.cn/screen/8.jpg" width="139" height="300" alt="" /></td>
+        <td style="padding: 30px"><img src="https://www.chargeon.cn/screen/5.jpg" width="185" height="400"  alt="" /></td>
+        <td style="padding: 30px"><img src="https://www.chargeon.cn/screen/6.jpg" width="185" height="400"  alt="" /></td>
+        <td style="padding: 30px"><img src="https://www.chargeon.cn/screen/7.jpg" width="185" height="400"  alt="" /></td>
+        <td style="padding: 30px"><img src="https://www.chargeon.cn/screen/8.jpg" width="185" height="400" alt="" /></td>
     </tr>
 
 </table>
