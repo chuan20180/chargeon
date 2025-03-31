@@ -13,11 +13,8 @@ import com.obast.charer.common.utils.ReflectUtils;
 import com.obast.charer.common.utils.SpringUtils;
 import com.obast.charer.common.utils.StringUtils;
 import com.obast.charer.common.web.enums.CaptchaType;
-import com.obast.charer.qo.SysTenantQueryBo;
 import com.obast.charer.system.config.properties.CaptchaProperties;
 import com.obast.charer.system.dto.*;
-import com.obast.charer.system.dto.vo.tenant.SysTenantVo;
-import com.obast.charer.system.service.platform.ISysTenantService;
 import com.obast.charer.system.service.system.SysLoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -46,8 +43,6 @@ import java.util.stream.Collectors;
 public class AuthController {
 
     private final SysLoginService loginService;
-
-    private final ISysTenantService tenantService;
 
     private final CaptchaProperties captchaProperties;
 
@@ -118,29 +113,4 @@ public class AuthController {
         captchaVo.setImg(captcha.getImageBase64());
         return captchaVo;
     }
-
-    /**
-     * 登录页面租户下拉框
-     *
-     * @return 租户列表
-     */
-    @ApiOperation("登录页面租户下拉框")
-    @PostMapping("/tenant/list")
-    public LoginTenantVo tenantList() {
-        List<SysTenantVo> tenantList = tenantService.queryList(new SysTenantQueryBo());
-        List<TenantListVo> voList = tenantList.stream().map(t -> TenantListVo.builder()
-                .tenantId(t.getTenantId())
-                .companyName(t.getCompanyName())
-                .domain(t.getDomain())
-                .avatar(t.getAvatar())
-                .displayName(t.getDisplayName())
-                .build()).collect(Collectors.toList());
-
-        // 返回对象
-        LoginTenantVo vo = new LoginTenantVo();
-        vo.setVoList(voList);
-        vo.setTenantEnabled(charerProperties.getTenant().getEnable());
-        return vo;
-    }
-
 }

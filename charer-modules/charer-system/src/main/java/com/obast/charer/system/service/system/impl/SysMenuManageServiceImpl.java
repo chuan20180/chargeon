@@ -13,7 +13,6 @@ import com.obast.charer.common.i18n.util.I18nUtils;
 import com.obast.charer.data.system.ISysMenuData;
 import com.obast.charer.data.system.ISysRoleData;
 import com.obast.charer.data.system.ISysRoleMenuData;
-import com.obast.charer.data.system.ISysTenantPackageData;
 import com.obast.charer.system.dto.bo.SysMenuBo;
 import com.obast.charer.system.dto.vo.MetaVo;
 import com.obast.charer.system.dto.vo.RouterVo;
@@ -21,10 +20,8 @@ import com.obast.charer.system.dto.vo.SysMenuVo;
 import com.obast.charer.system.service.system.ISysMenuManageService;
 import com.obast.charer.model.system.SysMenu;
 import com.obast.charer.model.system.SysRole;
-import com.obast.charer.model.system.SysTenantPackage;
 import com.obast.charer.qo.SysMenuQueryBo;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.lang.tree.Tree;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,8 +39,6 @@ public class SysMenuManageServiceImpl implements ISysMenuManageService {
     private final ISysRoleData sysRoleData;
     private final ISysRoleMenuData iSysRoleMenuData;
 
-
-    private final ISysTenantPackageData iSysTenantPackageData;
 
     @Override
     public Paging<SysMenuVo> queryPageList(PageRequest<SysMenuQueryBo> pageRequest) {
@@ -459,5 +454,4 @@ public class SysMenuManageServiceImpl implements ISysMenuManageService {
         return StringUtils.replaceEach(path, new String[]{Constants.HTTP, Constants.HTTPS, Constants.WWW, "."},
                 new String[]{"", "", "", "/"});
     }
-
 }

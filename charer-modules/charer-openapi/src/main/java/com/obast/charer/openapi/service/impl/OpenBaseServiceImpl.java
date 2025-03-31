@@ -14,9 +14,7 @@ import com.obast.charer.common.web.utils.ServletUtils;
 import com.obast.charer.data.business.ICustomerData;
 import com.obast.charer.data.business.ICustomerLoginData;
 import com.obast.charer.data.business.ISmsRecordData;
-import com.obast.charer.data.business.ISysCountryData;
 import com.obast.charer.data.system.ISysAppData;
-import com.obast.charer.data.system.ISysTenantData;
 import com.obast.charer.data.system.ISysUserData;
 import com.obast.charer.enums.CustomerTypeEnum;
 import com.obast.charer.enums.EnableStatusEnum;
@@ -24,8 +22,6 @@ import com.obast.charer.model.customer.Customer;
 import com.obast.charer.model.customer.CustomerLogin;
 import com.obast.charer.model.sms.SmsRecord;
 import com.obast.charer.model.system.SysApp;
-import com.obast.charer.model.system.SysCountry;
-import com.obast.charer.model.system.SysTenant;
 import com.obast.charer.model.system.SysUser;
 import com.obast.charer.openapi.config.request.RequestLocale;
 import com.obast.charer.openapi.config.request.RequestLocaleHolder;
@@ -55,9 +51,6 @@ public class OpenBaseServiceImpl implements OpenBaseService {
     private ISysUserData sysUserData;
 
     @Autowired
-    private ISysCountryData sysCountryData;
-
-    @Autowired
     private ISysAppData sysAppData;
 
     @Autowired
@@ -68,9 +61,6 @@ public class OpenBaseServiceImpl implements OpenBaseService {
 
     @Autowired
     private ICustomerLoginData customerLoginData;
-
-    @Autowired
-    private ISysTenantData sysTenantData;
 
     @Autowired
     private WechatUtil wechatUtil;
@@ -87,12 +77,6 @@ public class OpenBaseServiceImpl implements OpenBaseService {
 
         SysApp sysApp = sysAppData.findByAppId(appId);
         if (sysApp == null){
-            throw new BizException(ErrCode.API_LOGIN_ERROR);
-        }
-
-        SysTenant sysTenant = TenantHelper.ignore(()-> sysTenantData.findById(bo.getTenantId()));
-
-        if (sysTenant == null){
             throw new BizException(ErrCode.API_LOGIN_ERROR);
         }
 
@@ -178,17 +162,9 @@ public class OpenBaseServiceImpl implements OpenBaseService {
      */
     @Override
     public LoginMobileVo mobileLogin(MobileLoginBo bo) {
-        String countryId = bo.getCountryId();
-        SysCountry sysCountry = sysCountryData.findById(countryId);
-        if(sysCountry == null) {
-            throw new BizException(ErrCode.SYS_COUNTRY_NOT_FOUND);
-        }
 
         String mobile = bo.getMobile();
-        String pattern = sysCountry.getTelRule();
-        if(!mobile.matches(String.format("%s", pattern)) ) {
-            throw new BizException(ErrCode.APP_REGISTER_MOBILE_FORMAT_INVALID);
-        }
+
 
         Response<?> sendResult = remoteSmsService.sendVerificationCode(SmsTypeEnum.Login.name(), mobile);
         log.debug("验证码发送结果: {}", JsonUtils.toJsonString(sendResult));
@@ -206,7 +182,7 @@ public class OpenBaseServiceImpl implements OpenBaseService {
         if(smsRecord == null) {
             throw new BizException(ErrCode.APP_SMS_RECORD_NOT_FOUND);
         }
-        return new LoginMobileVo(smsRecord.getId(), mobile, sysCountry.getTel());
+        return new LoginMobileVo(smsRecord.getId(), mobile, null);
     }
 
     @Override

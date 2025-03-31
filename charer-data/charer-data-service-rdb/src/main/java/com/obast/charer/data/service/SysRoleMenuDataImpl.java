@@ -14,7 +14,6 @@ import com.obast.charer.data.dao.SysRoleRepository;
 import com.obast.charer.data.model.TbSysMenu;
 import com.obast.charer.data.model.TbSysRole;
 import com.obast.charer.data.model.TbSysRoleMenu;
-import com.obast.charer.data.model.TbSysTenantPackage;
 import com.obast.charer.data.system.ISysRoleMenuData;
 import com.obast.charer.model.system.SysRoleMenu;
 import com.obast.charer.qo.SysRoleMenuQueryBo;

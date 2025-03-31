@@ -220,8 +220,6 @@ public class SysConfigServiceImpl implements ISysConfigService, ConfigService {
         writeData(fileDir, "sys_role", SpringUtils.getBean(ISysRoleData.class));
 
         writeData(fileDir, "sys_role_menu", SpringUtils.getBean(ISysRoleMenuData.class));
-        writeData(fileDir, "sys_tenant", SpringUtils.getBean(ISysTenantData.class));
-        writeData(fileDir, "sys_tenant_package", SpringUtils.getBean(ISysTenantPackageData.class));
         writeData(fileDir, "sys_user", SpringUtils.getBean(ISysUserData.class));
         writeData(fileDir, "sys_user_post", SpringUtils.getBean(ISysUserPostData.class));
         writeData(fileDir, "sys_user_role", SpringUtils.getBean(ISysUserRoleData.class));

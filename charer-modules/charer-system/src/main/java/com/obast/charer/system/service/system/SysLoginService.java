@@ -24,7 +24,6 @@ import com.obast.charer.system.config.properties.CaptchaProperties;
 import com.obast.charer.common.web.utils.ServletUtils;
 import com.obast.charer.data.system.ISysUserData;
 import com.obast.charer.system.dto.vo.SysUserVo;
-import com.obast.charer.system.dto.vo.tenant.SysTenantVo;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.model.system.SysUser;
 import cn.dev33.satoken.exception.NotLoginException;
@@ -32,7 +31,6 @@ import cn.dev33.satoken.secure.BCrypt;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.obast.charer.system.service.platform.ISysTenantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,7 +54,6 @@ public class SysLoginService {
     private final ISysUserData userData;
     private final CaptchaProperties captchaProperties;
     private final ISysPermissionService permissionService;
-    private final ISysTenantService tenantService;
 
 
     @Value("${user.password.maxRetryCount}")
@@ -82,8 +79,6 @@ public class SysLoginService {
         if (captchaEnabled) {
             validateCaptcha(tenantId, username, code, uuid);
         }
-        // 校验租户
-        checkTenant(tenantId);
 
         //未登录前临时设置租户id
         LoginHelper.setTenantId(tenantId);
@@ -281,26 +276,4 @@ public class SysLoginService {
         // 登录成功 清空错误次数
         RedisUtils.deleteObject(errorKey);
     }
-
-    private void checkTenant(String tenantId) {
-        if (!TenantHelper.isEnable()) {
-            return;
-        }
-        if (TenantConstants.DEFAULT_TENANT_ID.equals(tenantId)) {
-            return;
-        }
-        SysTenantVo tenant = tenantService.queryByTenantId(tenantId);
-        if (ObjectUtil.isNull(tenant)) {
-            log.info("登录租户：{} 不存在.", tenantId);
-            throw new BizException(ErrCode.TENANT_NOT_FOUND);
-        } else if (EnableStatusEnum.Disabled.equals(tenant.getStatus())) {
-            log.info("登录租户：{} 已被停用.", tenantId);
-            throw new BizException(ErrCode.TENANT_DISABLE);
-        } else if (ObjectUtil.isNotNull(tenant.getExpireTime())
-                && new Date().after(tenant.getExpireTime())) {
-            log.info("登录租户：{} 已超过有效期.", tenantId);
-            throw new BizException(ErrCode.TENANT_EXPIRE);
-        }
-    }
-
 }

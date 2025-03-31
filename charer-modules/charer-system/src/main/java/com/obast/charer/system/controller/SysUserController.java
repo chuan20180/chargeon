@@ -26,7 +26,6 @@ import com.obast.charer.system.dto.bo.SysUserBo;
 import com.obast.charer.system.dto.bo.SysUserRolesBo;
 import com.obast.charer.system.dto.vo.*;
 import com.obast.charer.system.dto.vo.system.SysRoleVo;
-import com.obast.charer.system.service.platform.ISysTenantService;
 import com.obast.charer.system.service.system.ISysDeptService;
 import com.obast.charer.system.service.system.ISysPostService;
 import com.obast.charer.system.service.system.ISysRoleManageService;
@@ -43,7 +42,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 用户信息
@@ -63,7 +61,6 @@ public class SysUserController extends BaseController {
     private final ISysRoleManageService sysRoleManageService;
     private final ISysPostService postService;
     private final ISysDeptService deptService;
-    private final ISysTenantService tenantService;
 
 
     @ApiOperation("获取用户列表")
@@ -90,11 +87,8 @@ public class SysUserController extends BaseController {
         SysUserVo user = sysUserManageService.selectUserById(loginUser.getUserId());
         userInfoVo.setUser(user);
 
-
-
         userInfoVo.setPermissions(loginUser.getMenuPermission());
         userInfoVo.setRoles(loginUser.getRolePermission());
-        userInfoVo.setTenant(tenantService.queryById(loginUser.getTenantId()));
         return userInfoVo;
     }
 
@@ -132,9 +126,6 @@ public class SysUserController extends BaseController {
         SysUserBo user = reqUser.getData();
         if (!sysUserManageService.checkUserNameUnique(user.to(SysUser.class))) {
             fail("新增用户'" + user.getUserName() + "'失败，登录账号已存在");
-        }
-        if (!tenantService.checkAccountBalance(TenantHelper.getTenantId())) {
-            fail("当前租户下用户名额不足，请联系管理员");
         }
         user.setPassword(BCrypt.hashpw(user.getPassword()));
 

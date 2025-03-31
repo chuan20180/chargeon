@@ -3,15 +3,11 @@ package com.obast.charer.openapi.controller;
 import com.obast.charer.common.api.Request;
 import com.obast.charer.common.api.Response;
 import com.obast.charer.common.web.core.BaseController;
-import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.openapi.dto.bo.*;
 import com.obast.charer.openapi.dto.vo.AccountLoginVo;
 import com.obast.charer.openapi.dto.vo.LoginCodeVo;
 import com.obast.charer.openapi.dto.vo.OpenLoginVo;
-import com.obast.charer.openapi.dto.vo.OpenSysCountryVo;
-import com.obast.charer.openapi.service.IOpenSysCountryService;
 import com.obast.charer.openapi.service.OpenBaseService;
-import com.obast.charer.qo.SysCountryQueryBo;
 import cn.dev33.satoken.annotation.SaIgnore;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @Api(tags = {"openapi-基础"})
 @Slf4j
 @RequiredArgsConstructor
@@ -35,9 +29,6 @@ public class OpenAuthController extends BaseController {
 
     @Autowired
     private OpenBaseService openBaseService;
-
-    @Autowired
-    private IOpenSysCountryService openSysCountryService;
 
     @SaIgnore
     @ApiOperation(value = "token获取", notes = "token获取", httpMethod = "POST")
@@ -91,14 +82,5 @@ public class OpenAuthController extends BaseController {
     @PostMapping("/wxauthorize")
     public Response<?> wxauthorize(@RequestBody Request<WxAuthorizeBo> request) {
         return Response.success(openBaseService.wxAuthorize(request.getData()));
-    }
-
-    @SaIgnore
-    @ApiOperation(value = "国家列表", notes = "国家列表", httpMethod = "POST")
-    @PostMapping("/country")
-    public List<OpenSysCountryVo> queryPageList() {
-        SysCountryQueryBo queryBo = new SysCountryQueryBo();
-        queryBo.setStatus(EnableStatusEnum.Enabled);
-        return openSysCountryService.queryList(queryBo);
     }
 }
