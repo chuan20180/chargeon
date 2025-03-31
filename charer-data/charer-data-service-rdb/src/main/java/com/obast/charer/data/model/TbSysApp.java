@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.AppTypeEnum;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.model.system.SysApp;
@@ -21,7 +21,7 @@ import javax.persistence.*;
 @Table(name = "sys_app")
 @AutoMapper(target = SysApp.class)
 @ApiModel(value = "应用信息表")
-public class TbSysApp extends BaseTenantEntity {
+public class TbSysApp extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

@@ -29,7 +29,7 @@
 
         <dependency>
             <groupId>com.obast.charer</groupId>
-            <artifactId>charer-common-tenant</artifactId>
+            <artifactId>charer-common-satoken</artifactId>
         </dependency>
 
 

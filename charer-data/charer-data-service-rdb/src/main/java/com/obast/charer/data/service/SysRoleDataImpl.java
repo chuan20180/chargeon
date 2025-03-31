@@ -131,20 +131,6 @@ public class SysRoleDataImpl extends AbstractCommonData<SysRoleQueryBo>
     }
 
 
-    @Override
-    public List<SysRole> findAllByTenantId(String id) {
-        return MapstructUtils.convert(baseRepository.findByTenantId(id), SysRole.class);
-    }
-
-    @Override
-    public List<SysRole> findAllByAgentId(String id) {
-        return MapstructUtils.convert(baseRepository.findByAgentId(id), SysRole.class);
-    }
-
-    @Override
-    public List<SysRole> findAllByDealerId(String id) {
-        return MapstructUtils.convert(baseRepository.findByDealerId(id), SysRole.class);
-    }
 
     @Override
     public List<String> selectMenuListByRoleId(String roleId, boolean menuCheckStrictly) {

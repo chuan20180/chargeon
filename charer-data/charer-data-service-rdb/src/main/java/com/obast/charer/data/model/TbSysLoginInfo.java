@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseDealerEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.model.system.SysLoginInfo;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModel;
@@ -24,7 +24,7 @@ import java.util.Date;
 @Table(name = "sys_logininfo")
 @ApiModel(value = "登陆信息")
 @AutoMapper(target = SysLoginInfo.class)
-public class TbSysLoginInfo extends BaseDealerEntity {
+public class TbSysLoginInfo extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

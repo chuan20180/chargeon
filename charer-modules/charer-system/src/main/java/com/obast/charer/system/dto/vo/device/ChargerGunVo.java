@@ -1,5 +1,6 @@
 package com.obast.charer.system.dto.vo.device;
 
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.ChargerGunCurrentEnum;
 import com.obast.charer.enums.ChargerGunSpeedEnum;
 import com.obast.charer.enums.ChargerGunStateEnum;
@@ -19,9 +20,7 @@ import java.io.Serializable;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = ChargerGun.class,convertGenerate = false)
-public class ChargerGunVo extends BaseModel implements Serializable {
-
-    private static final long serialVersionUID = -1L;
+public class ChargerGunVo extends BaseDto {
 
     @ApiModelProperty(value = "id")
     @ExcelProperty(value = "id")

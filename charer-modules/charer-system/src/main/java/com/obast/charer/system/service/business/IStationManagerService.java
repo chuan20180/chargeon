@@ -19,8 +19,6 @@ public interface IStationManagerService {
 
     List<StationVo> queryList(PageRequest<StationQueryBo> pageRequest);
 
-    List<StationVo> queryNoAgentList(PageRequest<StationQueryBo> pageRequest);
-
     StationVo queryDetail(String stationId);
 
     boolean addStation(StationBo data);

@@ -1,7 +1,7 @@
 package com.obast.charer.system.dto.vo;
 
 import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
-import com.obast.charer.common.api.BaseTenantDto;
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.model.system.SysOssConfig;
 import io.github.linpeilie.annotations.AutoMapper;
@@ -18,8 +18,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = SysOssConfig.class)
-public class SysOssConfigVo extends BaseTenantDto {
-    private static final long serialVersionUID = 1L;
+public class SysOssConfigVo extends BaseDto {
 
     /**
      * 主建

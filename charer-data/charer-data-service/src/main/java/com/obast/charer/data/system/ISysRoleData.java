@@ -51,10 +51,4 @@ public interface ISysRoleData extends ICommonData<SysRole, String>, IJPACommonDa
      */
     boolean checkRoleKeyUnique(SysRole role);
 
-
-    List<SysRole> findAllByTenantId(String id);
-
-    List<SysRole> findAllByAgentId(String id);
-
-    List<SysRole> findAllByDealerId(String id);
 }

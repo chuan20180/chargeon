@@ -16,6 +16,4 @@ public interface ISysConfigData  extends ICommonData<SysConfig, String>, IJPACom
 
     SysConfig findByConfigKey(String configKey);
 
-
-    List<SysConfig> findAllByTenantId(String id);
 }

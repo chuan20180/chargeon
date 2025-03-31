@@ -1,8 +1,8 @@
 package com.obast.charer.system.dto.vo;
 
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.common.excel.annotation.ExcelDictFormat;
 import com.obast.charer.common.excel.convert.ExcelDictConvert;
-import com.obast.charer.model.TenantModel;
 import com.obast.charer.model.system.SysDept;
 import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
@@ -21,9 +21,7 @@ import java.util.Date;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = SysDept.class)
-public class SysDeptVo extends TenantModel {
-    private static final long serialVersionUID = 1L;
-
+public class SysDeptVo extends BaseDto {
     /**
      * 部门id
      */

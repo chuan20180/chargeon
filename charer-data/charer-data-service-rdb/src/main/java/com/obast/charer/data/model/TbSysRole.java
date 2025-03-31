@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseDealerEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.model.system.SysRole;
 import io.github.linpeilie.annotations.AutoMapper;
@@ -26,7 +26,7 @@ import javax.persistence.*;
 @Table(name = "sys_role")
 @AutoMapper(target = SysRole.class)
 @ApiModel(value = "角色表")
-public class TbSysRole extends BaseDealerEntity {
+public class TbSysRole extends BaseEntity {
 
     /**
      * 角色ID

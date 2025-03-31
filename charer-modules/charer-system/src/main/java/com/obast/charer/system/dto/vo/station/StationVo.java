@@ -1,6 +1,6 @@
 package com.obast.charer.system.dto.vo.station;
 
-import com.obast.charer.common.api.BaseAgentDto;
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.converter.StringToListConverter;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.common.i18n.I18nField;
@@ -23,7 +23,7 @@ import java.util.List;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = Station.class, uses = {StringToListConverter.class}, convertGenerate = false)
-public class StationVo extends BaseAgentDto {
+public class StationVo extends BaseDto {
     private static final long serialVersionUID = -1L;
 
     @ApiModelProperty(value = "id")

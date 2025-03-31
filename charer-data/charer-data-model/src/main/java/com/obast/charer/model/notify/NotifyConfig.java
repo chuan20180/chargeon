@@ -3,20 +3,19 @@ package com.obast.charer.model.notify;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.enums.NotifyIdentifierEnum;
 import com.obast.charer.enums.YesNoEnum;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 import lombok.*;
 
 import javax.persistence.Convert;
 import java.io.Serializable;
-import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NotifyConfig extends TenantModel implements Id<String>, Serializable {
+public class NotifyConfig extends BaseModel implements Id<String>, Serializable {
 
     private String id;
 

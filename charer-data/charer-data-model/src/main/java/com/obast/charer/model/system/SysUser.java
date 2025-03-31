@@ -2,7 +2,7 @@ package com.obast.charer.model.system;
 
 import com.obast.charer.common.enums.AdminTypeEnum;
 import com.obast.charer.enums.EnableStatusEnum;
-import com.obast.charer.model.DealerModel;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class SysUser extends DealerModel implements Id<String>, Serializable {
+public class SysUser extends BaseModel implements Id<String>, Serializable {
 
     /**
      * 用户ID

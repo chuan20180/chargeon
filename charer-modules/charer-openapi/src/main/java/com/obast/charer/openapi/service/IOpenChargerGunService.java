@@ -22,9 +22,8 @@ public interface IOpenChargerGunService {
 
     OpenChargerGunVo queryDetail(String stationId);
 
-    ActionResult<?> balanceStartCharge(BalanceStartChargeBo bo);
+    ActionResult<?> startCharge(BalanceStartChargeBo bo);
 
-    ActionResult<?> instantStartCharge(InstantStartChargeBo bo);
 
 
     ActionResult<?> stopCharge(StopChargeBo bo);

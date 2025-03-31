@@ -68,8 +68,13 @@ public class OpenAppController extends BaseController {
   public OpenAppSettingVo setting() {
     RequestLocale requestLocale = RequestLocaleHolder.getLocale();
     SysApp sysApp = sysAppData.findByAppId(requestLocale.getApiId());
-    MapConfig map = mapConfigData.findMapConfigByTenantId(sysApp.getTenantId());
-    Map<String, Object> config = openSysConfigService.querySysConfigByTenantId(sysApp.getTenantId());
+//    MapConfig map = mapConfigData.findMapConfigByTenantId(sysApp.getTenantId());
+//    Map<String, Object> config = openSysConfigService.querySysConfigByTenantId(sysApp.getTenantId());
+
+    //todo
+    MapConfig map = null;
+    Map<String, Object> config = null;
+
     OpenNotifyConfigVo notify = new OpenNotifyConfigVo(notifyConfigData.findWechatTemplateIds());
 
     return new OpenAppSettingVo(sysApp, map, config, openapiProperties, notify);

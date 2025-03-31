@@ -13,7 +13,7 @@ public interface IOpenSysConfigService {
     /**
      * 查询参数配置列表
      */
-    Map<String, Object> querySysConfigByTenantId(String tenantId);
+    Map<String, Object> querySysConfig();
 
     /**
      * 根据key查询参数

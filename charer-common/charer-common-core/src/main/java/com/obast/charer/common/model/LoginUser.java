@@ -29,7 +29,6 @@ public class LoginUser implements Serializable {
 
     private String userName;
 
-    private String tenantId;
 
     /**
      * 用户唯一标识
@@ -92,12 +91,10 @@ public class LoginUser implements Serializable {
     /********************************************************************
      * admin 部分
      *********************************************************************/
-    private Integer isTenantAdmin;
-    private Integer isAgentAdmin;
+
     private String deptId;
     private String deptName;
-    private String dealerId;
-    private String agentId;
+
     private AdminTypeEnum userType;
     private Long expireTime;
 

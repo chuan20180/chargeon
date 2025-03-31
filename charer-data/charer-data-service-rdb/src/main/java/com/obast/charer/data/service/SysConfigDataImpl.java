@@ -98,11 +98,6 @@ public class SysConfigDataImpl extends AbstractCommonData<SysConfigQueryBo>
         return MapstructUtils.convert(IteratorUtils.toList(iterator), SysConfig.class);
     }
 
-    @Override
-    public List<SysConfig> findAllByTenantId(String id) {
-        return MapstructUtils.convert(baseRepository.findByTenantId(id), SysConfig.class);
-    }
-
     public Specification<TbSysConfig> buildSpecification(SysConfigQueryBo bo) {
         return (root, query, cb) -> {
             List<javax.persistence.criteria.Predicate> predicates = new ArrayList<>();

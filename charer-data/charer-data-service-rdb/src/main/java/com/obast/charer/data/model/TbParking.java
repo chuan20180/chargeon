@@ -1,7 +1,7 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseAgentEntity;
 import com.obast.charer.common.i18n.I18nField;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.model.parking.Parking;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModel;
@@ -25,7 +25,7 @@ import javax.persistence.Table;
 @Table(name = "parking")
 @ApiModel(value = "车位信息")
 @AutoMapper(target = Parking.class)
-public class TbParking extends BaseAgentEntity {
+public class TbParking extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

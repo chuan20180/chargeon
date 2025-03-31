@@ -52,19 +52,16 @@ public class LoginHelper {
     public static void loginByPlatform(LoginUser loginUser, PlatformTypeEnum platformType) {
         SaStorage storage = SaHolder.getStorage();
         storage.set(LOGIN_USER_KEY, loginUser);
-        storage.set(TENANT_KEY, loginUser.getTenantId());
         storage.set(USER_KEY, loginUser.getUserId());
-        storage.set(DEALER_KEY, loginUser.getDealerId());
-        storage.set(IS_TENANT_ADMIN_KEY, loginUser.getIsTenantAdmin());
         SaLoginModel model = new SaLoginModel();
         if (ObjectUtil.isNotNull(platformType)) {
             model.setDevice(platformType.getData());
         }
         StpUtil.login(loginUser.getLoginId(),
-                model.setExtra(TENANT_KEY, loginUser.getTenantId())
+                model
+
                         .setExtra(USER_KEY, loginUser.getUserId())
-                        .setExtra(DEALER_KEY, loginUser.getDealerId())
-                        .setExtra(IS_TENANT_ADMIN_KEY, loginUser.getIsTenantAdmin())
+
         ) ;
         StpUtil.getTokenSession().set(LOGIN_USER_KEY, loginUser);
     }
@@ -114,66 +111,6 @@ public class LoginHelper {
 
 
     /**
-     * 获取用户id
-     */
-    public static String getAgentId() {
-        try {
-            LoginUser loginUser = getLoginUser();
-            if (loginUser == null) {
-                Object agentId = SaHolder.getStorage().get(AGENT_KEY);
-                if (agentId == null) {
-                    return null;
-                }
-                return (String) agentId;
-            }
-            return loginUser.getAgentId();
-        } catch (Exception e) {
-            //skip
-        }
-        return null;
-    }
-
-    /**
-     * 获取用户id
-     */
-    public static String getDealerId() {
-        try {
-            LoginUser loginUser = getLoginUser();
-            if (loginUser == null) {
-                Object dealerId = SaHolder.getStorage().get(DEALER_KEY);
-                if (dealerId == null) {
-                    return null;
-                }
-                return (String) dealerId;
-            }
-            return loginUser.getDealerId();
-        } catch (Exception e) {
-            //skip
-        }
-        return null;
-    }
-
-    /**
-     * 获取租户ID
-     */
-    public static String getTenantId() {
-        try {
-            LoginUser loginUser = getLoginUser();
-            if (loginUser == null) {
-                Object tenantId = SaHolder.getStorage().get(TENANT_KEY);
-                if (tenantId == null) {
-                    return null;
-                }
-                return (String) tenantId;
-            }
-            return loginUser.getTenantId();
-        } catch (Exception e) {
-            //skip
-        }
-        return null;
-    }
-
-    /**
      * 设置租户ID
      *
      * @param tenantId 租户ID
@@ -218,22 +155,6 @@ public class LoginHelper {
         return isSuperAdmin(getUserId());
     }
 
-    public static boolean isTenantAdmin() {
-        try {
-            LoginUser loginUser = getLoginUser();
-            if (loginUser == null) {
-                Object isTenantAdmin = SaHolder.getStorage().get(IS_TENANT_ADMIN_KEY);
-                if (isTenantAdmin == null) {
-                    return false;
-                }
-                return (Integer) isTenantAdmin == 1;
-            }
-            return loginUser.getIsTenantAdmin() == 1;
-        } catch (Exception e) {
-            //skip
-        }
-        return false;
-    }
 
 
 }

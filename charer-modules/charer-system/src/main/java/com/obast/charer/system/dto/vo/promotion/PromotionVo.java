@@ -1,5 +1,6 @@
 package com.obast.charer.system.dto.vo.promotion;
 
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.enums.PromotionScopeEnum;
 import com.obast.charer.enums.PromotionTypeEnum;
@@ -28,9 +29,7 @@ import java.util.List;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = Promotion.class,convertGenerate = false)
-public class PromotionVo extends BaseModel implements Serializable {
-
-    private static final long serialVersionUID = -1L;
+public class PromotionVo extends BaseDto {
 
     @ApiModelProperty(value = "id")
     @ExcelProperty(value = "id")

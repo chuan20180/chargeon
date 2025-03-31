@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.enums.TplTypeEnum;
 import com.obast.charer.model.sms.SmsConfig;
@@ -17,7 +17,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "sms_config")
 @AutoMapper(target = SmsConfig.class)
-public class TbSmsConfig extends BaseTenantEntity {
+public class TbSmsConfig extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

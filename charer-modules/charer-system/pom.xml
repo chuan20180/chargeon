@@ -68,11 +68,6 @@
 
         <dependency>
             <groupId>com.obast.charer</groupId>
-            <artifactId>charer-common-tenant</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.obast.charer</groupId>
             <artifactId>charer-common-i18n</artifactId>
         </dependency>
 

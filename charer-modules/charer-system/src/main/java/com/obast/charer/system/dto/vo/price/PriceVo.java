@@ -1,5 +1,6 @@
 package com.obast.charer.system.dto.vo.price;
 
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.common.enums.PriceTypeEnum;
 import com.obast.charer.common.model.dto.PriceFee;
 import com.obast.charer.common.model.dto.PriceProperties;
@@ -28,9 +29,7 @@ import java.io.Serializable;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = Price.class,convertGenerate = false)
-public class PriceVo extends BaseModel implements Serializable {
-
-    private static final long serialVersionUID = -1L;
+public class PriceVo extends BaseDto {
 
     @ApiModelProperty(value = "id")
     @ExcelProperty(value = "id")

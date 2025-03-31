@@ -12,5 +12,4 @@ public interface SysConfigRepository extends JpaRepository<TbSysConfig, String>,
 
     Optional<TbSysConfig> findByConfigKey(String configKey);
 
-    List<TbSysConfig> findByTenantId(String id);
 }

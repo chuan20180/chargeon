@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.enums.PromotionScopeEnum;
 import com.obast.charer.enums.PromotionTypeEnum;
@@ -25,7 +25,7 @@ import java.util.List;
 @Table(name = "promotion")
 @ApiModel(value = "活动")
 @AutoMapper(target = Promotion.class)
-public class TbPromotion extends BaseTenantEntity {
+public class TbPromotion extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

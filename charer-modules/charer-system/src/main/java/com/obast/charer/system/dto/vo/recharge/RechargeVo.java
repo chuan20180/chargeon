@@ -1,5 +1,6 @@
 package com.obast.charer.system.dto.vo.recharge;
 
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.enums.RechargeTypeEnum;
 import com.obast.charer.model.BaseModel;
@@ -26,9 +27,7 @@ import java.util.List;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = Recharge.class,convertGenerate = false)
-public class RechargeVo extends BaseModel implements Serializable {
-
-    private static final long serialVersionUID = -1L;
+public class RechargeVo extends BaseDto {
 
     @ApiModelProperty(value = "id")
     @ExcelProperty(value = "id")

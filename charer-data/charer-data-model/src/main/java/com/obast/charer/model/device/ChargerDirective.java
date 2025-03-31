@@ -3,8 +3,8 @@ package com.obast.charer.model.device;
 import com.obast.charer.enums.ChargerDirectiveResultEnum;
 import com.obast.charer.enums.ChargerDirectiveStateEnum;
 import com.obast.charer.enums.ChargerDirectiveTypeEnum;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 import lombok.*;
 
 import java.io.Serializable;
@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChargerDirective extends TenantModel implements Id<String>, Serializable {
+public class ChargerDirective extends BaseModel implements Id<String>, Serializable {
 
     private String id;
 

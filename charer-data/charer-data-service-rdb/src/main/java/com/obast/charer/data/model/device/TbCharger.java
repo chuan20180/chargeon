@@ -1,8 +1,7 @@
 package com.obast.charer.data.model.device;
 
-import com.obast.charer.data.base.BaseAgentEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.EnableStatusEnum;
-import com.obast.charer.enums.OnOffEnum;
 import com.obast.charer.enums.OnlineStatusEnum;
 import com.obast.charer.model.device.Charger;
 import io.github.linpeilie.annotations.AutoMapper;
@@ -23,7 +22,7 @@ import java.math.BigDecimal;
 @Table(name = "charger")
 @ApiModel(value = "设备信息")
 @AutoMapper(target = Charger.class)
-public class TbCharger extends BaseAgentEntity {
+public class TbCharger extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

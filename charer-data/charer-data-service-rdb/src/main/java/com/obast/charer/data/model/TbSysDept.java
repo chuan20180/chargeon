@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseAgentEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.model.system.SysDept;
 import io.github.linpeilie.annotations.AutoMapper;
@@ -20,7 +20,7 @@ import javax.persistence.*;
 @Table(name = "sys_dept")
 @AutoMapper(target = SysDept.class)
 @ApiModel(value = "部门表")
-public class TbSysDept extends BaseAgentEntity {
+public class TbSysDept extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     @Id

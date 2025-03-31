@@ -1,6 +1,5 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.common.tenant.dao.TenantAware;
 import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.NoticeStateEnum;
 import com.obast.charer.enums.NoticeTypeEnum;
@@ -27,7 +26,7 @@ import javax.persistence.*;
 @Table(name = "notice")
 @AutoMapper(target = Notice.class)
 @ApiModel(value = "通知公告表")
-public class TbNotice extends BaseEntity implements TenantAware {
+public class TbNotice extends BaseEntity {
 
     /**
      * 公告ID

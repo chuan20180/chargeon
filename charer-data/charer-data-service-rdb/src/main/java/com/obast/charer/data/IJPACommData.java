@@ -2,13 +2,10 @@ package com.obast.charer.data;
 
 import com.obast.charer.common.api.PageRequest;
 import com.obast.charer.common.api.Paging;
-import com.obast.charer.common.tenant.dao.TenantAware;
 
-import com.obast.charer.common.tenant.helper.TenantHelper;
 import com.obast.charer.common.utils.MapstructUtils;
 import com.obast.charer.data.util.PageBuilder;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import org.springframework.data.domain.Example;
@@ -52,17 +49,7 @@ public interface IJPACommData<T extends Id<ID>, ID> extends ICommonData<T, ID> {
             BeanUtil.copyProperties(tbData, dbObj, CopyOptions.create().ignoreNullValue());
             tbData = dbObj;
         }
-        if (tbData instanceof TenantAware) {
-            String sourceTid = null;
-            if (data instanceof TenantModel) {
-                sourceTid = ((TenantModel) data).getTenantId();
-            }
-            String tenantId = TenantHelper.getTenantId();
-            //未指定租户id,使用当前用户所属租户id
-            if (Objects.isNull(sourceTid) && tenantId != null) {
-                ((TenantAware) tbData).setTenantId(tenantId);
-            }
-        }
+
 
         Object o = getBaseRepository().save(tbData);
         return (T) MapstructUtils.convert(o, getTClass());

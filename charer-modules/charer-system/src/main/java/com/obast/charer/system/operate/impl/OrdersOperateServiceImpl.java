@@ -118,7 +118,7 @@ public class OrdersOperateServiceImpl implements IOrdersOperateService {
         ordersElecSettle.setOrderId(order.getId());
         ordersElecSettle.setType(OrderSettleTypeEnum.Elec);
         ordersElecSettle.setAmount(orderElecAmount);
-        ordersElecSettle.setTenantId(order.getTenantId());
+
 
 
         BigDecimal settledElecAmount = new BigDecimal(0);
@@ -225,7 +225,7 @@ public class OrdersOperateServiceImpl implements IOrdersOperateService {
         ordersServiceSettle.setOrderId(order.getId());
         ordersServiceSettle.setType(OrderSettleTypeEnum.Service);
         ordersServiceSettle.setAmount(orderServiceAmount);
-        ordersServiceSettle.setTenantId(order.getTenantId());
+
 
         BigDecimal settledServiceAmount = new BigDecimal(0);
         BigDecimal discountServiceAmount = new BigDecimal(0);

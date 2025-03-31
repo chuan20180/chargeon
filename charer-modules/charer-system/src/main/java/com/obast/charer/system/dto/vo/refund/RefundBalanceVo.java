@@ -1,11 +1,14 @@
 package com.obast.charer.system.dto.vo.refund;
 
 import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.RefundStateEnum;
 import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.refund.RefundBalance;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -24,10 +27,9 @@ import java.util.Date;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = RefundBalance.class,convertGenerate = false)
-public class RefundBalanceVo extends BaseModel implements Serializable {
+public class RefundBalanceVo extends BaseDto {
 
-    private static final long serialVersionUID = -1L;
-
+    private Long id;
 
     private String refundId;
 

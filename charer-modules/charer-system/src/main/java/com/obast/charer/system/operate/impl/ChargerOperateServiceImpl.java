@@ -137,8 +137,6 @@ public class ChargerOperateServiceImpl implements IChargerOperateService {
         orders.setStationName(station.getName());
         orders.setStationAddress(station.getAddress());
         orders.setParkAmount(new BigDecimal(0));
-        orders.setTenantId(station.getTenantId());
-        orders.setAgentId(station.getAgentId());
         orders.setCustomerLoginId(customerLoginId);
         orders.setStartTime(new Date());
         orders.setChargeMinute((short) 0);

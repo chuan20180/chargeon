@@ -1,6 +1,7 @@
 package com.obast.charer.system.dto.vo.coupon;
 
 import com.obast.charer.common.Decimal2Serializer;
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.CouponAcceptEnum;
 import com.obast.charer.enums.CouponApplyEnum;
 import com.obast.charer.enums.CouponScopeEnum;
@@ -31,9 +32,7 @@ import java.util.List;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = Coupon.class, convertGenerate = false)
-public class CouponVo extends BaseModel implements Serializable {
-
-    private static final long serialVersionUID = -1L;
+public class CouponVo extends BaseDto {
 
     @ApiModelProperty(value = "id")
     @ExcelProperty(value = "id")

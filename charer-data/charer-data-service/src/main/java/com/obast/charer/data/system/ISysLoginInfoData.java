@@ -13,14 +13,4 @@ import java.util.List;
  * @author sjg
  */
 public interface ISysLoginInfoData  extends ICommonData<SysLoginInfo, String>, IJPACommonData<SysLoginInfo, SysLoginInfoQueryBo, String> {
-
-    List<SysLoginInfo> findAllByTenantId(String id);
-
-    List<SysLoginInfo> findAllByAgentId(String id);
-
-    List<SysLoginInfo> findAllByDealerId(String id);
-
-
-
-
 }

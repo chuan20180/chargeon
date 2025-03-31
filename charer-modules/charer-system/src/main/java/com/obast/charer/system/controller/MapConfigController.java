@@ -63,6 +63,9 @@ public class MapConfigController {
     @ApiOperation(value = "查询可用的配置", notes = "查询可用的配置", httpMethod = "POST")
     @PostMapping("/available")
     public MapConfigVo queryAvailable() {
-        return mapConfigManagerService.queryByTenantId( LoginHelper.getTenantId());
+        //return mapConfigManagerService.queryByTenantId( LoginHelper.getTenantId());
+        //todo
+
+        return null;
     }
 }

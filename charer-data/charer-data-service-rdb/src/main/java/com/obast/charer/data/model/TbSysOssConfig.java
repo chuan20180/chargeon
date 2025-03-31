@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.model.system.SysOssConfig;
 import io.github.linpeilie.annotations.AutoMapper;
@@ -23,7 +23,7 @@ import javax.persistence.*;
 @Table(name = "sys_oss_config")
 @ApiModel(value = "对象存储配置对象")
 @AutoMapper(target = SysOssConfig.class)
-public class TbSysOssConfig extends BaseTenantEntity {
+public class TbSysOssConfig extends BaseEntity {
 
     /**
      * 主建

@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.model.push.PushConfig;
 import io.github.linpeilie.annotations.AutoMapper;
@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "push_config")
 @AutoMapper(target = PushConfig.class)
-public class TbPushConfig extends BaseTenantEntity {
+public class TbPushConfig extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

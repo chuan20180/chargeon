@@ -1,7 +1,7 @@
 package com.obast.charer.data.model;
 
 import com.obast.charer.common.Decimal2Serializer;
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.RefundStateEnum;
 import com.obast.charer.model.refund.Refund;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -24,7 +24,7 @@ import java.util.Date;
 @Table(name = "refund")
 @ApiModel(value = "退款记录")
 @AutoMapper(target = Refund.class)
-public class TbRefund extends BaseTenantEntity {
+public class TbRefund extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

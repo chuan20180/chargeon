@@ -3,8 +3,8 @@ package com.obast.charer.model.customer;
 import com.obast.charer.enums.MessageStateEnum;
 import com.obast.charer.enums.NotifyScopeEnum;
 import com.obast.charer.enums.NotifyTypeEnum;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 import lombok.*;
 
 import java.io.Serializable;
@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerNotify extends TenantModel implements Id<String>, Serializable {
+public class CustomerNotify extends BaseModel implements Id<String>, Serializable {
 
     private String id;
 

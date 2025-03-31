@@ -1,6 +1,7 @@
 package com.obast.charer.system.dto.vo.device;
 
 import com.obast.charer.common.Decimal2Serializer;
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.enums.OnlineStatusEnum;
 import com.obast.charer.model.BaseModel;
@@ -26,9 +27,7 @@ import java.util.List;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = Charger.class,convertGenerate = false)
-public class ChargerVo extends BaseModel implements Serializable {
-
-    private static final long serialVersionUID = -1L;
+public class ChargerVo extends BaseDto {
 
     @ApiModelProperty(value = "id")
     @ExcelProperty(value = "id")

@@ -15,6 +15,6 @@
     <modules>
         <module>charer-payment-wechat</module>
         <module>charer-payment-core</module>
-        <module>charer-payment-mbank</module>
+
     </modules>
 </project>

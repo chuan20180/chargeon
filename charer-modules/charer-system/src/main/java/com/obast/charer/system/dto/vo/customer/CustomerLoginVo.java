@@ -1,5 +1,6 @@
 package com.obast.charer.system.dto.vo.customer;
 
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.AppOsEnum;
 import com.obast.charer.enums.CustomerTypeEnum;
 import com.obast.charer.model.BaseModel;
@@ -17,7 +18,7 @@ import java.util.Date;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = CustomerLogin.class,convertGenerate = false)
-public class CustomerLoginVo extends BaseModel {
+public class CustomerLoginVo extends BaseDto {
 
     private static final long serialVersionUID = -1L;
 

@@ -7,7 +7,6 @@ import com.obast.charer.common.enums.*;
 import com.obast.charer.common.exception.BizException;
 import com.obast.charer.common.model.LoginUser;
 import com.obast.charer.common.satoken.util.LoginHelper;
-import com.obast.charer.common.tenant.helper.TenantHelper;
 import com.obast.charer.common.utils.JsonUtils;
 import com.obast.charer.common.utils.StringUtils;
 import com.obast.charer.common.web.utils.ServletUtils;
@@ -80,7 +79,7 @@ public class OpenBaseServiceImpl implements OpenBaseService {
             throw new BizException(ErrCode.API_LOGIN_ERROR);
         }
 
-        SysUser sysUser = sysUserData.findTenantUserByUserName("admin", "0");
+        SysUser sysUser = sysUserData.findByUserName("admin");
         if (sysUser == null){
             throw new BizException(ErrCode.API_LOGIN_ERROR);
         }
@@ -219,7 +218,7 @@ public class OpenBaseServiceImpl implements OpenBaseService {
 
             LoginUser loginUser = new LoginUser();
             loginUser.setLogicType(LogicTypeEnum.Openapi);
-            loginUser.setTenantId(customer.getTenantId());
+
             loginUser.setCustomerLoginId(customerLogin.getId());
             loginUser.setUserId(customer.getId());
             loginUser.setUserName(customer.getUserName());
@@ -273,7 +272,7 @@ public class OpenBaseServiceImpl implements OpenBaseService {
 
         LoginUser loginUser = new LoginUser();
         loginUser.setLogicType(LogicTypeEnum.Openapi);
-        loginUser.setTenantId(savedCustomer.getTenantId());
+
         loginUser.setUserId(savedCustomer.getId());
         loginUser.setUserName(savedCustomer.getUserName());
 
@@ -331,7 +330,7 @@ public class OpenBaseServiceImpl implements OpenBaseService {
 
         LoginUser loginUser = new LoginUser();
         loginUser.setLogicType(LogicTypeEnum.Openapi);
-        loginUser.setTenantId(customer.getTenantId());
+
         loginUser.setUserId(customer.getId());
         loginUser.setCustomerLoginId(customerLogin.getId());
         loginUser.setCustomerDn(customerLogin.getDn());
@@ -460,7 +459,7 @@ public class OpenBaseServiceImpl implements OpenBaseService {
 
         LoginUser loginUser = new LoginUser();
         loginUser.setLogicType(LogicTypeEnum.Openapi);
-        loginUser.setTenantId(customer.getTenantId());
+
         loginUser.setUserId(customer.getId());
         loginUser.setUserName(customer.getUserName());
         loginUser.setPlatform(PlatformTypeEnum.Weixin);

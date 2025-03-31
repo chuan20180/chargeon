@@ -1,6 +1,7 @@
 package com.obast.charer.system.dto.vo.refund;
 
 import com.obast.charer.common.Decimal2Serializer;
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.RefundStateEnum;
 import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.refund.Refund;
@@ -28,9 +29,7 @@ import java.util.Date;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = Refund.class,convertGenerate = false)
-public class RefundVo extends BaseModel implements Serializable {
-
-    private static final long serialVersionUID = -1L;
+public class RefundVo extends BaseDto {
 
     @ApiModelProperty(value = "id")
     @ExcelProperty(value = "id")

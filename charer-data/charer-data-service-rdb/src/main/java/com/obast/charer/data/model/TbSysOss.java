@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.model.system.SysOss;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModel;
@@ -25,7 +25,7 @@ import javax.persistence.Table;
 @Table(name = "sys_oss")
 @ApiModel(value = "OSS对象存储对象")
 @AutoMapper(target = SysOss.class)
-public class TbSysOss extends BaseTenantEntity {
+public class TbSysOss extends BaseEntity {
 
     /**
      * 对象存储主键

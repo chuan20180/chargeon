@@ -25,9 +25,10 @@ package com.obast.charer.system.dto.bo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.validator.constraints.NotBlank;
+
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Map;
 
 /**

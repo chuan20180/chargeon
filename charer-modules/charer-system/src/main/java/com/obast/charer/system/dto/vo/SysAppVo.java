@@ -1,6 +1,7 @@
 package com.obast.charer.system.dto.vo;
 
 import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.AppTypeEnum;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.model.BaseModel;
@@ -16,11 +17,7 @@ import java.io.Serializable;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = SysApp.class)
-public class SysAppVo extends BaseModel implements Serializable {
-
-
-    private static final long serialVersionUID = 1L;
-
+public class SysAppVo extends BaseDto {
     /**
      * id
      */

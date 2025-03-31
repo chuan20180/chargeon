@@ -2,7 +2,7 @@ package com.obast.charer.data.model.price;
 
 import com.obast.charer.common.enums.PriceTypeEnum;
 import com.obast.charer.common.model.dto.PriceProperties;
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.model.price.Price;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
@@ -30,7 +30,7 @@ import javax.persistence.*;
     @TypeDef(name = "json", typeClass = JsonStringType.class),
 })
 
-public class TbPrice extends BaseTenantEntity {
+public class TbPrice extends BaseEntity {
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")
     @GenericGenerator(name = "SnowflakeIdGenerator", strategy = "com.obast.charer.data.config.id.SnowflakeIdGenerator")

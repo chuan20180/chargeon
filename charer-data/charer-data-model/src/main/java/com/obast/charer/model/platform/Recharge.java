@@ -2,8 +2,8 @@ package com.obast.charer.model.platform;
 
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.enums.RechargeTypeEnum;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 import lombok.*;
 
 import java.io.Serializable;
@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Recharge extends TenantModel implements Id<String>, Serializable {
+public class Recharge extends BaseModel implements Id<String>, Serializable {
 
     private String id;
 

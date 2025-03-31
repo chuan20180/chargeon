@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.CouponApplyEnum;
 import com.obast.charer.enums.CouponCodeStateEnum;
 import com.obast.charer.enums.CouponScopeEnum;
@@ -26,7 +26,7 @@ import java.util.List;
 @Table(name = "coupon_code")
 @ApiModel(value = "优惠券")
 @AutoMapper(target = CouponCode.class)
-public class TbCouponCode extends BaseTenantEntity {
+public class TbCouponCode extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

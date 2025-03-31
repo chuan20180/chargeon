@@ -1,6 +1,5 @@
 package com.obast.charer.openapi.controller;
 
-import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.alibaba.fastjson.JSONObject;
 import com.obast.charer.common.api.PageRequest;
 import com.obast.charer.common.api.Paging;
@@ -9,7 +8,6 @@ import com.obast.charer.openapi.dto.vo.OpenPromotionVo;
 import com.obast.charer.openapi.dto.vo.OpenStationFavoriteVo;
 import com.obast.charer.openapi.dto.vo.OpenStationVo;
 import com.obast.charer.openapi.service.IOpenPromotionService;
-import com.obast.charer.openapi.service.IOpenStationFavoriteService;
 import com.obast.charer.openapi.service.IOpenStationService;
 import com.obast.charer.qo.StationFavoriteQueryBo;
 import com.obast.charer.qo.StationQueryBo;
@@ -35,8 +33,6 @@ public class OpenStationController {
     @Autowired
     private IOpenStationService openStationService;
 
-    @Autowired
-    private IOpenStationFavoriteService openStationFavoriteService;
 
     @Autowired
     private IOpenPromotionService openPromotionService;
@@ -62,9 +58,4 @@ public class OpenStationController {
         return result;
     }
 
-    @ApiOperation("收藏")
-    @PostMapping("/favorite")
-    public Paging<OpenStationFavoriteVo> favorite(@RequestBody @Validated PageRequest<StationFavoriteQueryBo> pageRequest) {
-        return openStationFavoriteService.queryPage(pageRequest);
-    }
 }

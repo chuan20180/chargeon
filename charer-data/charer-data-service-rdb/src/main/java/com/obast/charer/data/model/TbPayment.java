@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.common.i18n.I18nField;
 import com.obast.charer.enums.PaymentIdentifierEnum;
@@ -23,7 +23,7 @@ import javax.persistence.*;
 @Table(name = "payment")
 @ApiModel(value = "设备信息")
 @AutoMapper(target = Payment.class)
-public class TbPayment extends BaseTenantEntity {
+public class TbPayment extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

@@ -1,8 +1,8 @@
 package com.obast.charer.model.system;
 
 import com.obast.charer.enums.SysConfigDataTypeEnum;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,7 +17,7 @@ import java.util.Date;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class SysConfig extends TenantModel implements Id<String>, Serializable {
+public class SysConfig extends BaseModel implements Id<String>, Serializable {
     private static final long serialVersionUID = 1L;
 
     private String id;

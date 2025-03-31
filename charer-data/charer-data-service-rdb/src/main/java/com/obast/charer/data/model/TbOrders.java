@@ -2,7 +2,7 @@ package com.obast.charer.data.model;
 
 import com.obast.charer.common.i18n.I18nField;
 import com.obast.charer.common.model.dto.PriceProperties;
-import com.obast.charer.data.base.BaseAgentEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.*;
 import com.obast.charer.model.order.Orders;
 import io.github.linpeilie.annotations.AutoMapper;
@@ -25,7 +25,7 @@ import java.util.Date;
 @Table(name = "orders")
 @ApiModel(value = "充电订单")
 @AutoMapper(target = Orders.class)
-public class TbOrders extends BaseAgentEntity {
+public class TbOrders extends BaseEntity {
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")
     @GenericGenerator(name = "SnowflakeIdGenerator", strategy = "com.obast.charer.data.config.id.SnowflakeIdGenerator")

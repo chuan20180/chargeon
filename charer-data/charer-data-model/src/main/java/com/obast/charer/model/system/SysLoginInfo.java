@@ -1,6 +1,6 @@
 package com.obast.charer.model.system;
 
-import com.obast.charer.model.DealerModel;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,7 +10,7 @@ import java.util.Date;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class SysLoginInfo  extends DealerModel implements Id<String>,Serializable {
+public class SysLoginInfo  extends BaseModel implements Id<String>,Serializable {
     private static final long serialVersionUID = 1L;
 
     /**

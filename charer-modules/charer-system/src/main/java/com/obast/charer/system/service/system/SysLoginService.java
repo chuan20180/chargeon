@@ -1,43 +1,34 @@
 package com.obast.charer.system.service.system;
 
-import com.obast.charer.common.constant.Constants;
-import com.obast.charer.common.constant.GlobalConstants;
-import com.obast.charer.common.constant.TenantConstants;
-import com.obast.charer.common.enums.ErrCode;
-import com.obast.charer.common.enums.LogicTypeEnum;
-import com.obast.charer.common.enums.LoginType;
-import com.obast.charer.common.enums.PlatformTypeEnum;
-import com.obast.charer.common.exception.BizException;
-import com.obast.charer.common.exception.user.UserException;
-import com.obast.charer.common.utils.DateUtils;
-import com.obast.charer.common.utils.MapstructUtils;
-import com.obast.charer.common.utils.MessageUtils;
-import com.obast.charer.common.utils.StringUtils;
-import com.obast.charer.common.log.event.LogininforEvent;
-import com.obast.charer.common.model.LoginUser;
-import com.obast.charer.common.model.RoleDTO;
-import com.obast.charer.common.redis.utils.RedisUtils;
-import com.obast.charer.common.satoken.util.LoginHelper;
-import com.obast.charer.common.tenant.helper.TenantHelper;
-import com.obast.charer.common.utils.SpringUtils;
-import com.obast.charer.system.config.properties.CaptchaProperties;
-import com.obast.charer.common.web.utils.ServletUtils;
-import com.obast.charer.data.system.ISysUserData;
-import com.obast.charer.system.dto.vo.SysUserVo;
-import com.obast.charer.enums.EnableStatusEnum;
-import com.obast.charer.model.system.SysUser;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.secure.BCrypt;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
+import com.obast.charer.common.constant.Constants;
+import com.obast.charer.common.constant.GlobalConstants;
+import com.obast.charer.common.enums.LogicTypeEnum;
+import com.obast.charer.common.enums.LoginType;
+import com.obast.charer.common.enums.PlatformTypeEnum;
+import com.obast.charer.common.exception.BizException;
+import com.obast.charer.common.exception.user.UserException;
+import com.obast.charer.common.log.event.LogininforEvent;
+import com.obast.charer.common.model.LoginUser;
+import com.obast.charer.common.model.RoleDTO;
+import com.obast.charer.common.redis.utils.RedisUtils;
+import com.obast.charer.common.satoken.util.LoginHelper;
+import com.obast.charer.common.utils.*;
+import com.obast.charer.common.web.utils.ServletUtils;
+import com.obast.charer.data.system.ISysUserData;
+import com.obast.charer.model.system.SysUser;
+import com.obast.charer.system.config.properties.CaptchaProperties;
+import com.obast.charer.system.dto.vo.SysUserVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
-import java.util.Date;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -81,12 +72,11 @@ public class SysLoginService {
         }
 
         //未登录前临时设置租户id
-        LoginHelper.setTenantId(tenantId);
-        SysUserVo user = loadUserByUsername(tenantId, username);
+
+        SysUserVo user = loadUserByUsername(username);
 
 
         log.debug("登陆信息: {}", user);
-        user.setTenantId(tenantId);
         checkLogin(LoginType.PASSWORD, tenantId, username, () -> !BCrypt.checkpw(password, user.getPassword()));
         // 此处可根据登录用户的数据不同 自行创建 loginUser
         LoginUser loginUser = buildLoginUser(user);
@@ -95,7 +85,7 @@ public class SysLoginService {
 
         log.debug("web用户: {}", loginUser);
 
-        recordLoginInfo(loginUser.getTenantId(), username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
+        recordLoginInfo(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
         recordLoginInfo(user.getId());
         return StpUtil.getTokenValue();
     }
@@ -112,12 +102,9 @@ public class SysLoginService {
             if(loginUser==null){
                 return;
             }
-            if (LoginHelper.isSuperAdmin()) {
-                // 超级管理员 登出清除动态租户
-                TenantHelper.clearDynamic();
-            }
+
             StpUtil.logout();
-            recordLoginInfo(loginUser.getTenantId(), loginUser.getUserName(), Constants.LOGOUT, MessageUtils.message("user.logout.success"));
+            recordLoginInfo(loginUser.getUserName(), Constants.LOGOUT, MessageUtils.message("user.logout.success"));
         } catch (NotLoginException ignored) {
         }
     }
@@ -125,14 +112,13 @@ public class SysLoginService {
     /**
      * 记录登录信息
      *
-     * @param tenantId 租户ID
      * @param username 用户名
      * @param status   状态
      * @param message  消息内容
      */
-    private void recordLoginInfo(String tenantId, String username, String status, String message) {
+    private void recordLoginInfo(String username, String status, String message) {
         LogininforEvent logininforEvent = new LogininforEvent();
-        logininforEvent.setTenantId(tenantId);
+
         logininforEvent.setUsername(username);
         logininforEvent.setStatus(status);
         logininforEvent.setMessage(message);
@@ -143,10 +129,10 @@ public class SysLoginService {
     /**
      * 校验短信验证码
      */
-    private boolean validateSmsCode(String tenantId, String phonenumber, String smsCode) {
+    private boolean validateSmsCode(String phonenumber, String smsCode) {
         String code = RedisUtils.getCacheObject(GlobalConstants.CAPTCHA_CODE_KEY + phonenumber);
         if (StringUtils.isBlank(code)) {
-            recordLoginInfo(tenantId, phonenumber, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
+            recordLoginInfo(phonenumber, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
             throw new BizException(MessageUtils.message("user.jcaptcha.expire"));
         }
         return code.equals(smsCode);
@@ -155,10 +141,10 @@ public class SysLoginService {
     /**
      * 校验邮箱验证码
      */
-    private boolean validateEmailCode(String tenantId, String email, String emailCode) {
+    private boolean validateEmailCode(String email, String emailCode) {
         String code = RedisUtils.getCacheObject(GlobalConstants.CAPTCHA_CODE_KEY + email);
         if (StringUtils.isBlank(code)) {
-            recordLoginInfo(tenantId, email, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
+            recordLoginInfo(email, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
             throw new BizException("验证码过期");
         }
         return code.equals(emailCode);
@@ -176,28 +162,16 @@ public class SysLoginService {
         String captcha = RedisUtils.getCacheObject(verifyKey);
         RedisUtils.deleteObject(verifyKey);
         if (captcha == null) {
-            recordLoginInfo(tenantId, username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
+            recordLoginInfo(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
             throw new BizException("验证码过期");
         }
         if (!code.equalsIgnoreCase(captcha)) {
-            recordLoginInfo(tenantId, username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error"));
+            recordLoginInfo(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error"));
             throw new BizException("验证码错误");
         }
     }
 
-    private SysUserVo loadUserByUsername(String tenantId, String username) {
-        SysUser user = userData.findTenantUserByUserName(username,tenantId);
-
-        if (ObjectUtil.isNull(user)) {
-            log.info("登录用户：{} 不存在.", username);
-            throw new UserException("登录用户不存在");
-        } else if (user.getStatus().equals(EnableStatusEnum.Disabled)) {
-            log.info("登录用户：{} 已被停用.", username);
-            throw new UserException("用户被停用");
-        }
-        if (TenantHelper.isEnable()) {
-            return user.to(SysUserVo.class);
-        }
+    private SysUserVo loadUserByUsername(String username) {
         SysUser sysUser = userData.findByUserName(username);
         return MapstructUtils.convert(sysUser, SysUserVo.class);
     }
@@ -209,11 +183,6 @@ public class SysLoginService {
     private LoginUser buildLoginUser(SysUserVo user) {
         LoginUser loginUser = new LoginUser();
         loginUser.setLogicType(LogicTypeEnum.System);
-        loginUser.setTenantId(user.getTenantId());
-        loginUser.setAgentId(user.getAgentId());
-        loginUser.setDealerId(user.getDealerId());
-        loginUser.setIsTenantAdmin(user.getIsTenantAdmin());
-        loginUser.setIsAgentAdmin(user.getIsAgentAdmin());
         loginUser.setUserId(user.getId());
         loginUser.setDeptId(user.getDeptId());
         loginUser.setUserName(user.getUserName());
@@ -251,7 +220,7 @@ public class SysLoginService {
         Integer errorNumber = RedisUtils.getCacheObject(errorKey);
         // 锁定时间内登录 则踢出
         if (ObjectUtil.isNotNull(errorNumber) && errorNumber.equals(maxRetryCount)) {
-            recordLoginInfo(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
+            recordLoginInfo(username, loginFail, MessageUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
             throw new UserException("重试达到最大限制");
         }
 
@@ -261,13 +230,13 @@ public class SysLoginService {
             // 达到规定错误次数 则锁定登录
             if (errorNumber.equals(maxRetryCount)) {
                 RedisUtils.setCacheObject(errorKey, errorNumber, Duration.ofMinutes(lockTime));
-                recordLoginInfo(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
+                recordLoginInfo(username, loginFail, MessageUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
                 throw new UserException("重试达到最大限制");
 
             } else {
                 // 未达到规定错误次数 则递增
                 RedisUtils.setCacheObject(errorKey, errorNumber);
-                recordLoginInfo(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitCount(), errorNumber));
+                recordLoginInfo(username, loginFail, MessageUtils.message(loginType.getRetryLimitCount(), errorNumber));
                 throw new UserException(String.format("错误次数:%s", errorNumber));
 
             }

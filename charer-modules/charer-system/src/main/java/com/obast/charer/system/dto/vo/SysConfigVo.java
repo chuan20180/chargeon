@@ -22,7 +22,6 @@ import java.util.Date;
 @ExcelIgnoreUnannotated
 @AutoMapper(target = SysConfig.class)
 public class SysConfigVo implements Serializable {
-    private static final long serialVersionUID = 1L;
 
     /**
      * 参数主键

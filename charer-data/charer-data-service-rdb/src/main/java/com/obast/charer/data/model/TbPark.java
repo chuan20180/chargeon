@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseAgentEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.ParkSettleEnum;
 import com.obast.charer.enums.ParkStateEnum;
 import com.obast.charer.common.i18n.I18nField;
@@ -25,7 +25,7 @@ import java.util.List;
 @Table(name = "park")
 @ApiModel(value = "车辆停放记录")
 @AutoMapper(target = Park.class)
-public class TbPark extends BaseAgentEntity {
+public class TbPark extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

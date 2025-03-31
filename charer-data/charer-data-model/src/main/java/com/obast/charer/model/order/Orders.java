@@ -3,7 +3,7 @@ package com.obast.charer.model.order;
 import com.obast.charer.common.i18n.I18nField;
 import com.obast.charer.common.model.dto.PriceProperties;
 import com.obast.charer.enums.*;
-import com.obast.charer.model.AgentModel;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
 import lombok.*;
 
@@ -16,7 +16,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Orders extends AgentModel implements Id<String>, Serializable {
+public class Orders extends BaseModel implements Id<String>, Serializable {
 
     private String id;
 

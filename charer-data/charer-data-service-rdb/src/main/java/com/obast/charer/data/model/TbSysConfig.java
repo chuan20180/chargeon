@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.SysConfigDataTypeEnum;
 import com.obast.charer.model.system.SysConfig;
 import io.github.linpeilie.annotations.AutoMapper;
@@ -22,7 +22,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "sys_config")
 @AutoMapper(target = SysConfig.class)
-public class TbSysConfig extends BaseTenantEntity {
+public class TbSysConfig extends BaseEntity {
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")
     @GenericGenerator(name = "SnowflakeIdGenerator", strategy = "com.obast.charer.data.config.id.SnowflakeIdGenerator")

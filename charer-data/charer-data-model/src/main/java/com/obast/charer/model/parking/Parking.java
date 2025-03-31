@@ -1,8 +1,8 @@
 package com.obast.charer.model.parking;
 
 import com.obast.charer.common.i18n.I18nField;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 import lombok.*;
 
 import java.io.Serializable;
@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Parking extends TenantModel implements Id<String>, Serializable {
+public class Parking extends BaseModel implements Id<String>, Serializable {
 
     private String id;
 

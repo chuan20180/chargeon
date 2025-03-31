@@ -1,8 +1,8 @@
 package com.obast.charer.model.refund;
 
 import com.obast.charer.enums.RefundStateEnum;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 import lombok.*;
 
 import java.io.Serializable;
@@ -14,7 +14,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Refund extends TenantModel implements Id<String>, Serializable {
+public class Refund extends BaseModel implements Id<String>, Serializable {
 
     private String id;
 

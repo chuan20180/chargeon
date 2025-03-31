@@ -47,7 +47,7 @@
         <module>charer-common-redis</module>
         <module>charer-common-i18n</module>
         <module>charer-common-satoken</module>
-        <module>charer-common-tenant</module>
+
         <module>charer-common-web</module>
         <module>charer-common-websocket</module>
         <module>charer-common-thing</module>

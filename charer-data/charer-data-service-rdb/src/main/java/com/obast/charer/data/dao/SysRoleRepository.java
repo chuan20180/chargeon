@@ -9,10 +9,5 @@ import java.util.List;
 
 public interface SysRoleRepository extends JpaRepository<TbSysRole, String>, QuerydslPredicateExecutor<TbSysRole>, JpaSpecificationExecutor<TbSysRole> {
 
-    List<TbSysRole> findByTenantId(String id);
-
-    List<TbSysRole> findByAgentId(String id);
-
-    List<TbSysRole> findByDealerId(String id);
 
 }

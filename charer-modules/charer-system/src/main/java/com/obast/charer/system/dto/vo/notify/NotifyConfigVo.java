@@ -1,5 +1,6 @@
 package com.obast.charer.system.dto.vo.notify;
 
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.enums.NotifyIdentifierEnum;
 import com.obast.charer.model.BaseModel;
@@ -17,9 +18,7 @@ import java.util.List;
 @ApiModel(value = "NotifyConfigVo")
 @Data
 @AutoMapper(target = NotifyConfig.class)
-public class NotifyConfigVo  extends BaseModel implements Serializable {
-
-    private static final long serialVersionUID = -1L;
+public class NotifyConfigVo  extends BaseDto {
 
     @ApiModelProperty(value="id")
     private Long id;

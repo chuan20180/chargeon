@@ -1,7 +1,7 @@
 package com.obast.charer.model.system;
 
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class SysOss  extends TenantModel implements Id<String>,Serializable {
+public class SysOss  extends BaseModel implements Id<String>,Serializable {
     private static final long serialVersionUID = 1L;
 
     /**

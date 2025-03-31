@@ -10,13 +10,10 @@ import com.obast.charer.common.exception.BizException;
 import com.obast.charer.common.oss.constant.OssConstant;
 import com.obast.charer.common.redis.utils.CacheUtils;
 import com.obast.charer.common.redis.utils.RedisUtils;
-import com.obast.charer.common.tenant.helper.TenantHelper;
 import com.obast.charer.common.utils.JsonUtils;
 import com.obast.charer.common.utils.MapstructUtils;
-import com.obast.charer.common.utils.StreamUtils;
 import com.obast.charer.common.utils.StringUtils;
 import com.obast.charer.data.system.ISysOssConfigData;
-import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.model.system.SysOssConfig;
 import com.obast.charer.qo.SysOssConfigQueryBo;
 import com.obast.charer.system.dto.bo.SysOssConfigBo;
@@ -27,11 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 /**
  * 对象存储配置Service业务层处理
@@ -62,23 +56,25 @@ public class SysOssConfigServiceImpl implements ISysOssConfigService {
      */
     @Override
     public void init() {
-        List<SysOssConfig> list = sysOssConfigData.findAll();
-        List<SysOssConfig> notEmptyTenantIdList = list.stream().filter(item -> ObjectUtil.isNotNull(item.getTenantId())).collect(Collectors.toList());
-        Map<String, List<SysOssConfig>> map = StreamUtils.groupByKey(notEmptyTenantIdList, SysOssConfig::getTenantId);
-        try {
-            for (Map.Entry<String, List<SysOssConfig>> stringListEntry : map.entrySet()) {
-                TenantHelper.setDynamic(stringListEntry.getKey());
-                for (SysOssConfig config : stringListEntry.getValue()) {
-                    String configKey = config.getConfigKey();
-                    if (EnableStatusEnum.Enabled.equals(config.getStatus())) {
-                        RedisUtils.setCacheObject(OssConstant.DEFAULT_CONFIG_KEY, configKey);
-                    }
-                    CacheUtils.put(CacheNames.SYS_OSS_CONFIG, config.getConfigKey(), JsonUtils.toJsonString(config));
-                }
-            }
-        } finally {
-            TenantHelper.clearDynamic();
-        }
+//        List<SysOssConfig> list = sysOssConfigData.findAll();
+//        List<SysOssConfig> notEmptyTenantIdList = new ArrayList<>(list);
+//        Map<String, List<SysOssConfig>> map = StreamUtils.groupByKey(notEmptyTenantIdList, SysOssConfig::getTenantId);
+//        try {
+//            for (Map.Entry<String, List<SysOssConfig>> stringListEntry : map.entrySet()) {
+//                TenantHelper.setDynamic(stringListEntry.getKey());
+//                for (SysOssConfig config : stringListEntry.getValue()) {
+//                    String configKey = config.getConfigKey();
+//                    if (EnableStatusEnum.Enabled.equals(config.getStatus())) {
+//                        RedisUtils.setCacheObject(OssConstant.DEFAULT_CONFIG_KEY, configKey);
+//                    }
+//                    CacheUtils.put(CacheNames.SYS_OSS_CONFIG, config.getConfigKey(), JsonUtils.toJsonString(config));
+//                }
+//            }
+//        } finally {
+//            TenantHelper.clearDynamic();
+//        }
+
+        //todo
     }
 
     @Override

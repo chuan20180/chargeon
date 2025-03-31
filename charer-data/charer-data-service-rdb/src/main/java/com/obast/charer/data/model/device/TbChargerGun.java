@@ -1,6 +1,6 @@
 package com.obast.charer.data.model.device;
 
-import com.obast.charer.data.base.BaseAgentEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.ChargerGunCurrentEnum;
 import com.obast.charer.enums.ChargerGunSpeedEnum;
 import com.obast.charer.enums.ChargerGunStateEnum;
@@ -22,7 +22,7 @@ import javax.persistence.*;
 @Table(name = "charger_gun")
 @ApiModel(value = "充电枪")
 @AutoMapper(target = ChargerGun.class)
-public class TbChargerGun extends BaseAgentEntity {
+public class TbChargerGun extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

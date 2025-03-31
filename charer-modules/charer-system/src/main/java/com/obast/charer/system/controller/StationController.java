@@ -98,12 +98,4 @@ public class StationController {
         return stationManagerService.queryList(pageRequest);
     }
 
-    /**
-     * 获取未绑定代理商的场站
-     */
-    @ApiOperation(value = "获取未绑定代理商的场站", notes = "获取未绑定代理商的场站")
-    @PostMapping("/optionNoAgentSelect")
-    public List<StationVo> optionNoAgentSelect(@Validated @RequestBody PageRequest<StationQueryBo> pageRequest) {
-        return stationManagerService.queryNoAgentList(pageRequest);
-    }
 }

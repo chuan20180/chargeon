@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.obast.charer.common.Decimal2Serializer;
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.CustomerTypeEnum;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.model.BaseModel;
@@ -23,9 +24,7 @@ import java.util.List;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = Customer.class,convertGenerate = false)
-public class CustomerVo extends BaseModel {
-
-    private static final long serialVersionUID = -1L;
+public class CustomerVo extends BaseDto {
 
     private String id;
 

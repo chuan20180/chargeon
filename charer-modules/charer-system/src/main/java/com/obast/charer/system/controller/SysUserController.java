@@ -12,7 +12,6 @@ import com.obast.charer.common.log.annotation.Log;
 import com.obast.charer.common.log.enums.BusinessType;
 import com.obast.charer.common.model.LoginUser;
 import com.obast.charer.common.satoken.util.LoginHelper;
-import com.obast.charer.common.tenant.helper.TenantHelper;
 import com.obast.charer.common.utils.MapstructUtils;
 import com.obast.charer.common.utils.StreamUtils;
 import com.obast.charer.common.validate.AddGroup;
@@ -80,10 +79,7 @@ public class SysUserController extends BaseController {
     public UserInfoVo getInfo() {
         UserInfoVo userInfoVo = new UserInfoVo();
         LoginUser loginUser = LoginHelper.getLoginUser();
-        if (LoginHelper.isSuperAdmin()) {
-            // 超级管理员 如果重新加载用户信息需清除动态租户
-            TenantHelper.clearDynamic();
-        }
+
         SysUserVo user = sysUserManageService.selectUserById(loginUser.getUserId());
         userInfoVo.setUser(user);
 

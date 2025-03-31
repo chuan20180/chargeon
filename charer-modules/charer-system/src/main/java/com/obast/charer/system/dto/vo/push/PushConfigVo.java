@@ -18,8 +18,6 @@ import lombok.EqualsAndHashCode;
 @AutoMapper(target = PushConfig.class)
 public class PushConfigVo extends BaseDto {
 
-    private static final long serialVersionUID = -1L;
-
     @ApiModelProperty(value = "id")
     @ExcelProperty(value = "id")
     private String id;

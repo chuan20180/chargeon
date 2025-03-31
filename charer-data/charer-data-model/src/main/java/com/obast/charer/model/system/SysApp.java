@@ -2,8 +2,8 @@ package com.obast.charer.model.system;
 
 import com.obast.charer.enums.AppTypeEnum;
 import com.obast.charer.enums.EnableStatusEnum;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class SysApp extends TenantModel implements Id<String>, Serializable{
+public class SysApp extends BaseModel implements Id<String>, Serializable{
 
     private String id;
 

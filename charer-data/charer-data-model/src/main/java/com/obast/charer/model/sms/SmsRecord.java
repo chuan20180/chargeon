@@ -1,7 +1,7 @@
 package com.obast.charer.model.sms;
 
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 
 
 import lombok.*;
@@ -19,7 +19,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SmsRecord extends TenantModel implements Id<String>, Serializable {
+public class SmsRecord extends BaseModel implements Id<String>, Serializable {
 
     private String id;
 

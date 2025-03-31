@@ -2,7 +2,7 @@ package com.obast.charer.model.order;
 
 import com.obast.charer.enums.DiscountTypeEnum;
 import com.obast.charer.enums.OrderSettleTypeEnum;
-import com.obast.charer.model.AgentModel;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
 import com.obast.charer.model.customer.Customer;
 import lombok.*;
@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrdersSettle extends AgentModel implements Id<String>, Serializable {
+public class OrdersSettle extends BaseModel implements Id<String>, Serializable {
 
     private String id;
     private String customerId;

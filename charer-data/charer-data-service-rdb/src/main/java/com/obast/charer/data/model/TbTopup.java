@@ -2,7 +2,7 @@ package com.obast.charer.data.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.obast.charer.common.Decimal2Serializer;
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.*;
 import com.obast.charer.model.topup.Topup;
 import io.github.linpeilie.annotations.AutoMapper;
@@ -24,7 +24,7 @@ import java.util.Date;
 @Table(name = "topup")
 @ApiModel(value = "充值记录")
 @AutoMapper(target = Topup.class)
-public class TbTopup extends BaseTenantEntity {
+public class TbTopup extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

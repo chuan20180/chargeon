@@ -2,7 +2,7 @@ package com.obast.charer.data.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.CustomerTypeEnum;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.model.customer.Customer;
@@ -27,7 +27,7 @@ import java.util.List;
 @Table(name = "customer")
 @ApiModel(value = "客户")
 @AutoMapper(target = Customer.class)
-public class TbCustomer extends BaseTenantEntity {
+public class TbCustomer extends BaseEntity {
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")
     @GenericGenerator(name = "SnowflakeIdGenerator", strategy = "com.obast.charer.data.config.id.SnowflakeIdGenerator")

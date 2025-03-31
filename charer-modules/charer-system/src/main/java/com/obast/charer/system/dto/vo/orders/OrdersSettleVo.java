@@ -23,7 +23,6 @@ import java.math.BigDecimal;
 @ExcelIgnoreUnannotated
 @AutoMapper(target = OrdersSettle.class, uses = {StringToListConverter.class}, convertGenerate = false)
 public class OrdersSettleVo extends BaseDto {
-    private static final long serialVersionUID = -1L;
 
     @ApiModelProperty(value = "id")
     @ExcelProperty(value = "")

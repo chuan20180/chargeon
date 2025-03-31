@@ -1,19 +1,17 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.common.tenant.dao.TenantAware;
-import com.obast.charer.common.tenant.listener.TenantListener;
 import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.model.system.SysPost;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.ParamDef;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * 岗位表 sys_post
@@ -26,10 +24,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "sys_post")
 @AutoMapper(target = SysPost.class)
-@FilterDef(name = "tenantFilter", parameters = {@ParamDef(name = "tenantId", type = "string")})
-@Filter(name = "tenantFilter", condition = "tenant_id = :tenantId")
-@EntityListeners(TenantListener.class)
-public class TbSysPost extends BaseEntity implements TenantAware {
+public class TbSysPost extends BaseEntity {
 
     /**
      * 岗位序号

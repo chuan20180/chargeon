@@ -1,9 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.common.tenant.dao.TenantAware;
-import com.obast.charer.common.tenant.listener.TenantListener;
 import com.obast.charer.data.base.BaseEntity;
-import com.obast.charer.data.base.BaseTenantEntity;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.enums.NotifyIdentifierEnum;
 import com.obast.charer.model.notify.NotifyConfig;
@@ -17,7 +14,6 @@ import org.hibernate.annotations.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -25,7 +21,7 @@ import java.util.List;
 @Table(name = "notify_config")
 @ApiModel(value = "通知配置")
 @AutoMapper(target = NotifyConfig.class)
-public class TbNotifyConfig extends BaseTenantEntity {
+public class TbNotifyConfig extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

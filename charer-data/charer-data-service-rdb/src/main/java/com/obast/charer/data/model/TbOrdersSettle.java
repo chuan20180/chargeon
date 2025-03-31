@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseAgentEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.DiscountTypeEnum;
 import com.obast.charer.enums.OrderSettleTypeEnum;
 import com.obast.charer.model.customer.Customer;
@@ -24,7 +24,7 @@ import java.math.BigDecimal;
 @Table(name = "orders_settle")
 @ApiModel(value = "订单结算")
 @AutoMapper(target = OrdersSettle.class)
-public class TbOrdersSettle extends BaseAgentEntity {
+public class TbOrdersSettle extends BaseEntity {
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")
     @GenericGenerator(name = "SnowflakeIdGenerator", strategy = "com.obast.charer.data.config.id.SnowflakeIdGenerator")

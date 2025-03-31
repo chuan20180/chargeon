@@ -28,7 +28,8 @@ import com.obast.charer.common.validate.AddGroup;
 import com.obast.charer.common.validate.EditGroup;
 import com.obast.charer.model.system.SysPost;
 import io.github.linpeilie.annotations.AutoMapper;
-import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;

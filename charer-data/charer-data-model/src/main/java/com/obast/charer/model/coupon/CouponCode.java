@@ -3,8 +3,8 @@ package com.obast.charer.model.coupon;
 import com.obast.charer.enums.CouponApplyEnum;
 import com.obast.charer.enums.CouponCodeStateEnum;
 import com.obast.charer.enums.CouponScopeEnum;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 import lombok.*;
 
 import java.io.Serializable;
@@ -17,7 +17,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CouponCode extends TenantModel implements Id<String>, Serializable {
+public class CouponCode extends BaseModel implements Id<String>, Serializable {
 
     private String id;
 

@@ -1,6 +1,5 @@
 package com.obast.charer.data.service;
 
-import com.obast.charer.common.tenant.helper.TenantHelper;
 import com.obast.charer.data.IJPACommData;
 import com.obast.charer.data.dao.SysUserRepository;
 import com.obast.charer.common.api.PageRequest;
@@ -12,17 +11,14 @@ import com.obast.charer.common.utils.MapstructUtils;
 import com.obast.charer.common.utils.StringUtils;
 import com.obast.charer.data.AbstractCommonData;
 import com.obast.charer.data.IJPACommonData;
-import com.obast.charer.data.model.TbStation;
 import com.obast.charer.data.model.TbSysUser;
 import com.obast.charer.data.system.ISysDeptData;
 import com.obast.charer.data.system.ISysRoleData;
 import com.obast.charer.data.system.ISysUserData;
 import com.obast.charer.enums.EnableStatusEnum;
-import com.obast.charer.model.station.Station;
 import com.obast.charer.model.system.SysDept;
 import com.obast.charer.model.system.SysRole;
 import com.obast.charer.model.system.SysUser;
-import com.obast.charer.qo.StationQueryBo;
 import com.obast.charer.qo.SysUserQueryBo;
 import cn.hutool.core.util.ObjectUtil;
 import lombok.RequiredArgsConstructor;
@@ -176,27 +172,6 @@ public class SysUserDataImpl extends AbstractCommonData<SysUserQueryBo>
         return convert;
     }
 
-    @Override
-    public SysUser findTenantUserByUserName(String username, String tenantId) {
-
-        Specification<TbSysUser> specification = (root, query, cb) -> {
-            List<Predicate> predicates = new ArrayList<>();
-
-            Predicate statusPredicate = cb.equal(root.get("userName"), username);
-            predicates.add(statusPredicate);
-
-            if(TenantHelper.isEnable()) {
-                Predicate tenantIdPredicate = cb.equal(root.get("tenantId"), tenantId);
-                predicates.add(tenantIdPredicate);
-            }
-
-            return query.where(predicates.toArray(Predicate[]::new)).getRestriction();
-        };
-
-        TbSysUser sysUser = baseRepository.findOne(specification).orElse(null);
-
-        return fillData(sysUser);
-    }
 
     @Override
     public SysUser findByPhone(String phone) {
@@ -222,21 +197,6 @@ public class SysUserDataImpl extends AbstractCommonData<SysUserQueryBo>
         TbSysUser sysUser = baseRepository.findOne(specification).orElse(null);
 
         return fillData(sysUser);
-    }
-
-    @Override
-    public List<SysUser> findAllByTenantId(String id) {
-        return MapstructUtils.convert(baseRepository.findByTenantId(id), SysUser.class);
-    }
-
-    @Override
-    public List<SysUser> findAllByAgentId(String id) {
-        return MapstructUtils.convert(baseRepository.findByAgentId(id), SysUser.class);
-    }
-
-    @Override
-    public List<SysUser> findAllByDealerId(String id) {
-        return MapstructUtils.convert(baseRepository.findByDealerId(id), SysUser.class);
     }
 
 

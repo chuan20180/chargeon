@@ -1,5 +1,6 @@
 package com.obast.charer.system.dto.vo.customer;
 
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.MessageStateEnum;
 import com.obast.charer.enums.NotifyScopeEnum;
 import com.obast.charer.enums.NotifyTypeEnum;
@@ -17,7 +18,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = CustomerNotify.class,convertGenerate = false)
-public class CustomerNotifyVo extends BaseModel {
+public class CustomerNotifyVo extends BaseDto {
 
     private static final long serialVersionUID = -1L;
 

@@ -1,8 +1,8 @@
 package com.obast.charer.model.topup;
 
 import com.obast.charer.enums.*;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -16,7 +16,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Topup extends TenantModel implements Id<String>, Serializable {
+public class Topup extends BaseModel implements Id<String>, Serializable {
 
     @GeneratedValue(generator = "SnowflakeIdGenerator")
     @GenericGenerator(name = "SnowflakeIdGenerator", strategy = "com.obast.charer.data.config.id.SnowflakeIdGenerator")

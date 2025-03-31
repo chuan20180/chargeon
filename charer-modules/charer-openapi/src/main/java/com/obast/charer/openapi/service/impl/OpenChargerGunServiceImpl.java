@@ -13,7 +13,6 @@ import com.obast.charer.common.satoken.util.LoginHelper;
 import com.obast.charer.common.utils.MapstructUtils;
 import com.obast.charer.data.business.*;
 import com.obast.charer.enums.*;
-import com.obast.charer.model.Instant;
 import com.obast.charer.model.customer.Customer;
 import com.obast.charer.model.device.Charger;
 import com.obast.charer.model.device.ChargerGun;
@@ -40,9 +39,6 @@ public class OpenChargerGunServiceImpl implements IOpenChargerGunService {
 
     @Autowired
     private IChargerData chargerData;
-
-    @Autowired
-    private IInstantData instantData;
 
     @Autowired
     private ICustomerData customerData;
@@ -88,7 +84,7 @@ public class OpenChargerGunServiceImpl implements IOpenChargerGunService {
     }
 
     @Override
-    public ActionResult<?> balanceStartCharge(BalanceStartChargeBo bo) {
+    public ActionResult<?> startCharge(BalanceStartChargeBo bo) {
 
         ChargePayTypeEnum chargePayType = ChargePayTypeEnum.Balance;
 
@@ -169,88 +165,6 @@ public class OpenChargerGunServiceImpl implements IOpenChargerGunService {
         return ActionResult.fail(result.getMessage());
     }
 
-    @Override
-    public ActionResult<?> instantStartCharge(InstantStartChargeBo bo) {
-
-        ChargePayTypeEnum chargePayType = ChargePayTypeEnum.Balance;
-
-        if(bo.getChargeStartType() == null) {
-            throw new BizException(ErrCode.ORDER_CHARGE_START_TYPE_NULL);
-        }
-
-        if(bo.getChargeStopType() == null) {
-            throw new BizException(ErrCode.ORDER_CHARGE_STOP_TYPE_NULL);
-        }
-
-        ChargerGun chargerGun = chargerGunData.findById(bo.getGunId());
-        if(chargerGun == null) {
-            throw new BizException(ErrCode.CHARGER_GUN_NOT_FOUND);
-        }
-
-        Charger charger = chargerData.findById(chargerGun.getChargerId());
-        if(charger == null) {
-            throw new BizException(ErrCode.CHARGER_NOT_FOUND);
-        }
-
-        //离线检查
-        if(!charger.getOnline().equals(OnlineStatusEnum.Online)) {
-            throw new BizException(ErrCode.CHARGER_STATE_OFFLINE);
-        }
-
-        //空闲检查
-        if(!chargerGun.getState().equals(ChargerGunStateEnum.Idle)) {
-            throw new BizException(ErrCode.CHARGER_STATE_FAIL);
-        }
-
-        //是否插枪检查
-        if(chargerGun.getSlot() == 0) {
-            throw new BizException(ErrCode.CHARGER_GUN_NOT_SLOT);
-        }
-
-        LoginUser loginUser = LoginHelper.getLoginUser();
-
-        Customer customer = customerData.findById(loginUser.getUserId());
-        if(customer == null) {
-            throw new BizException(ErrCode.CUSTOMER_NOT_FOUND);
-        }
-
-        //充值检查
-        Instant instant = instantData.findById(bo.getInstantId());
-        if(instant == null) {
-            throw new BizException(ErrCode.INSTANT_NOT_FOUND);
-        }
-
-        if(!instant.getState().equals(InstantStateEnum.Successful)) {
-            throw new BizException(ErrCode.INSTANT_NOT_PAID);
-        }
-
-        BigDecimal lowBalance = charger.getLowBalance();
-        if(lowBalance == null) {
-            lowBalance = new BigDecimal(0);
-        }
-
-        BigDecimal balanceLimit = instant.getArrivalAmount().subtract(lowBalance);
-
-        BigDecimal balance = instant.getArrivalAmount();
-        if(balance.compareTo(balanceLimit) < 0) {
-            throw new BizException(ErrCode.INSTANT_BALANCE_NOT_ENOUGH);
-        }
-
-        PlatformTypeEnum platform = null;
-        RequestLocale locale = RequestLocaleHolder.getLocale();
-        if(locale != null) {
-            platform = locale.getPlatform();
-        }
-
-        Response<?> result = remoteOperateService.startCharge(chargePayType, bo.getChargeStartType(), bo.getChargeStopType(), charger.getDn(), chargerGun.getNo(), customer.getId(), platform);
-
-        if(result.getCode() == 200) {
-            return ActionResult.success(result.getData());
-        }
-
-        return ActionResult.fail(result.getMessage());
-
-    }
 
     @Override
     public ActionResult<?> stopCharge(StopChargeBo bo) {

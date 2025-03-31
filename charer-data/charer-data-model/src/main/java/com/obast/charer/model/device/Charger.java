@@ -1,11 +1,9 @@
 package com.obast.charer.model.device;
 
 import com.obast.charer.enums.EnableStatusEnum;
-import com.obast.charer.enums.OnOffEnum;
 import com.obast.charer.enums.OnlineStatusEnum;
-import com.obast.charer.model.AgentModel;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 import com.obast.charer.model.price.Price;
 import com.obast.charer.model.station.Station;
 import lombok.*;
@@ -18,7 +16,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Charger extends AgentModel implements Id<String>, Serializable {
+public class Charger extends BaseModel implements Id<String>, Serializable {
 
     private String id;
 

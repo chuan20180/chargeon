@@ -3,7 +3,7 @@ package com.obast.charer.system.dto.bo;
 import com.obast.charer.common.validate.AddGroup;
 import com.obast.charer.common.validate.EditGroup;
 import com.obast.charer.enums.EnableStatusEnum;
-import com.obast.charer.model.TenantModel;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.system.SysOssConfig;
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
@@ -20,7 +20,7 @@ import javax.validation.constraints.Size;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @AutoMapper(target = SysOssConfig.class, reverseConvertGenerate = false)
-public class SysOssConfigBo extends TenantModel {
+public class SysOssConfigBo extends BaseModel {
 
     /**
      * 主建

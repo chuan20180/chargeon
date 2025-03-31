@@ -1,8 +1,9 @@
 package com.obast.charer.system.dto.vo;
 
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.common.enums.AdminTypeEnum;
 import com.obast.charer.enums.EnableStatusEnum;
-import com.obast.charer.model.DealerModel;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.system.SysUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,7 +24,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AutoMapper(target = SysUser.class)
-public class SysUserVo  extends DealerModel {
+public class SysUserVo  extends BaseDto {
 
     /**
      * 用户ID

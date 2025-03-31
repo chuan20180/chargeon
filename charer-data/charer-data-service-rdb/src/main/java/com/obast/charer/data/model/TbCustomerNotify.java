@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.MessageStateEnum;
 import com.obast.charer.enums.NotifyScopeEnum;
 import com.obast.charer.enums.NotifyTypeEnum;
@@ -22,7 +22,7 @@ import javax.persistence.*;
 @Table(name = "customer_notify")
 @ApiModel(value = "客户消息")
 @AutoMapper(target = CustomerNotify.class)
-public class TbCustomerNotify extends BaseTenantEntity {
+public class TbCustomerNotify extends BaseEntity {
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")
     @GenericGenerator(name = "SnowflakeIdGenerator", strategy = "com.obast.charer.data.config.id.SnowflakeIdGenerator")

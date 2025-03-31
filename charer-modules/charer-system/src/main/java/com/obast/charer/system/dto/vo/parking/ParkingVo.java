@@ -1,5 +1,6 @@
 package com.obast.charer.system.dto.vo.parking;
 
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.common.i18n.I18nField;
 import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.parking.Parking;
@@ -20,9 +21,7 @@ import java.io.Serializable;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = Parking.class,convertGenerate = false)
-public class ParkingVo extends BaseModel implements Serializable {
-
-    private static final long serialVersionUID = -1L;
+public class ParkingVo extends BaseDto {
 
     @ApiModelProperty(value = "")
     @ExcelProperty(value = "")

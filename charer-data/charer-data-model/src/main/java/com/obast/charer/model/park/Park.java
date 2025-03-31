@@ -3,7 +3,7 @@ package com.obast.charer.model.park;
 import com.obast.charer.enums.ParkSettleEnum;
 import com.obast.charer.enums.ParkStateEnum;
 import com.obast.charer.common.i18n.I18nField;
-import com.obast.charer.model.AgentModel;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
 import lombok.*;
 
@@ -16,7 +16,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Park extends AgentModel implements Id<String>, Serializable {
+public class Park extends BaseModel implements Id<String>, Serializable {
 
     private String id;
 

@@ -8,6 +8,7 @@ import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -19,11 +20,11 @@ import java.util.Date;
  * @author Michelle.Chung
  * @date 2023-02-07
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = SysOperLog.class)
-public class SysOperLogVo extends BaseDto implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class SysOperLogVo extends BaseDto {
 
     /**
      * 日志主键

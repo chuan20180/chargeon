@@ -1,19 +1,13 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.common.tenant.dao.TenantAware;
-import com.obast.charer.common.tenant.listener.TenantListener;
 import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.EnableStatusEnum;
-
 import com.obast.charer.model.map.MapConfig;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.ParamDef;
 
 import javax.persistence.*;
 
@@ -22,10 +16,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "map_config")
 @AutoMapper(target = MapConfig.class)
-@FilterDef(name = "tenantFilter", parameters = {@ParamDef(name = "tenantId", type = "string")})
-@Filter(name = "tenantFilter", condition = "tenant_id = :tenantId")
-@EntityListeners(TenantListener.class)
-public class TbMapConfig extends BaseEntity implements TenantAware {
+public class TbMapConfig extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

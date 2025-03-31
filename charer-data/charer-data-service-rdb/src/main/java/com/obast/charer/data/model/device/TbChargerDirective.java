@@ -1,6 +1,6 @@
 package com.obast.charer.data.model.device;
 
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.ChargerDirectiveResultEnum;
 import com.obast.charer.enums.ChargerDirectiveStateEnum;
 import com.obast.charer.enums.ChargerDirectiveTypeEnum;
@@ -22,7 +22,7 @@ import javax.persistence.*;
 @Table(name = "charger_directive")
 @ApiModel(value = "设备指令")
 @AutoMapper(target = ChargerDirective.class)
-public class TbChargerDirective extends BaseTenantEntity {
+public class TbChargerDirective extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

@@ -21,8 +21,6 @@ import javax.validation.constraints.NotNull;
 @AutoMapper(target = Payment.class)
 public class PaymentVo extends BaseDto {
 
-    private static final long serialVersionUID = -1L;
-
     @ApiModelProperty(value = "id")
     @ExcelProperty(value = "id")
     private String id;

@@ -20,8 +20,6 @@ import lombok.EqualsAndHashCode;
 @AutoMapper(target = Product.class)
 public class ProductVo extends BaseDto {
 
-    private static final long serialVersionUID = -1L;
-
     @ApiModelProperty(value = "产品id")
     @ExcelProperty(value = "产品id")
     private String id;

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.obast.charer.common.Decimal2Serializer;
 import com.obast.charer.common.Decimal4Serializer;
 import com.obast.charer.common.Decimal5Serializer;
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.converter.I18nToStringConverter;
 import com.obast.charer.enums.*;
 import com.obast.charer.common.i18n.I18nField;
@@ -30,9 +31,7 @@ import java.util.Date;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = Orders.class,convertGenerate = false)
-public class OrdersVo extends BaseModel implements Serializable {
-
-    private static final long serialVersionUID = -1L;
+public class OrdersVo extends BaseDto {
 
     @ApiModelProperty(value = "id")
     @ExcelProperty(value = "ID", order = 1)

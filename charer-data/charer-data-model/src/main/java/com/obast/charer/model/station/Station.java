@@ -2,8 +2,7 @@ package com.obast.charer.model.station;
 
 import com.obast.charer.common.i18n.I18nField;
 import com.obast.charer.enums.EnableStatusEnum;
-import com.obast.charer.enums.OnOffEnum;
-import com.obast.charer.model.AgentModel;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
 import lombok.*;
 
@@ -14,7 +13,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Station extends AgentModel implements Id<String>, Serializable {
+public class Station extends BaseModel implements Id<String>, Serializable {
 
     private String id;
 

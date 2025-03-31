@@ -1,7 +1,5 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.common.tenant.dao.TenantAware;
-import com.obast.charer.common.tenant.listener.TenantListener;
 import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.ChannelIdentifierEnum;
 import com.obast.charer.model.notify.ChannelConfig;
@@ -23,10 +21,7 @@ import javax.persistence.*;
 @Table(name = "channel_config")
 @ApiModel(value = "通道配置")
 @AutoMapper(target = ChannelConfig.class)
-@FilterDef(name = "tenantFilter", parameters = {@ParamDef(name = "tenantId", type = "string")})
-@Filter(name = "tenantFilter", condition = "tenant_id = :tenantId")
-@EntityListeners(TenantListener.class)
-public class TbChannelConfig extends BaseEntity implements TenantAware {
+public class TbChannelConfig extends BaseEntity {
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")
     @GenericGenerator(name = "SnowflakeIdGenerator", strategy = "com.obast.charer.data.config.id.SnowflakeIdGenerator")

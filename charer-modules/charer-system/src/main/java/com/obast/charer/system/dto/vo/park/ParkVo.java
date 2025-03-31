@@ -22,7 +22,6 @@ import java.util.List;
 @ExcelIgnoreUnannotated
 @AutoMapper(target = Park.class, uses = {StringToListConverter.class}, convertGenerate = false)
 public class ParkVo extends BaseDto {
-    private static final long serialVersionUID = -1L;
 
     @ApiModelProperty(value = "id")
     @ExcelProperty(value = "")

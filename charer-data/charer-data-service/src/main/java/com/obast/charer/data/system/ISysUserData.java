@@ -28,17 +28,8 @@ public interface ISysUserData extends ICommonData<SysUser, String>, IJPACommonDa
 
     boolean checkUserNameUnique(SysUser sysUser);
 
-    SysUser findTenantUserByUserName(String username, String tenantId);
-
-
-
     SysUser findByPhone(String phone);
 
     SysUser findByUserName(String userName);
 
-    List<SysUser> findAllByTenantId(String id);
-
-    List<SysUser> findAllByAgentId(String id);
-
-    List<SysUser> findAllByDealerId(String id);
 }

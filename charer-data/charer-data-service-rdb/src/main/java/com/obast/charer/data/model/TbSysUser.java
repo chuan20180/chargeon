@@ -1,7 +1,7 @@
 package com.obast.charer.data.model;
 
 import com.obast.charer.common.enums.AdminTypeEnum;
-import com.obast.charer.data.base.BaseDealerEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.model.system.SysUser;
 import io.github.linpeilie.annotations.AutoMapper;
@@ -20,7 +20,7 @@ import java.util.Date;
 @Entity
 @Table(name = "sys_user")
 @AutoMapper(target = SysUser.class)
-public class TbSysUser extends BaseDealerEntity {
+public class TbSysUser extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     @Id

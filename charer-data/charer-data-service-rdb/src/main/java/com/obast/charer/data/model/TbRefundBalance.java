@@ -2,7 +2,7 @@ package com.obast.charer.data.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.obast.charer.common.Decimal2Serializer;
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.RefundStateEnum;
 import com.obast.charer.model.refund.RefundBalance;
 import io.github.linpeilie.annotations.AutoMapper;
@@ -25,7 +25,7 @@ import java.util.Date;
 @Table(name = "refund_balance")
 @ApiModel(value = "退款记录")
 @AutoMapper(target = RefundBalance.class)
-public class TbRefundBalance extends BaseTenantEntity {
+public class TbRefundBalance extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

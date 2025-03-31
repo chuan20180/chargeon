@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.model.sms.SmsRecord;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModelProperty;
@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "sms_record")
 @AutoMapper(target = SmsRecord.class)
-public class TbSmsRecord extends BaseTenantEntity {
+public class TbSmsRecord extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

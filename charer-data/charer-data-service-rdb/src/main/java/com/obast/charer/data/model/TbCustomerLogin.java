@@ -2,7 +2,7 @@ package com.obast.charer.data.model;
 
 import com.obast.charer.common.enums.LoginTypeEnum;
 import com.obast.charer.common.enums.PlatformTypeEnum;
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.model.customer.CustomerLogin;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModel;
@@ -22,7 +22,7 @@ import java.util.Date;
 @Table(name = "customer_login")
 @ApiModel(value = "客户登陆信息")
 @AutoMapper(target = CustomerLogin.class)
-public class TbCustomerLogin extends BaseTenantEntity {
+public class TbCustomerLogin extends BaseEntity {
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")
     @GenericGenerator(name = "SnowflakeIdGenerator", strategy = "com.obast.charer.data.config.id.SnowflakeIdGenerator")

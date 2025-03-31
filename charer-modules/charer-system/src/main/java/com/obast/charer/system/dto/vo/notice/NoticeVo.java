@@ -19,7 +19,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @AutoMapper(target = Notice.class)
 public class NoticeVo extends BaseDto {
-    private static final long serialVersionUID = 1L;
 
     private String id;
 

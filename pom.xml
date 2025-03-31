@@ -337,12 +337,6 @@
 
             <dependency>
                 <groupId>com.obast.charer</groupId>
-                <artifactId>charer-common-tenant</artifactId>
-                <version>${charer.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.obast.charer</groupId>
                 <artifactId>charer-common-satoken</artifactId>
                 <version>${charer.version}</version>
             </dependency>
@@ -562,12 +556,6 @@
             <dependency>
                 <groupId>com.obast.charer</groupId>
                 <artifactId>charer-payment-wechat</artifactId>
-                <version>${charer.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.obast.charer</groupId>
-                <artifactId>charer-payment-mbank</artifactId>
                 <version>${charer.version}</version>
             </dependency>
 

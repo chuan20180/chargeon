@@ -8,8 +8,8 @@ import com.obast.charer.common.enums.ErrCode;
 import com.obast.charer.common.exception.BizException;
 import com.obast.charer.enums.CustomerTypeEnum;
 import com.obast.charer.enums.EnableStatusEnum;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 import lombok.*;
 
 import java.io.Serializable;
@@ -23,7 +23,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer extends TenantModel implements Id<String>, Serializable {
+public class Customer extends BaseModel implements Id<String>, Serializable {
 
     private String id;
 

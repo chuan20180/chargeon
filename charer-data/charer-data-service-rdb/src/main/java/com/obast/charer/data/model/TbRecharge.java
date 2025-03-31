@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.enums.RechargeTypeEnum;
 import com.obast.charer.model.platform.Recharge;
@@ -21,7 +21,7 @@ import javax.persistence.*;
 @Table(name = "recharge")
 @ApiModel(value = "充值方案")
 @AutoMapper(target = Recharge.class)
-public class TbRecharge extends BaseTenantEntity {
+public class TbRecharge extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

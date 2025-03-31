@@ -9,9 +9,5 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import java.util.List;
 
 public interface SysLoginInfoRepository extends JpaRepository<TbSysLoginInfo, String>, QuerydslPredicateExecutor<TbSysLoginInfo>, JpaSpecificationExecutor<TbSysLoginInfo> {
-    List<TbSysLoginInfo> findByTenantId(String tenantId);
 
-    List<TbSysLoginInfo> findByAgentId(String agentId);
-
-    List<TbSysLoginInfo> findByDealerId(String dealerId);
 }

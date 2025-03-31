@@ -4,7 +4,6 @@ import com.obast.charer.common.api.PageRequest;
 import com.obast.charer.common.api.Paging;
 import com.obast.charer.common.enums.ErrCode;
 import com.obast.charer.common.exception.BizException;
-import com.obast.charer.common.tenant.helper.DealerHelper;
 import com.obast.charer.common.utils.MapstructUtils;
 import com.obast.charer.data.business.IChargerData;
 import com.obast.charer.data.business.IStationData;
@@ -57,15 +56,6 @@ public class StationManagerServiceImpl implements IStationManagerService {
         return newList;
     }
 
-    @Override
-    public List<StationVo> queryNoAgentList(PageRequest<StationQueryBo> pageRequest) {
-        List<Station> list = DealerHelper.ignore(()->stationData.findNoAgentList(pageRequest.getData())) ;
-        List<StationVo> newList = new ArrayList<>();
-        for(Station station: list) {
-            newList.add(fillData(station));
-        }
-        return newList;
-    }
 
     @Override
     public StationVo queryDetail(String stationId) {

@@ -15,8 +15,6 @@ import lombok.EqualsAndHashCode;
 @AutoMapper(target = ChannelConfig.class)
 public class ChannelConfigVo extends BaseDto {
 
-    private static final long serialVersionUID = -1L;
-
     @ApiModelProperty(value="id")
     private Long id;
 

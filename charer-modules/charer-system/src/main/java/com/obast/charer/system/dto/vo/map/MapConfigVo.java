@@ -19,8 +19,6 @@ import lombok.EqualsAndHashCode;
 @AutoMapper(target = MapConfig.class)
 public class MapConfigVo extends BaseDto {
 
-    private static final long serialVersionUID = -1L;
-
     @ApiModelProperty(value = "id")
     @ExcelProperty(value = "id")
     private String id;

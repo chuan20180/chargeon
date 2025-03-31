@@ -9,9 +9,5 @@ import java.util.List;
 
 public interface SysUserRepository extends JpaRepository<TbSysUser, String>, QuerydslPredicateExecutor<TbSysUser>, JpaSpecificationExecutor<TbSysUser> {
 
-    List<TbSysUser> findByTenantId(String id);
 
-    List<TbSysUser> findByAgentId(String id);
-
-    List<TbSysUser> findByDealerId(String id);
 }

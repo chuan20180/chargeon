@@ -3,8 +3,8 @@ package com.obast.charer.model.promotion;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.enums.PromotionScopeEnum;
 import com.obast.charer.enums.PromotionTypeEnum;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 import lombok.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -16,7 +16,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Promotion extends TenantModel implements Id<String>, Serializable {
+public class Promotion extends BaseModel implements Id<String>, Serializable {
 
     private String id;
 

@@ -1,6 +1,7 @@
 package com.obast.charer.system.dto.vo.recharge;
 
 import com.obast.charer.common.Decimal2Serializer;
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.platform.RechargeItem;
@@ -27,9 +28,7 @@ import java.math.BigDecimal;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = RechargeItem.class,convertGenerate = false)
-public class RechargeItemVo extends BaseModel implements Serializable {
-
-    private static final long serialVersionUID = -1L;
+public class RechargeItemVo extends BaseDto {
 
     @ApiModelProperty(value = "id")
     @ExcelProperty(value = "id")

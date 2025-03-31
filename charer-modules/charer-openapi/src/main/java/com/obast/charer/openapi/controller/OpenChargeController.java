@@ -207,18 +207,7 @@ public class OpenChargeController {
     @PostMapping("/balanceStart")
     public Object balanceStart(@RequestBody @Validated Request<BalanceStartChargeBo> bo) {
         log.debug("余额启动充电 params: {}", bo);
-        ActionResult<?> result =  openChargerGunService.balanceStartCharge(bo.getData());
-        if(result.getCode() > 0) {
-            throw new BizException(ErrCode.CHARGER_START_FAIL, result.getReason());
-        }
-        return result.getData();
-    }
-
-    @ApiOperation("即充即退充电")
-    @PostMapping("/instantStart")
-    public Object instantStart(@RequestBody @Validated Request<InstantStartChargeBo> bo) {
-        log.debug("即充即退充电 params: {}", bo);
-        ActionResult<?> result =  openChargerGunService.instantStartCharge(bo.getData());
+        ActionResult<?> result =  openChargerGunService.startCharge(bo.getData());
         if(result.getCode() > 0) {
             throw new BizException(ErrCode.CHARGER_START_FAIL, result.getReason());
         }

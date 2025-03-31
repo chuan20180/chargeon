@@ -3,9 +3,8 @@ package com.obast.charer.model.device;
 import com.obast.charer.enums.ChargerGunCurrentEnum;
 import com.obast.charer.enums.ChargerGunSpeedEnum;
 import com.obast.charer.enums.ChargerGunStateEnum;
-import com.obast.charer.model.AgentModel;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 import lombok.*;
 
 import java.io.Serializable;
@@ -15,7 +14,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChargerGun extends AgentModel implements Id<String>, Serializable {
+public class ChargerGun extends BaseModel implements Id<String>, Serializable {
 
     private String id;
     private String chargerId;

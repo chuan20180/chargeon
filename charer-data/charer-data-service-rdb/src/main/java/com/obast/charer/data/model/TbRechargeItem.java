@@ -1,6 +1,6 @@
 package com.obast.charer.data.model;
 
-import com.obast.charer.data.base.BaseTenantEntity;
+import com.obast.charer.data.base.BaseEntity;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.model.platform.RechargeItem;
 import io.github.linpeilie.annotations.AutoMapper;
@@ -24,7 +24,7 @@ import java.math.BigDecimal;
 @Table(name = "recharge_item")
 @ApiModel(value = "充值方案项目")
 @AutoMapper(target = RechargeItem.class)
-public class TbRechargeItem extends BaseTenantEntity {
+public class TbRechargeItem extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "SnowflakeIdGenerator")

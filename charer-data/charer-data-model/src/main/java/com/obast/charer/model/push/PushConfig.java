@@ -1,8 +1,8 @@
 package com.obast.charer.model.push;
 
 import com.obast.charer.enums.EnableStatusEnum;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
-import com.obast.charer.model.TenantModel;
 import lombok.*;
 
 import java.io.Serializable;
@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PushConfig extends TenantModel implements Id<String>, Serializable {
+public class PushConfig extends BaseModel implements Id<String>, Serializable {
 
     private String id;
 

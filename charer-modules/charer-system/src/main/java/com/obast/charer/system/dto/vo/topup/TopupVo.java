@@ -1,6 +1,7 @@
 package com.obast.charer.system.dto.vo.topup;
 
 import com.obast.charer.common.Decimal2Serializer;
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.LockEnum;
 import com.obast.charer.enums.RechargeTypeEnum;
 import com.obast.charer.enums.TopupSourceEnum;
@@ -33,7 +34,7 @@ import java.util.Date;
 @Data
 @ExcelIgnoreUnannotated
 @AutoMapper(target = Topup.class,convertGenerate = false)
-public class TopupVo extends BaseModel implements Serializable {
+public class TopupVo extends BaseDto {
 
     private static final long serialVersionUID = -1L;
 

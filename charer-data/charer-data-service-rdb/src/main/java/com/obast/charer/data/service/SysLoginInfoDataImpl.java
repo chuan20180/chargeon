@@ -61,20 +61,6 @@ public class SysLoginInfoDataImpl extends AbstractCommonData<SysLoginInfoQueryBo
         return MapstructUtils.convert(list, SysLoginInfo.class);
     }
 
-    @Override
-    public List<SysLoginInfo> findAllByTenantId(String id) {
-        return MapstructUtils.convert(baseRepository.findByTenantId(id), SysLoginInfo.class);
-    }
-
-    @Override
-    public List<SysLoginInfo> findAllByAgentId(String id) {
-        return MapstructUtils.convert(baseRepository.findByTenantId(id), SysLoginInfo.class);
-    }
-
-    @Override
-    public List<SysLoginInfo> findAllByDealerId(String id) {
-        return MapstructUtils.convert(baseRepository.findByDealerId(id), SysLoginInfo.class);
-    }
 
     public Specification<TbSysLoginInfo> buildSpecification(SysLoginInfoQueryBo bo) {
         return (root, query, cb) -> {

@@ -1,7 +1,7 @@
 package com.obast.charer.model.system;
 
 import com.obast.charer.enums.EnableStatusEnum;
-import com.obast.charer.model.DealerModel;
+import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.Id;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class SysDept extends DealerModel implements Id<String>, Serializable {
+public class SysDept extends BaseModel implements Id<String>, Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
