@@ -63,6 +63,4 @@ public class RechargeItemVo extends BaseDto {
     @ApiModelProperty(value = "描述")
     @ExcelProperty(value = "描述")
     private String note;
-
-
 }
