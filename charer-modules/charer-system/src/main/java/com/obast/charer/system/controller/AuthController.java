@@ -46,8 +46,6 @@ public class AuthController {
 
     private final CaptchaProperties captchaProperties;
 
-    private final CharerProperties charerProperties;
-
     /**
      * 登录方法
      *
@@ -61,13 +59,11 @@ public class AuthController {
         LoginVo loginVo = new LoginVo();
         // 生成令牌
         String token = loginService.login(
-                loginBody.getTenantId(),
                 loginBody.getUsername(), loginBody.getPassword(),
                 loginBody.getCode(), loginBody.getUuid());
         loginVo.setToken(token);
         return loginVo;
     }
-
 
     /**
      * 退出登录

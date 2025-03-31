@@ -39,12 +39,6 @@ import javax.validation.constraints.NotNull;
 public class LoginBody {
 
     /**
-     * 租户ID
-     */
-    @NotNull(message = "{tenant.number.not.blank}")
-    private String tenantId;
-
-    /**
      * 用户名
      */
     @NotBlank(message = "{user.username.not.blank}")

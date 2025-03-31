@@ -53,8 +53,6 @@ public class SysLoginService {
     @Value("${user.password.lockTime}")
     private Integer lockTime;
 
-    //private String authUrl="https://api.weixin.qq.com/sns/jscode2session";
-
     /**
      * 登录验证
      *
@@ -64,21 +62,18 @@ public class SysLoginService {
      * @param uuid     唯一标识
      * @return 结果
      */
-    public String login(String tenantId, String username, String password, String code, String uuid) {
+    public String login(String username, String password, String code, String uuid) {
         boolean captchaEnabled = captchaProperties.getEnable();
         // 验证码开关
         if (captchaEnabled) {
-            validateCaptcha(tenantId, username, code, uuid);
+            validateCaptcha(username, code, uuid);
         }
-
-        //未登录前临时设置租户id
 
         SysUserVo user = loadUserByUsername(username);
 
-
         log.debug("登陆信息: {}", user);
-        checkLogin(LoginType.PASSWORD, tenantId, username, () -> !BCrypt.checkpw(password, user.getPassword()));
-        // 此处可根据登录用户的数据不同 自行创建 loginUser
+        checkLogin(username, () -> !BCrypt.checkpw(password, user.getPassword()));
+
         LoginUser loginUser = buildLoginUser(user);
         // 生成token
         LoginHelper.loginByPlatform(loginUser, PlatformTypeEnum.Web);
@@ -127,37 +122,13 @@ public class SysLoginService {
     }
 
     /**
-     * 校验短信验证码
-     */
-    private boolean validateSmsCode(String phonenumber, String smsCode) {
-        String code = RedisUtils.getCacheObject(GlobalConstants.CAPTCHA_CODE_KEY + phonenumber);
-        if (StringUtils.isBlank(code)) {
-            recordLoginInfo(phonenumber, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
-            throw new BizException(MessageUtils.message("user.jcaptcha.expire"));
-        }
-        return code.equals(smsCode);
-    }
-
-    /**
-     * 校验邮箱验证码
-     */
-    private boolean validateEmailCode(String email, String emailCode) {
-        String code = RedisUtils.getCacheObject(GlobalConstants.CAPTCHA_CODE_KEY + email);
-        if (StringUtils.isBlank(code)) {
-            recordLoginInfo(email, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
-            throw new BizException("验证码过期");
-        }
-        return code.equals(emailCode);
-    }
-
-    /**
      * 校验验证码
      *
      * @param username 用户名
      * @param code     验证码
      * @param uuid     唯一标识
      */
-    public void validateCaptcha(String tenantId, String username, String code, String uuid) {
+    public void validateCaptcha(String username, String code, String uuid) {
         String verifyKey = GlobalConstants.CAPTCHA_CODE_KEY + StringUtils.defaultString(uuid, "");
         String captcha = RedisUtils.getCacheObject(verifyKey);
         RedisUtils.deleteObject(verifyKey);
@@ -212,7 +183,7 @@ public class SysLoginService {
     /**
      * 登录校验
      */
-    private void checkLogin(LoginType loginType, String tenantId, String username, Supplier<Boolean> supplier) {
+    private void checkLogin(String username, Supplier<Boolean> supplier) {
         String errorKey = GlobalConstants.PWD_ERR_CNT_KEY + username;
         String loginFail = Constants.LOGIN_FAIL;
 
@@ -220,7 +191,7 @@ public class SysLoginService {
         Integer errorNumber = RedisUtils.getCacheObject(errorKey);
         // 锁定时间内登录 则踢出
         if (ObjectUtil.isNotNull(errorNumber) && errorNumber.equals(maxRetryCount)) {
-            recordLoginInfo(username, loginFail, MessageUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
+            recordLoginInfo(username, loginFail, MessageUtils.message(LoginType.PASSWORD.getRetryLimitExceed(), maxRetryCount, lockTime));
             throw new UserException("重试达到最大限制");
         }
 
@@ -230,13 +201,13 @@ public class SysLoginService {
             // 达到规定错误次数 则锁定登录
             if (errorNumber.equals(maxRetryCount)) {
                 RedisUtils.setCacheObject(errorKey, errorNumber, Duration.ofMinutes(lockTime));
-                recordLoginInfo(username, loginFail, MessageUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
+                recordLoginInfo(username, loginFail, MessageUtils.message(LoginType.PASSWORD.getRetryLimitExceed(), maxRetryCount, lockTime));
                 throw new UserException("重试达到最大限制");
 
             } else {
                 // 未达到规定错误次数 则递增
                 RedisUtils.setCacheObject(errorKey, errorNumber);
-                recordLoginInfo(username, loginFail, MessageUtils.message(loginType.getRetryLimitCount(), errorNumber));
+                recordLoginInfo(username, loginFail, MessageUtils.message(LoginType.PASSWORD.getRetryLimitCount(), errorNumber));
                 throw new UserException(String.format("错误次数:%s", errorNumber));
 
             }
