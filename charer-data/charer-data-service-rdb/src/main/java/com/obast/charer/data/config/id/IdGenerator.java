@@ -69,27 +69,6 @@ public class IdGenerator {
         return String.valueOf(YitIdHelper.nextId());
     }
 
-    public static String generateLedgerTranId() {
-        IdGeneratorOptions options = new IdGeneratorOptions((short) 1);
-        YitIdHelper.setIdGenerator(options);
-        return String.valueOf(YitIdHelper.nextId());
-    }
-
-
-    public static String generateLedgerSettleTranId() {
-        IdGeneratorOptions options = new IdGeneratorOptions((short) 1);
-        YitIdHelper.setIdGenerator(options);
-        return String.valueOf(YitIdHelper.nextId());
-    }
-
-
-    public static String generateLedgerSettleDealerTranId() {
-        IdGeneratorOptions options = new IdGeneratorOptions((short) 1);
-        YitIdHelper.setIdGenerator(options);
-        return String.valueOf(YitIdHelper.nextId());
-    }
-
-
     public static String generateParkTranId() {
         IdGeneratorOptions options = new IdGeneratorOptions((short) 1);
         YitIdHelper.setIdGenerator(options);

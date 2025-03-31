@@ -65,14 +65,6 @@ public class OrdersController {
         ordersOperateService.settle(bo.getId(), bo.getNote());
     }
 
-    @ApiOperation(value = "分成", notes = "订单分成", httpMethod = "POST")
-    @SaCheckPermission("business:order:deal")
-    @PostMapping("/deal")
-    public void deal(@Validated @RequestBody PageRequest<OrderSettlementBo> request) {
-        OrderSettlementBo bo = request.getData();
-        ordersOperateService.deal(bo.getId());
-    }
-
     @ApiOperation(value = "通知", notes = "通知", httpMethod = "POST")
     @PostMapping("/notify")
     public void notify(@Validated @RequestBody PageRequest<OrderSettlementBo> request) {

@@ -1,53 +1,30 @@
 package com.obast.charer.system.operate.impl;
 
-import com.obast.charer.common.constant.TenantConstants;
 import com.obast.charer.common.enums.ErrCode;
 import com.obast.charer.common.exception.BizException;
 import com.obast.charer.common.plugin.core.StopReasonEnum;
-import com.obast.charer.common.properties.CharerProperties;
 import com.obast.charer.common.utils.JsonUtils;
 import com.obast.charer.common.utils.SpringUtils;
 import com.obast.charer.common.utils.StringUtils;
 import com.obast.charer.data.business.*;
-import com.obast.charer.data.system.ISysAgentStationData;
-import com.obast.charer.data.system.ISysAgentStationDealerData;
-import com.obast.charer.data.system.ISysDealerData;
-import com.obast.charer.data.system.ISysTenantData;
 import com.obast.charer.enums.*;
 import com.obast.charer.model.coupon.CouponCode;
 import com.obast.charer.model.customer.Customer;
 import com.obast.charer.model.customer.CustomerLogin;
-import com.obast.charer.model.device.Dcam;
-import com.obast.charer.model.device.DcamParking;
-import com.obast.charer.model.ledger.Ledger;
 import com.obast.charer.model.order.Orders;
 import com.obast.charer.model.order.OrdersSettle;
-import com.obast.charer.model.park.Park;
-import com.obast.charer.model.price.PricePark;
 import com.obast.charer.model.promotion.Promotion;
 import com.obast.charer.model.station.Station;
-import com.obast.charer.model.system.SysAgent;
-import com.obast.charer.model.system.SysAgentStationDealer;
-import com.obast.charer.model.system.SysDealer;
-import com.obast.charer.model.system.SysTenant;
-import com.obast.charer.push.wechat.WechatPushEvent;
 import com.obast.charer.system.listener.event.OrderSettledEvent;
 import com.obast.charer.system.operate.INotifyOperateService;
 import com.obast.charer.system.operate.IOrdersOperateService;
-import com.obast.charer.system.service.platform.NotifyService;
-import com.obast.charer.system.utils.ParkUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -83,27 +60,10 @@ public class OrdersOperateServiceImpl implements IOrdersOperateService {
     @Autowired
     private IPromotionData promotionData;
 
-    @Autowired
-    private ILedgerData ledgerData;
-
-
-    @Autowired
-    private ISysDealerData sysDealerData;
-
-    @Autowired
-    private ISysTenantData sysTenantData;
-
-    @Autowired
-    private ISysAgentStationData sysAgentStationData;
-
-    @Autowired
-    private ISysAgentStationDealerData sysAgentStationDealerData;
 
     @Autowired
     private INotifyOperateService notifyOperateService;
 
-    @Autowired
-    private CharerProperties charerProperties;
 
     /**
      * 订单结算
@@ -360,381 +320,6 @@ public class OrdersOperateServiceImpl implements IOrdersOperateService {
         //发送订单结算完成事件
         SpringUtils.context().publishEvent(new OrderSettledEvent(order));
     }
-
-    /**
-     * 订单分润
-     */
-    @Override
-    @Transactional
-    public void deal(String orderId) {
-        Orders order = ordersData.findById(orderId);
-        if(order == null) {
-            throw new BizException(ErrCode.ORDER_NOT_FOUND);
-        }
-
-        log.info("[分润调试]开始订单分润, orderId={}", orderId);
-
-        if(!order.getState().equals(OrderStateEnum.Settled)) {
-            log.error("[分润调试]分润失败，订单未结算, state={}", order.getState());
-            throw new BizException(ErrCode.ORDER_STATE_ERROR);
-        }
-
-        if(!order.getDeal().equals(OrderDealEnum.NoDeal)) {
-            log.error("[分润调试]分润失败，订单已分润, deal={}", order.getDeal());
-            throw new BizException(ErrCode.ORDER_DEAL_ERROR);
-        }
-
-        //订单分润金额
-        BigDecimal orderSettledElecAmount = order.getSettledElecAmount();
-        BigDecimal orderSettledServiceAmount = order.getSettledServiceAmount();
-        BigDecimal orderSettledParkAmount = order.getSettledParkAmount();
-
-        //服务费和占位费参与分润
-        BigDecimal orderProfitAmount = orderSettledServiceAmount.add(orderSettledParkAmount);
-
-        BigDecimal totalProfitAmount = orderProfitAmount;
-
-        //订单分润金额为0，自动结算
-        if(orderProfitAmount.compareTo(new BigDecimal(0)) <= 0) {
-            log.info("[分润调试]分润成功, 分润金额为0");
-            order.setDeal(OrderDealEnum.Dealed);
-            ordersData.save(order);
-            return;
-        }
-
-        SysTenant sysTenant = sysTenantData.findById(order.getTenantId());
-        //没有找到运营商
-        if(sysTenant == null) {
-            log.error("[分润调试]分润失败, 订单运营商未找到 tenantId={}", order.getTenantId());
-            throw new BizException(ErrCode.TENANT_NOT_FOUND);
-        }
-
-        Station station = stationData.findById(order.getStationId());
-        if(station == null) {
-            log.error("[分润调试]分润失败, 场站未找到 stationId={}", order.getStationId());
-            throw new BizException(ErrCode.STATION_NOT_FOUND);
-        }
-
-        //平台未开启分润, 全部结算给平台
-        if(!charerProperties.getProfit().getEnabled()) {
-            Ledger ledger = new Ledger();
-            ledger.setDealerName(LedgerTypeEnum.Platform.getMsg());
-            ledger.setType(LedgerTypeEnum.Platform);
-            ledger.setCustomerId(order.getCustomerId());
-            ledger.setUserName(order.getUserName());
-            ledger.setOrderId(order.getId());
-            ledger.setOrderTranId(order.getTranId());
-            ledger.setStationId(station.getId());
-            ledger.setStationName(station.getName());
-            ledger.setStationAddress(station.getAddress());
-            ledger.setChargerDn(order.getChargerDn());
-            ledger.setGunNo(order.getGunNo());
-            ledger.setStartTime(order.getStartTime());
-            ledger.setEndTime(order.getEndTime());
-            ledger.setTotalAmount(order.getTotalAmount());
-            ledger.setTotalQuantity(order.getTotalQuantity());
-            ledger.setChargeMinute(order.getChargeMinute());
-
-            ledger.setSettledAmount(order.getSettledAmount());
-            ledger.setSettledElecAmount(orderSettledElecAmount);
-            ledger.setSettledServiceAmount(orderSettledServiceAmount);
-            ledger.setSettledParkAmount(orderSettledParkAmount);
-
-            ledger.setAmount(orderProfitAmount);
-            ledger.setPercent(new BigDecimal(1));
-            ledger.setState(LedgerStateEnum.Pending);
-            ledger.setDealerId("-1");
-            ledger.setAgentId("-1");
-            ledger.setTenantId(TenantConstants.DEFAULT_TENANT_ID);
-            ledger.setDealerName(null);
-            ledger.setAgentName(null);
-            ledger.setTenantName(null);
-            ledgerData.add(ledger);
-            log.info("[分润调试](平台未开启分润) 分润完成[平台],分润金额={}", orderProfitAmount);
-            order.setDeal(OrderDealEnum.Dealed);
-            ordersData.save(order);
-            return;
-        }
-
-        //结算平台分润
-        BigDecimal platformProfitPercent = new BigDecimal(0);
-        if(sysTenant.getPlatformProfitPercent() != null) {
-            platformProfitPercent = sysTenant.getPlatformProfitPercent();
-        }
-
-        if(platformProfitPercent.compareTo(new BigDecimal(1)) > 0 || platformProfitPercent.compareTo(new BigDecimal(0)) < 0) {
-            log.error("[分润调试]分润失败,平台分润比例设置错误, 分润比例={}", platformProfitPercent);
-            throw new BizException(ErrCode.TENANT_PROFIT_PERCENT_INVALID);
-        }
-        if(platformProfitPercent.compareTo(new BigDecimal(0)) > 0) {
-            if(orderProfitAmount.compareTo(new BigDecimal(0)) > 0) {
-                BigDecimal platformSettleProfitAmount = orderProfitAmount.multiply(platformProfitPercent).setScale(2, RoundingMode.HALF_UP);
-                BigDecimal platformSettleProfitPercent = platformSettleProfitAmount.divide(totalProfitAmount, 2, RoundingMode.HALF_UP);
-
-                orderProfitAmount = orderProfitAmount.subtract(platformSettleProfitAmount);
-
-                Ledger ledger = new Ledger();
-                ledger.setDealerName(LedgerTypeEnum.Platform.getMsg());
-                ledger.setType(LedgerTypeEnum.Platform);
-                ledger.setCustomerId(order.getCustomerId());
-                ledger.setUserName(order.getUserName());
-                ledger.setOrderId(order.getId());
-                ledger.setOrderTranId(order.getTranId());
-                ledger.setStationId(station.getId());
-                ledger.setStationName(station.getName());
-                ledger.setStationAddress(station.getAddress());
-                ledger.setChargerDn(order.getChargerDn());
-                ledger.setGunNo(order.getGunNo());
-                ledger.setStartTime(order.getStartTime());
-                ledger.setEndTime(order.getEndTime());
-                ledger.setTotalAmount(order.getTotalAmount());
-                ledger.setTotalQuantity(order.getTotalQuantity());
-                ledger.setChargeMinute(order.getChargeMinute());
-
-                ledger.setSettledAmount(order.getSettledAmount());
-                ledger.setSettledElecAmount(orderSettledElecAmount);
-                ledger.setSettledServiceAmount(orderSettledServiceAmount);
-                ledger.setSettledParkAmount(orderSettledParkAmount);
-
-                ledger.setAmount(platformSettleProfitAmount);
-                ledger.setPercent(platformSettleProfitPercent);
-                ledger.setState(LedgerStateEnum.Pending);
-                ledger.setDealerId("-1");
-                ledger.setAgentId("-1");
-                ledger.setTenantId(TenantConstants.DEFAULT_TENANT_ID);
-                ledger.setDealerName(null);
-                ledger.setAgentName(null);
-                ledger.setTenantName(null);
-                ledgerData.add(ledger);
-
-                log.error("[分润调试]分润完成[平台],分润金额={}", platformSettleProfitAmount);
-            }
-        }
-
-        SysAgent sysAgent = sysAgentStationData.findAgentByStationId(station.getId());
-
-        //场站没有绑定代理商则全部结算给运营商
-        if(sysAgent == null) {
-            if(orderProfitAmount.compareTo(new BigDecimal(0)) > 0) {
-
-                BigDecimal tenantSettleProfitPercent = orderProfitAmount.divide(totalProfitAmount, 2, RoundingMode.HALF_UP);
-
-                Ledger ledger = new Ledger();
-                ledger.setType(LedgerTypeEnum.Tenant);
-                ledger.setCustomerId(order.getCustomerId());
-                ledger.setUserName(order.getUserName());
-                ledger.setOrderId(order.getId());
-                ledger.setOrderTranId(order.getTranId());
-                ledger.setStationId(station.getId());
-                ledger.setStationName(station.getName());
-                ledger.setStationAddress(station.getAddress());
-                ledger.setChargerDn(order.getChargerDn());
-                ledger.setGunNo(order.getGunNo());
-                ledger.setStartTime(order.getStartTime());
-                ledger.setEndTime(order.getEndTime());
-                ledger.setTotalAmount(order.getTotalAmount());
-                ledger.setTotalQuantity(order.getTotalQuantity());
-                ledger.setChargeMinute(order.getChargeMinute());
-
-                ledger.setSettledAmount(order.getSettledAmount());
-                ledger.setSettledElecAmount(orderSettledElecAmount);
-                ledger.setSettledServiceAmount(orderSettledServiceAmount);
-                ledger.setSettledParkAmount(orderSettledParkAmount);
-
-                ledger.setAmount(orderProfitAmount);
-                ledger.setPercent(tenantSettleProfitPercent);
-                ledger.setState(LedgerStateEnum.Pending);
-
-                ledger.setDealerId("-1");
-                ledger.setAgentId("-1");
-
-                ledger.setDealerName(null);
-                ledger.setAgentName(null);
-
-
-                ledger.setTenantId(sysTenant.getTenantId());
-                ledger.setTenantName(sysTenant.getCompanyName());
-
-                ledgerData.add(ledger);
-
-                log.error("[分润调试]分润完成[运营商],分润金额={}", orderProfitAmount);
-            }
-
-            order.setDeal(OrderDealEnum.Dealed);
-            ordersData.save(order);
-            return;
-        }
-
-        //结算运营商分润
-        BigDecimal tenantProfitPercent = sysAgent.getTenantProfitPercent();
-        if(tenantProfitPercent.compareTo(new BigDecimal(1)) > 0 || tenantProfitPercent.compareTo(new BigDecimal(0)) < 0) {
-            log.error("[分润调试]分润失败, 运营商分润比例设置错误, 分润比例={}", tenantProfitPercent);
-            throw new BizException(ErrCode.TENANT_PROFIT_PERCENT_INVALID);
-        }
-
-        if(tenantProfitPercent.compareTo(new BigDecimal(0)) > 0) {
-            if(orderProfitAmount.compareTo(new BigDecimal(0)) > 0) {
-                BigDecimal tenantSettleProfitAmount = orderProfitAmount.multiply(tenantProfitPercent).setScale(2, RoundingMode.HALF_UP);
-                BigDecimal tenantSettleProfitPercent = tenantSettleProfitAmount.divide(totalProfitAmount, 2, RoundingMode.HALF_UP);
-                orderProfitAmount = orderProfitAmount.subtract(tenantSettleProfitAmount);
-
-                Ledger ledger = new Ledger();
-                ledger.setType(LedgerTypeEnum.Tenant);
-                ledger.setCustomerId(order.getCustomerId());
-                ledger.setUserName(order.getUserName());
-                ledger.setOrderId(order.getId());
-                ledger.setOrderTranId(order.getTranId());
-                ledger.setStationId(station.getId());
-                ledger.setStationName(station.getName());
-                ledger.setStationAddress(station.getAddress());
-                ledger.setChargerDn(order.getChargerDn());
-                ledger.setGunNo(order.getGunNo());
-                ledger.setStartTime(order.getStartTime());
-                ledger.setEndTime(order.getEndTime());
-                ledger.setTotalAmount(order.getTotalAmount());
-                ledger.setTotalQuantity(order.getTotalQuantity());
-                ledger.setChargeMinute(order.getChargeMinute());
-
-                ledger.setSettledAmount(order.getSettledAmount());
-                ledger.setSettledElecAmount(orderSettledElecAmount);
-                ledger.setSettledServiceAmount(orderSettledServiceAmount);
-                ledger.setSettledParkAmount(orderSettledParkAmount);
-
-                ledger.setAmount(tenantSettleProfitAmount);
-                ledger.setPercent(tenantSettleProfitPercent);
-                ledger.setState(LedgerStateEnum.Pending);
-
-
-
-                ledger.setDealerId("-1");
-                ledger.setAgentId("-1");
-
-                ledger.setDealerName(null);
-                ledger.setAgentName(null);
-
-                ledger.setTenantId(sysTenant.getTenantId());
-                ledger.setTenantName(sysTenant.getCompanyName());
-
-                ledgerData.add(ledger);
-            }
-        }
-
-
-        //结算合作商商分润
-        if(orderProfitAmount.compareTo(new BigDecimal(0)) > 0) {
-            List<SysAgentStationDealer>  sysAgentStationDealers = sysAgentStationDealerData.findByAgentId(sysAgent.getId());
-            BigDecimal totalPercent = new BigDecimal(0);
-            if(!sysAgentStationDealers.isEmpty()) {
-                for(SysAgentStationDealer sysAgentStationDealer: sysAgentStationDealers) {
-                    totalPercent = totalPercent.add(sysAgentStationDealer.getPercent());
-                }
-
-                if(totalPercent.compareTo(new BigDecimal(1)) > 0 || totalPercent.compareTo(new BigDecimal(0)) < 0) {
-                    log.error("[分润调试]分润失败,合作商分润比例设置错误, 分润比例总和={}", totalPercent);
-                    throw new BizException(ErrCode.SYS_AGENT_TENANT_PROFIT_PERCENT_INVALID);
-                }
-
-                for(SysAgentStationDealer sysAgentStationDealer: sysAgentStationDealers) {
-                    BigDecimal dealerProfitPercent = sysAgentStationDealer.getPercent();
-                    if(dealerProfitPercent.compareTo(new BigDecimal(0)) > 0) {
-                        SysDealer sysDealer = sysDealerData.findById(sysAgentStationDealer.getDealerId());
-                        if(sysDealer == null) {
-                            throw new BizException(ErrCode.SYS_DEALER_NOT_FOUND);
-                        }
-
-                        BigDecimal dealerSettleProfitAmount = orderProfitAmount.multiply(dealerProfitPercent).setScale(2, RoundingMode.HALF_UP);
-                        BigDecimal dealerSettleProfitPercent = dealerSettleProfitAmount.divide(totalProfitAmount, 2, RoundingMode.HALF_UP);
-                        orderProfitAmount = orderProfitAmount.subtract(dealerSettleProfitAmount);
-
-
-                        Ledger ledger = new Ledger();
-                        ledger.setType(LedgerTypeEnum.Dealer);
-                        ledger.setCustomerId(order.getCustomerId());
-                        ledger.setUserName(order.getUserName());
-                        ledger.setOrderId(order.getId());
-                        ledger.setOrderTranId(order.getTranId());
-                        ledger.setStationId(station.getId());
-                        ledger.setStationName(station.getName());
-                        ledger.setStationAddress(station.getAddress());
-                        ledger.setChargerDn(order.getChargerDn());
-                        ledger.setGunNo(order.getGunNo());
-                        ledger.setStartTime(order.getStartTime());
-                        ledger.setEndTime(order.getEndTime());
-                        ledger.setTotalAmount(order.getTotalAmount());
-                        ledger.setTotalQuantity(order.getTotalQuantity());
-                        ledger.setChargeMinute(order.getChargeMinute());
-
-                        ledger.setSettledAmount(order.getSettledAmount());
-                        ledger.setSettledElecAmount(orderSettledElecAmount);
-                        ledger.setSettledServiceAmount(orderSettledServiceAmount);
-                        ledger.setSettledParkAmount(orderSettledParkAmount);
-
-                        ledger.setAmount(dealerSettleProfitAmount);
-                        ledger.setPercent(dealerSettleProfitPercent);
-                        ledger.setState(LedgerStateEnum.Pending);
-
-                        ledger.setDealerId(sysDealer.getId());
-                        ledger.setDealerName(sysDealer.getName());
-
-                        ledger.setAgentId(sysAgent.getId());
-                        ledger.setAgentName(sysAgent.getName());
-
-                        ledger.setTenantId(sysTenant.getTenantId());
-                        ledger.setTenantName(sysTenant.getCompanyName());
-                        ledgerData.add(ledger);
-                    }
-                }
-            }
-        }
-
-        //结算代理商分润
-        if(orderProfitAmount.compareTo(new BigDecimal(0)) > 0) {
-
-            BigDecimal agentSettleProfitPercent = orderProfitAmount.divide(totalProfitAmount, 2, RoundingMode.HALF_UP);
-
-            Ledger ledger = new Ledger();
-            ledger.setType(LedgerTypeEnum.Agent);
-            ledger.setCustomerId(order.getCustomerId());
-            ledger.setUserName(order.getUserName());
-            ledger.setOrderId(order.getId());
-            ledger.setOrderTranId(order.getTranId());
-            ledger.setStationId(station.getId());
-            ledger.setStationName(station.getName());
-            ledger.setStationAddress(station.getAddress());
-            ledger.setChargerDn(order.getChargerDn());
-            ledger.setGunNo(order.getGunNo());
-            ledger.setStartTime(order.getStartTime());
-            ledger.setEndTime(order.getEndTime());
-            ledger.setTotalAmount(order.getTotalAmount());
-            ledger.setTotalQuantity(order.getTotalQuantity());
-            ledger.setChargeMinute(order.getChargeMinute());
-
-            ledger.setSettledAmount(order.getSettledAmount());
-            ledger.setSettledElecAmount(orderSettledElecAmount);
-            ledger.setSettledServiceAmount(orderSettledServiceAmount);
-            ledger.setSettledParkAmount(orderSettledParkAmount);
-
-            ledger.setAmount(orderProfitAmount);
-            ledger.setPercent(agentSettleProfitPercent);
-            ledger.setState(LedgerStateEnum.Pending);
-
-            ledger.setDealerId("-1");
-
-            ledger.setDealerName(null);
-
-            ledger.setAgentId(sysAgent.getId());
-            ledger.setAgentName(sysAgent.getName());
-            ledger.setTenantId(sysTenant.getTenantId());
-            ledger.setTenantName(sysTenant.getCompanyName());
-            ledgerData.add(ledger);
-        }
-
-        order.setDeal(OrderDealEnum.Dealed);
-        ordersData.save(order);
-        log.info("[分润调试]结束订单分润, orderId={}", order.getId());
-
-    }
-
 
     /**
      * 发送订单通知

@@ -29,8 +29,5 @@ public class OrderEventListener {
 
         //开始通知
         ordersOperateService.notify(order.getId());
-
-        //开始结算
-        ordersOperateService.deal(order.getId());
     }
 }

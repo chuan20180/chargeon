@@ -40,17 +40,6 @@ public class InnerOrderController {
         return Response.success();
     }
 
-    /**
-     * 订单分成
-     * @param orderId 订单id
-     */
-    @ApiOperation("订单分成")
-    @GetMapping("/deal")
-    public Response<?> deal(@RequestParam("orderId") String orderId) {
-        ordersOperateService.deal(orderId);
-        return Response.success();
-    }
-
     @ApiOperation("订单通知")
     @PostMapping("/notify")
     public void notify(@RequestParam("orderId") String orderId) {
