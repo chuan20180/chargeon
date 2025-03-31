@@ -37,25 +37,12 @@ public class JacksonConfig {
     CharerProperties charerProperties;
 
     public TimeZone getTimeZone() {
-        String language = charerProperties.getSystem().getI18n().getLanguage();
-        I18nLocaleProperties i18nLocale = Arrays.stream(charerProperties.getSystem().getI18n().getLocales()).filter(item->item.getLocale().equals(language)).findFirst().orElse(null);
-        TimeZone timeZone = TimeZone.getTimeZone(Constants.TIMEZONE);
-        if(i18nLocale != null) {
-            timeZone = TimeZone.getTimeZone(i18nLocale.getTimezone());
-        }
-        return timeZone;
+        return TimeZone.getTimeZone(Constants.TIMEZONE);
     }
 
     public String getDateFormat() {
-        String language = charerProperties.getSystem().getI18n().getLanguage();
-        I18nLocaleProperties i18nLocale = Arrays.stream(charerProperties.getSystem().getI18n().getLocales()).filter(item->item.getLocale().equals(language)).findFirst().orElse(null);
-        String dateFormat = Constants.DATE_FORMAT;
-        if(i18nLocale != null) {
-            dateFormat = i18nLocale.getDateFormat();
-        }
-        return dateFormat;
+        return Constants.DATE_FORMAT;
     }
-
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer customizer() {
         return builder -> {
