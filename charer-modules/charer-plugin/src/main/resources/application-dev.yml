@@ -24,10 +24,6 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-    #        format_sql: true
-    #        use_sql_comments: false
-    #        session_factory:
-    #          statement_inspector: com.obast.charer.interceptor.data.JpaStatementInterceptor
     open-in-view: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
@@ -37,40 +33,15 @@ spring:
     password: root
     hikari:
       connection-timeout: 30000
-      #idle-timeout: 30000 # 经过idle-timeout时间如果连接还处于空闲状态, 该连接会被回收
-      #min-idle: 3 # 池中维护的最小空闲连接数, 默认为 10 个
-      #max-pool-size: 50 # 池中最大连接数, 包括闲置和使用中的连接, 默认为 10 个
-      max-lifetime: 0 # 如果一个连接超过了时长，且没有被使用, 连接会被回收
-      #is-auto-commit: true
-  #   ============mysql配置结束============>>
+      max-lifetime: 0
 
-  #<<================es时序数据配置开始===============
   elasticsearch:
-    #    embedded:
-    #      # 是否启用内部es
-    #      enabled: true
-    #      port: 9200
-    #rest:
-    #使用内置es的配置
-    #uris: http://elasticsearch:9200
     uris: http://127.0.0.1:9200
     username:
     password:
     connection-timeout: 10s
-  #================es时序数据配置结束===============>>
 
-  #<<===========tdengine时序数据库配置开始============
-  #  td-datasource:
-  #    url: jdbc:TAOS-RS://127.0.0.1:6041/obast?timezone=UTC-8&charset=UTF-8&locale=en_US.UTF-8
-  #    username: root
-  #    password: taosdata
-  #    driverClassName: com.taosdata.jdbc.rs.RestfulDriver
-  #===========tdengine时序数据库配置开始============>>
   redis:
-    #使用内置redis的配置
-    embedded:
-      enabled: false
-    #host: redis
     host: 127.0.0.1
     port: 6379
     database: 1
@@ -78,13 +49,9 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: path_pattern_parser
-#  profiles:
-#    active: dev
-
 
 logging:
   level:
-    #    org.hibernate: INFO
     org.hibernate.SQL: DEBUG
     org.hibernate.orm.jdbc.bind: TRACE
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
@@ -101,58 +68,8 @@ logging:
   pattern:
     console: '%d{HH:mm:ss.SSS} %-5level - %msg%n'
 
-
 plugin:
   runMode: prod
   mainPackage: com.obast.charer
   pluginPath:
     - /Users/chuan/Desktop/java/charer/charer-cloud/data/plugins/
-
-charer:
-  baseUrl: 'http://192.168.3.61'
-  # 多租户
-  tenant:
-    enable: true
-  # 代理商
-  agent:
-    enable: true
-  # 合作商
-  dealer:
-    enable: true
-  #是否开启分润
-  profit:
-    enabled: true
-
-  #系统模块
-  system:
-    i18n:
-      #默认语言
-      language: zh_CN
-      multiple: false
-      locales:
-        - locale: zh_CN
-          timezone: GMT+8
-          date-format: 'yyyy-MM-dd HH:mm:ss'
-        - locale: en_US
-          timezone: GMT+8
-          date-format: 'yyyy-MM-dd HH:mm:ss'
-        - locale: ru_RU
-          timezone: GMT+8
-          date-format: 'yyyy-MM-dd HH:mm:ss'
-
-  #openapi模块
-  openapi:
-    i18n:
-      #默认语言
-      language: zh_CN
-      multiple: false
-      locales:
-        - locale: zh_CN
-          timezone: GMT+8
-          date-format: 'yyyy-MM-dd HH:mm:ss'
-        - locale: en_US
-          timezone: GMT+8
-          date-format: 'yyyy-MM-dd HH:mm:ss'
-        - locale: ru_RU
-          timezone: GMT+8
-          date-format: 'yyyy-MM-dd HH:mm:ss'

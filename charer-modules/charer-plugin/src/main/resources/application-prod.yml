@@ -1,8 +1,8 @@
 server:
-  port: 9087
+  port: 9088
 spring:
   application:
-    name: charer-openapi
+    name: charer-plugin
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848
@@ -19,6 +19,7 @@ spring:
     database: MySQL
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: false
+
     hibernate:
       ddl-auto: update
     properties:
@@ -29,7 +30,7 @@ spring:
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
     url: jdbc:log4jdbc:mysql://127.0.0.1:3306/charer-open?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: root
+    password: 'Chuan811025@'
     hikari:
       connection-timeout: 30000
       max-lifetime: 0
@@ -43,7 +44,7 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-    database: 2
+    database: 1
 
   mvc:
     pathmatch:
@@ -51,7 +52,6 @@ spring:
 
 logging:
   level:
-    #    org.hibernate: INFO
     org.hibernate.SQL: DEBUG
     org.hibernate.orm.jdbc.bind: TRACE
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
@@ -68,19 +68,8 @@ logging:
   pattern:
     console: '%d{HH:mm:ss.SSS} %-5level - %msg%n'
 
-
-sa-token:
-  # token名称 (同时也是cookie名称)
-  token-name: x-token
-  # token有效期，单位s 默认30天, -1代表永不过期
-  timeout: -1
-  # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
-  activity-timeout: -1
-  # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
-  is-concurrent: true
-  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
-  is-share: false
-  # token风格
-  token-style: uuid
-  # 是否输出操作日志
-  is-log: false
+plugin:
+  runMode: prod
+  mainPackage: com.obast.charer
+  pluginPath:
+    - /Users/chuan/Desktop/java/charer/charer-cloud/data/plugins/
