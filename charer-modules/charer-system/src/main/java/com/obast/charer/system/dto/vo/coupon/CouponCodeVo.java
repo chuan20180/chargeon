@@ -1,21 +1,19 @@
 package com.obast.charer.system.dto.vo.coupon;
 
+import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.obast.charer.common.Decimal2Serializer;
 import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.CouponApplyEnum;
 import com.obast.charer.enums.CouponCodeStateEnum;
 import com.obast.charer.enums.CouponScopeEnum;
-import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.coupon.CouponCode;
-import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;

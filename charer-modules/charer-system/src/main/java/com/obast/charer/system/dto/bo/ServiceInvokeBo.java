@@ -31,12 +31,6 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 import java.util.Map;
 
-/**
- * @author: regan
- * @description:
- * @date:created in 2023/6/17 12:17
- * @modificed by:
- */
 @ApiModel(value = "ServiceInvokeBo")
 @Data
 public class ServiceInvokeBo {

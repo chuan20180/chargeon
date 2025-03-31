@@ -40,7 +40,7 @@ public class ChangeStateBo extends BaseDto {
     private static final long serialVersionUID = -1L;
 
     @NotBlank(message = "id不能为空")
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "Id")
     private String id;
 
 

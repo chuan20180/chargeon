@@ -1,16 +1,15 @@
 package com.obast.charer.system.dto.vo;
 
+import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
+import com.alibaba.excel.annotation.ExcelProperty;
 import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.common.excel.annotation.ExcelDictFormat;
 import com.obast.charer.common.excel.convert.ExcelDictConvert;
 import com.obast.charer.model.system.SysOperLog;
-import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
-import com.alibaba.excel.annotation.ExcelProperty;
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
 import java.util.Date;
 
 

@@ -32,14 +32,7 @@ public class LoginHelper {
 
     public static final String LOGIN_USER_KEY = "loginUser";
 
-    public static final String TENANT_KEY = "tenantId";
     public static final String USER_KEY = "userId";
-
-    public static final String AGENT_KEY = "agentId";
-
-    public static final String DEALER_KEY = "dealerId";
-
-    public static final String IS_TENANT_ADMIN_KEY = "isTenantAdmin";
 
 
     /* *********************************************************************************************************
@@ -107,16 +100,6 @@ public class LoginHelper {
         } catch (Exception e) {
             return null;
         }
-    }
-
-
-    /**
-     * 设置租户ID
-     *
-     * @param tenantId 租户ID
-     */
-    public static void setTenantId(String tenantId) {
-        SaHolder.getStorage().set(TENANT_KEY, tenantId);
     }
 
     /**

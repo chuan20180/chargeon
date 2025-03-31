@@ -11,11 +11,6 @@ import java.util.Map;
 public interface IOpenSysConfigService {
 
     /**
-     * 查询参数配置列表
-     */
-    Map<String, Object> querySysConfig();
-
-    /**
      * 根据key查询参数
      */
     Object selectByConfigKey(String key);

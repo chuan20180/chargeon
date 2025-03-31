@@ -87,9 +87,4 @@ public class TbSysRole extends BaseEntity {
     @ApiModelProperty(value = "是否是系统角色")
     private Integer isSys;
 
-
-    public TbSysRole(String id) {
-        this.id = id;
-    }
-
 }

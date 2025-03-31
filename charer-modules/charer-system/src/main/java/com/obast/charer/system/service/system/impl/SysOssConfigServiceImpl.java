@@ -29,10 +29,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 对象存储配置Service业务层处理
- *
- * @author Lion Li
- * @author 孤舟烟雨
- * @date 2021-08-13
  */
 
 @Slf4j

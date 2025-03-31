@@ -4,14 +4,11 @@ import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.AppTypeEnum;
 import com.obast.charer.enums.EnableStatusEnum;
-import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.system.SysApp;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.io.Serializable;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

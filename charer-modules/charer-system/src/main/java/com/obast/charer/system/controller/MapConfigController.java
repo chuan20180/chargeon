@@ -1,16 +1,15 @@
 package com.obast.charer.system.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.obast.charer.common.api.PageRequest;
 import com.obast.charer.common.api.Paging;
 import com.obast.charer.common.api.Request;
 import com.obast.charer.common.log.annotation.Log;
 import com.obast.charer.common.log.enums.BusinessType;
-import com.obast.charer.common.satoken.util.LoginHelper;
+import com.obast.charer.qo.MapConfigQueryBo;
 import com.obast.charer.system.dto.bo.MapConfigBo;
 import com.obast.charer.system.dto.vo.map.MapConfigVo;
 import com.obast.charer.system.service.system.IMapConfigManagerService;
-import com.obast.charer.qo.MapConfigQueryBo;
-import cn.dev33.satoken.annotation.SaCheckPermission;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

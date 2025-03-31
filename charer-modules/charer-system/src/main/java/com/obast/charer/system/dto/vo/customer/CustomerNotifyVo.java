@@ -1,12 +1,11 @@
 package com.obast.charer.system.dto.vo.customer;
 
+import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.MessageStateEnum;
 import com.obast.charer.enums.NotifyScopeEnum;
 import com.obast.charer.enums.NotifyTypeEnum;
-import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.customer.CustomerNotify;
-import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

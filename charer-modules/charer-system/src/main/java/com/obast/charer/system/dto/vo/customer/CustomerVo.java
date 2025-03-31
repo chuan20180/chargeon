@@ -8,7 +8,6 @@ import com.obast.charer.common.Decimal2Serializer;
 import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.CustomerTypeEnum;
 import com.obast.charer.enums.EnableStatusEnum;
-import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.customer.Customer;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModel;

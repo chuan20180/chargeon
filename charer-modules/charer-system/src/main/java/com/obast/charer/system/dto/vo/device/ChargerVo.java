@@ -1,23 +1,19 @@
 package com.obast.charer.system.dto.vo.device;
 
+import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.obast.charer.common.Decimal2Serializer;
 import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.enums.OnlineStatusEnum;
-import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.device.Charger;
-import com.obast.charer.model.price.Price;
-import com.obast.charer.model.product.Product;
-import com.obast.charer.model.station.Station;
-import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
-import com.alibaba.excel.annotation.ExcelProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import java.io.Serializable;
+
 import java.math.BigDecimal;
 import java.util.List;
 

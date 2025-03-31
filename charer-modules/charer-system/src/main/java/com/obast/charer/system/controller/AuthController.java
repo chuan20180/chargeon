@@ -7,14 +7,15 @@ import cn.hutool.core.util.IdUtil;
 import com.obast.charer.common.api.Request;
 import com.obast.charer.common.constant.Constants;
 import com.obast.charer.common.constant.GlobalConstants;
-import com.obast.charer.common.properties.CharerProperties;
 import com.obast.charer.common.redis.utils.RedisUtils;
 import com.obast.charer.common.utils.ReflectUtils;
 import com.obast.charer.common.utils.SpringUtils;
 import com.obast.charer.common.utils.StringUtils;
 import com.obast.charer.common.web.enums.CaptchaType;
 import com.obast.charer.system.config.properties.CaptchaProperties;
-import com.obast.charer.system.dto.*;
+import com.obast.charer.system.dto.CaptchaVo;
+import com.obast.charer.system.dto.LoginBody;
+import com.obast.charer.system.dto.LoginVo;
 import com.obast.charer.system.service.system.SysLoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,8 +31,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Duration;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Api(tags = "认证")

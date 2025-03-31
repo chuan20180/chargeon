@@ -20,7 +20,7 @@ import lombok.EqualsAndHashCode;
 @AutoMapper(target = Parking.class,convertGenerate = false)
 public class ParkingVo extends BaseDto {
 
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "Id")
     @ExcelProperty(value = "")
     private String id;
 

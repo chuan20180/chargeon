@@ -5,8 +5,6 @@ import com.obast.charer.data.IJPACommonData;
 import com.obast.charer.model.system.SysUser;
 import com.obast.charer.qo.SysUserQueryBo;
 
-import java.util.List;
-
 /**
  * 用户数据接口
  *
@@ -18,12 +16,6 @@ public interface ISysUserData extends ICommonData<SysUser, String>, IJPACommonDa
 
     SysUser update(SysUser sysUser);
 
-    /**
-     * 按部门统计数量
-     *
-     * @param deptId 部门id
-     * @return 数量
-     */
     long countByDeptId(String deptId);
 
     boolean checkUserNameUnique(SysUser sysUser);

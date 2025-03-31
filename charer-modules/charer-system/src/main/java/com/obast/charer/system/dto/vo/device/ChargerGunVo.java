@@ -1,19 +1,17 @@
 package com.obast.charer.system.dto.vo.device;
 
+import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
+import com.alibaba.excel.annotation.ExcelProperty;
 import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.ChargerGunCurrentEnum;
 import com.obast.charer.enums.ChargerGunSpeedEnum;
 import com.obast.charer.enums.ChargerGunStateEnum;
-import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.device.ChargerGun;
-import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
-import com.alibaba.excel.annotation.ExcelProperty;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
-
-import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "ChargerGun")

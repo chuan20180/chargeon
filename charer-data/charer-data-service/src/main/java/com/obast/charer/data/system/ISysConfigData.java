@@ -5,8 +5,6 @@ import com.obast.charer.data.IJPACommonData;
 import com.obast.charer.model.system.SysConfig;
 import com.obast.charer.qo.SysConfigQueryBo;
 
-import java.util.List;
-
 /**
  * 系统配置数据接口
  *

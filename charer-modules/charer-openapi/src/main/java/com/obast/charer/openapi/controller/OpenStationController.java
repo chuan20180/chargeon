@@ -1,17 +1,15 @@
 package com.obast.charer.openapi.controller;
 
+import cn.dev33.satoken.annotation.SaIgnore;
 import com.alibaba.fastjson.JSONObject;
 import com.obast.charer.common.api.PageRequest;
 import com.obast.charer.common.api.Paging;
 import com.obast.charer.common.api.Request;
 import com.obast.charer.openapi.dto.vo.OpenPromotionVo;
-import com.obast.charer.openapi.dto.vo.OpenStationFavoriteVo;
 import com.obast.charer.openapi.dto.vo.OpenStationVo;
 import com.obast.charer.openapi.service.IOpenPromotionService;
 import com.obast.charer.openapi.service.IOpenStationService;
-import com.obast.charer.qo.StationFavoriteQueryBo;
 import com.obast.charer.qo.StationQueryBo;
-import cn.dev33.satoken.annotation.SaIgnore;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

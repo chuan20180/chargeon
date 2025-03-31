@@ -69,9 +69,4 @@ public class SysRole extends BaseModel implements Id<String>,Serializable {
 
     private Integer isSys;
 
-
-    public boolean isSuperAdmin() {
-        return UserConstants.SUPER_ADMIN_ID.equals(this.id);
-    }
-
 }

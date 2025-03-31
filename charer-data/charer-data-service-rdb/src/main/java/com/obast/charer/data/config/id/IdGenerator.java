@@ -37,11 +37,6 @@ public class IdGenerator {
         return String.valueOf(YitIdHelper.nextId());
     }
 
-    public static String generateInstantTranId() {
-        IdGeneratorOptions options = new IdGeneratorOptions((short) 1);
-        YitIdHelper.setIdGenerator(options);
-        return String.valueOf(YitIdHelper.nextId());
-    }
 
     public static String generateRefundTranId() {
         IdGeneratorOptions options = new IdGeneratorOptions((short) 1);
@@ -50,14 +45,6 @@ public class IdGenerator {
     }
 
     public static String generateRefundBalanceTranId() {
-        IdGeneratorOptions options = new IdGeneratorOptions((short) 1);
-        YitIdHelper.setIdGenerator(options);
-        return String.valueOf(YitIdHelper.nextId());
-    }
-
-
-
-    public static String generateCustomerBalanceTranId() {
         IdGeneratorOptions options = new IdGeneratorOptions((short) 1);
         YitIdHelper.setIdGenerator(options);
         return String.valueOf(YitIdHelper.nextId());

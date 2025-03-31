@@ -37,9 +37,4 @@ public class SysApp extends BaseModel implements Id<String>, Serializable{
 
         private String appSecret;
     }
-
-    @Data
-    static class AppConfig {
-
-    }
 }
