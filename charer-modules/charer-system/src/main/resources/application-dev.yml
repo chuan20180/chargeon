@@ -142,16 +142,16 @@ charer:
   baseUrl: 'http://192.168.3.61'
   # 多租户
   tenant:
-    enable: true
+    enable: false
   # 代理商
   agent:
-    enable: true
+    enable: false
   # 合作商
   dealer:
-    enable: true
+    enable: false
   #是否开启分润
   profit:
-    enabled: true
+    enabled: false
 
   #系统模块
   system:
