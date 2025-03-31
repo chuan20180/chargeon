@@ -3,16 +3,12 @@ package com.obast.charer.system.dto.vo.notify;
 import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.enums.EnableStatusEnum;
 import com.obast.charer.enums.NotifyIdentifierEnum;
-import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.notify.NotifyConfig;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.io.Serializable;
-import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "NotifyConfigVo")

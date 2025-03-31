@@ -1,12 +1,10 @@
 package com.obast.charer.system.listener;
 
-import com.obast.charer.data.business.IAlertConfigData;
 import com.obast.charer.model.order.Orders;
 import com.obast.charer.system.listener.event.OrderSettledEvent;
 import com.obast.charer.system.operate.IOrdersOperateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;

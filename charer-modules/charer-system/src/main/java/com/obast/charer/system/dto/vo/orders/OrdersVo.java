@@ -1,19 +1,17 @@
 package com.obast.charer.system.dto.vo.orders;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.obast.charer.common.Decimal2Serializer;
-import com.obast.charer.common.Decimal4Serializer;
-import com.obast.charer.common.Decimal5Serializer;
-import com.obast.charer.common.api.BaseDto;
-import com.obast.charer.converter.I18nToStringConverter;
-import com.obast.charer.enums.*;
-import com.obast.charer.common.i18n.I18nField;
-import com.obast.charer.model.BaseModel;
-import com.obast.charer.model.order.Orders;
 import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.obast.charer.common.Decimal2Serializer;
+import com.obast.charer.common.Decimal4Serializer;
+import com.obast.charer.common.Decimal5Serializer;
+import com.obast.charer.common.api.BaseDto;
+import com.obast.charer.common.i18n.I18nField;
+import com.obast.charer.converter.I18nToStringConverter;
+import com.obast.charer.enums.*;
+import com.obast.charer.model.order.Orders;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -21,7 +19,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.Convert;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 

@@ -1,10 +1,7 @@
 package com.obast.charer.system.dto.vo.customer;
 
-import com.obast.charer.common.api.BaseDto;
-import com.obast.charer.enums.AppOsEnum;
-import com.obast.charer.enums.CustomerTypeEnum;
-import com.obast.charer.model.BaseModel;
 import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
+import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.model.customer.CustomerLogin;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModel;

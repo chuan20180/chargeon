@@ -1,12 +1,11 @@
 package com.obast.charer.system.dto.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.obast.charer.common.api.BaseDto;
 import com.obast.charer.common.enums.AdminTypeEnum;
 import com.obast.charer.enums.EnableStatusEnum;
-import com.obast.charer.model.BaseModel;
 import com.obast.charer.model.system.SysUser;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.obast.charer.system.dto.vo.system.SysRoleVo;
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;

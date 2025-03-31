@@ -1,20 +1,18 @@
 package com.obast.charer.system.dto.vo.recharge;
 
-import com.obast.charer.common.Decimal2Serializer;
-import com.obast.charer.common.api.BaseDto;
-import com.obast.charer.enums.EnableStatusEnum;
-import com.obast.charer.model.BaseModel;
-import com.obast.charer.model.platform.RechargeItem;
 import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.obast.charer.common.Decimal2Serializer;
+import com.obast.charer.common.api.BaseDto;
+import com.obast.charer.enums.EnableStatusEnum;
+import com.obast.charer.model.platform.RechargeItem;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
