@@ -7,8 +7,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.obast.charer.common.constant.Constants;
-import com.obast.charer.common.properties.CharerProperties;
-import com.obast.charer.common.properties.I18nLocaleProperties;
 import com.obast.charer.common.web.serializer.BigNumberSerializer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,6 @@ import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.TimeZone;
 
 /**
@@ -33,8 +30,6 @@ import java.util.TimeZone;
 @AutoConfiguration(before = JacksonAutoConfiguration.class)
 public class JacksonConfig {
 
-    @Autowired
-    CharerProperties charerProperties;
 
     public TimeZone getTimeZone() {
         return TimeZone.getTimeZone(Constants.TIMEZONE);

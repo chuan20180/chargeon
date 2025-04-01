@@ -7,8 +7,8 @@ package com.obast.charer.common.i18n.util;
  * @ Description：MessageUtils
  */
 
+import com.obast.charer.common.constant.Constants;
 import com.obast.charer.common.i18n.I18nField;
-import com.obast.charer.common.properties.CharerProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,17 +21,11 @@ import java.lang.reflect.Field;
  */
 @Component
 public class I18nUtils {
-    private static CharerProperties charerProperties;
-
-    @Autowired
-    public I18nUtils(CharerProperties charerProperties) {
-        I18nUtils.charerProperties = charerProperties;
-    }
 
     public static String convert(I18nField i18nString) {
 
         try {
-            Field field = i18nString.getClass().getDeclaredField(charerProperties.getSystem().getI18n().getLanguage());
+            Field field = i18nString.getClass().getDeclaredField(Constants.Language);
             field.setAccessible(true);
             return (String) field.get(i18nString);
         } catch (NoSuchFieldException | IllegalAccessException e) {

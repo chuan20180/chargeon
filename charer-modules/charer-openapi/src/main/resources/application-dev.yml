@@ -84,3 +84,13 @@ sa-token:
   token-style: uuid
   # 是否输出操作日志
   is-log: false
+
+
+charer:
+  #系统模块
+  system:
+    baseUrl: 'http://192.168.3.61'
+
+  #openapi模块
+  openapi:
+    baseUrl: 'http://192.168.3.61'

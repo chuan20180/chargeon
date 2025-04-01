@@ -5,14 +5,9 @@ import com.obast.charer.common.properties.CharerProperties;
 import com.obast.charer.common.properties.I18nLocaleProperties;
 import com.obast.charer.data.platform.IProductData;
 import com.obast.charer.enums.ChargerGunStateEnum;
-import com.obast.charer.enums.OrderStateEnum;
-import com.obast.charer.enums.TopupStateEnum;
-import com.obast.charer.model.device.Charger;
 import com.obast.charer.model.device.ChargerGun;
-import com.obast.charer.model.order.Orders;
 import com.obast.charer.model.product.Product;
 import com.obast.charer.model.stats.DataItem;
-import com.obast.charer.model.topup.Topup;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.obast.charer.qo.*;
 import com.obast.charer.data.business.*;
@@ -25,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.*;
@@ -69,17 +63,9 @@ public class AnalyzeController {
     public Map<?,?> summary() {
         Map<String, Object> result = new HashMap<>();
 
-        String language = charerProperties.getSystem().getI18n().getLanguage();
-        I18nLocaleProperties i18nLocale = Arrays.stream(charerProperties.getSystem().getI18n().getLocales()).filter(item->item.getLocale().equals(language)).findFirst().orElse(null);
         String dateFormat = Constants.DATE_FORMAT;
-        if(i18nLocale != null) {
-            dateFormat = i18nLocale.getDateFormat();
-        }
 
         TimeZone timeZone = TimeZone.getTimeZone(Constants.TIMEZONE);
-        if(i18nLocale != null) {
-            timeZone = TimeZone.getTimeZone(i18nLocale.getTimezone());
-        }
 
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
 

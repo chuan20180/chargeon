@@ -73,3 +73,12 @@ plugin:
   mainPackage: com.obast.charer
   pluginPath:
     - /Users/chuan/Desktop/java/charer/charer-cloud/data/plugins/
+
+charer:
+  #系统模块
+  system:
+    baseUrl: 'http://192.168.3.61'
+
+  #openapi模块
+  openapi:
+    baseUrl: 'http://192.168.3.61'

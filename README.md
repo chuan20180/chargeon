@@ -1,4 +1,30 @@
-# ChargeOn充电桩运营管理平台
+<h1 align="center">ChargeOn充电桩运营管理平台</h1>
+
+<p align="center">基于SaaS架构的云端充电桩运营管理平台，致力于为充电桩运营商、企业、政府等客户提供高效、智能、可靠的电动汽车充电桩运营管理 SaaS 平台解决方案。
+</p>
+
+<p align="center">
+<a href="./README.md">中文介绍</a>
+</p>
+
+
+<p align="center">
+<img src="https://img.shields.io/badge/ChargeON-v1.0.6-brightgreen.svg" title="ChargeON" />
+<img src="https://img.shields.io/badge/Spring Cloud-2021.0.4-blue.svg" title="SpringCloud" />
+<img src="https://img.shields.io/badge/SpringBoot-v2.7.2-blue.svg" title="SpringBoot" />
+<img src="https://img.shields.io/badge/Vue3-3.2.45+-important.svg" title="SpringBoot" />
+
+</p>
+
+<p align="center">
+<a href="https://www.chargeon.cn">官方网站</a> | 
+<a href="https://www.chargeon.cn:8085">演示站点</a> |
+<a href="https://cned5b7owj.feishu.cn/docx/MKxwdGpYSon94PxWBIocb7UAnxd?from=from_copylink">使用文档</a>
+</p>
+
+
+
+
 
 
 此项目为ChargeOn充电桩运营管理平台开源版本的后端项目。

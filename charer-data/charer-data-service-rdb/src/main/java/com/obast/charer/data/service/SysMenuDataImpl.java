@@ -4,7 +4,6 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.obast.charer.common.api.PageRequest;
 import com.obast.charer.common.api.Paging;
 import com.obast.charer.common.constant.UserConstants;
-import com.obast.charer.common.properties.CharerProperties;
 import com.obast.charer.common.utils.MapstructUtils;
 import com.obast.charer.common.utils.StringUtils;
 import com.obast.charer.data.AbstractCommonData;
@@ -49,13 +48,6 @@ public class SysMenuDataImpl extends AbstractCommonData<SysMenuQueryBo>
 
     private final SysRoleMenuRepository sysRoleMenuRepository;
 
-    private final CharerProperties.TenantProperties tenantProperties;
-
-    private final CharerProperties.AgentProperties agentProperties;
-
-    private final CharerProperties.DealerProperties dealerProperties;
-
-    private final CharerProperties.ProfitProperties profitProperties;
 
     @Override
     public JpaRepository<?,?> getBaseRepository() {
@@ -348,23 +340,6 @@ public class SysMenuDataImpl extends AbstractCommonData<SysMenuQueryBo>
             Predicate predicate = root.get("menuType").in(List.of(UserConstants.TYPE_DIR, UserConstants.TYPE_MENU));
             predicates.add(predicate);
 
-            if(!tenantProperties.getEnable()) {
-                predicates.add(cb.equal(root.get("isTenant"), 0));
-            }
-
-            if(!agentProperties.getEnable()) {
-                predicates.add(cb.equal(root.get("isAgent"), 0));
-                predicates.add(cb.equal(root.get("isDealer"), 0));
-            }
-
-            if(!dealerProperties.getEnable()) {
-                predicates.add(cb.equal(root.get("isDealer"), 0));
-            }
-
-            if(!profitProperties.getEnabled()) {
-                predicates.add(cb.equal(root.get("isProfit"), 0));
-            }
-
             return query.where(predicates.toArray(Predicate[]::new)).getRestriction();
         };
 
@@ -404,23 +379,6 @@ public class SysMenuDataImpl extends AbstractCommonData<SysMenuQueryBo>
 
                     Predicate statusPredicate = cb.equal(root.get("status"), EnableStatusEnum.Enabled.getCode());
                     predicates.add(statusPredicate);
-
-                    if(!tenantProperties.getEnable()) {
-                        predicates.add(cb.equal(root.get("isTenant"), 0));
-                    }
-
-                    if(!agentProperties.getEnable()) {
-                        predicates.add(cb.equal(root.get("isAgent"), 0));
-                        predicates.add(cb.equal(root.get("isDealer"), 0));
-                    }
-
-                    if(!dealerProperties.getEnable()) {
-                        predicates.add(cb.equal(root.get("isDealer"), 0));
-                    }
-
-                    if(!profitProperties.getEnabled()) {
-                        predicates.add(cb.equal(root.get("isProfit"), 0));
-                    }
 
                     return query.where(predicates.toArray(Predicate[]::new)).getRestriction();
                 };
