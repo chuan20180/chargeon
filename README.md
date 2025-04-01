@@ -11,7 +11,6 @@
 
 <p align="center">
 <img src="https://img.shields.io/badge/ChargeON-v1.0.6-brightgreen.svg" title="ChargeON" />
-<img src="https://img.shields.io/badge/Spring Cloud-2021.0.4-blue.svg" title="SpringCloud" />
 <img src="https://img.shields.io/badge/SpringBoot-v2.7.2-blue.svg" title="SpringBoot" />
 <img src="https://img.shields.io/badge/Vue3-3.2.45+-important.svg" title="SpringBoot" />
 
