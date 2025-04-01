@@ -1,6 +1,6 @@
 <h1 align="center">ChargeOn充电桩运营管理平台</h1>
 
-<p align="center">基于SaaS架构的云端充电桩运营管理平台，致力于为充电桩运营商、企业、政府等客户提供高效、智能、可靠的电动汽车充电桩运营管理 SaaS 平台解决方案。
+<p align="center">基于SaaS架构的云端充电桩运营管理解决方案。
 </p>
 
 <p align="center">
